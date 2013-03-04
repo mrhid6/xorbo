@@ -1,30 +1,29 @@
 package mrhid6.xorbo.tileEntity;
 
+import java.util.List;
+
+import mrhid6.xorbo.block.BlockCableBase;
+import mrhid6.xorbo.interfaces.ICustomCollision;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class TECableBase extends TileEntity{
 
-
-	public void renderCableAt(double Thickness, World world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer, int texture, boolean center, double pull){
-		if (center){
-			renderer.overrideBlockBounds(0.5D - Thickness, 0.5D - Thickness, 0.5D - Thickness, 0.5D + Thickness, 0.5D + Thickness, 0.5D + Thickness);
-
-			renderer.renderStandardBlock(block, x, y, z);
-		}
-
+	protected byte connections = -1;
+	protected byte connectionMask = 0;
+	private boolean isLoaded = false;
+	
+	
+	public static double getCableThickness() {
+		return 6.0D / 16.0D;
 	}
+	
+	
 
-	@Override
-	public void updateEntity() {
-		super.updateEntity();
-		
-	}
 
-	public void draw(RenderBlocks renderer) {
-		renderCableAt(0.03000000178813934D, this.worldObj, this.xCoord, this.yCoord, this.zCoord, getBlockType(), 0, renderer, 69, true, 0.0D);
-		
-	}
 }

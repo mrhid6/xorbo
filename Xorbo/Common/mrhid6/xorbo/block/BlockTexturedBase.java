@@ -1,10 +1,15 @@
 package mrhid6.xorbo.block;
 
+import java.util.List;
+
+import mrhid6.xorbo.interfaces.ICustomCollision;
 import mrhid6.xorbo.proxy.commonProxy;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public abstract class BlockTexturedBase extends BlockContainer{
@@ -30,4 +35,6 @@ public abstract class BlockTexturedBase extends BlockContainer{
 	public String getName(){
 		return this.name;
 	}
+
+
 }

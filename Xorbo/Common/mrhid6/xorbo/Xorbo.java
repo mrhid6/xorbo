@@ -32,6 +32,7 @@ public class Xorbo {
 
 	@Init
 	public void load(FMLInitializationEvent event) {
+		Config.init();
 		proxy.registerRenderers();
 		ModBlocks.init();
 	}
