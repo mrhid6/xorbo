@@ -11,8 +11,8 @@ public class ModBlocks {
 	
 	public static void init(){
 		
-		cable = new BlockCableBase(500, 0, "zorocable");
-		LanguageRegistry.addName(cable, "My Cable");
+		cable = new BlockCableBase(500, 0, "zorocable", false);
+		LanguageRegistry.addName(cable, "Zoro Cable");
 		GameRegistry.registerBlock(cable,cable.getBlockName());
 		
 		GameRegistry.registerTileEntity(TECableBase.class, "te"+cable.getBlockName());

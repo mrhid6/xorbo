@@ -1,6 +1,7 @@
 package mrhid6.xorbo;
 
 import mrhid6.xorbo.block.ModBlocks;
+import mrhid6.xorbo.items.ModItems;
 import mrhid6.xorbo.proxy.commonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -35,6 +36,7 @@ public class Xorbo {
 		Config.init();
 		proxy.registerRenderers();
 		ModBlocks.init();
+		ModItems.init();
 	}
 
 	@PostInit

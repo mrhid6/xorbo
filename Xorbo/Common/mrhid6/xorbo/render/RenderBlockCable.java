@@ -18,7 +18,9 @@ public class RenderBlockCable implements ISimpleBlockRenderingHandler{
 	}
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {}
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+		
+	}
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
@@ -42,10 +44,7 @@ public class RenderBlockCable implements ISimpleBlockRenderingHandler{
 		double xD = x;
 		double yD = y;
 		double zD = z;
-
-		//TODO connect cables on each side!
-
-
+		
 		int mask = 1;
 
 		for (int i = 0;i<6;i++) {

@@ -12,8 +12,12 @@ import net.minecraft.world.World;
 
 public class BlockCableBase extends BlockTexturedBase{
 
-	public BlockCableBase(int id, int textureid, String name) {
-		super(id, textureid, name);
+	public BlockCableBase(int id, int textureid, String name,boolean craftable) {
+		super(id, textureid, name, craftable);
+		
+		this.setResistance(4.0F);
+		this.setHardness(4.0F);
+		this.setStepSound(soundClothFootstep);
 
 	}
 	@Override

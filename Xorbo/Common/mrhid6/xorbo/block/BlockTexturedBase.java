@@ -9,12 +9,16 @@ public abstract class BlockTexturedBase extends BlockContainer{
 
 	private String name;
 
-	public BlockTexturedBase(int id,int texture, String name) {
+	public BlockTexturedBase(int id,int texture, String name, boolean craftable) {
 
 		super(id, texture, Material.ground);
 
 		this.name = name;
-		this.setCreativeTab(Config.creativeTabXor);
+		if(craftable){
+			this.setCreativeTab(Config.creativeTabXor);
+		}else{
+			this.setCreativeTab(null);
+		}
 		this.setHardness(89.3F);
 		this.setResistance(89.5F);
 		this.setStepSound(soundMetalFootstep);
