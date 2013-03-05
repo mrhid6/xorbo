@@ -1,13 +1,11 @@
 package mrhid6.xorbo.render;
 
-import mrhid6.xorbo.Config;
 import mrhid6.xorbo.tileEntity.TECableBase;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
@@ -298,12 +296,11 @@ public class RenderBlockCable implements ISimpleBlockRenderingHandler{
 					renderer.renderWestFace(block, xD, yD, zD, texture);
 				}
 			}
-
-			block.setBlockBounds(0, 0, 0, 1, 1, 1);
-			renderer.setRenderBoundsFromBlock(block);
-
 		}
-		return false;
+		
+		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+		renderer.setRenderBoundsFromBlock(block);
+		return true;
 	}
 
 	@Override

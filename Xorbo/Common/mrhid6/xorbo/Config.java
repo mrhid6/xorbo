@@ -14,8 +14,12 @@ public class Config extends Configuration{
 
 	static HashMap<String, Integer> renderIds = new HashMap<String, Integer>();
 
+	public static CreativeTabXor creativeTabXor;
+
 
 	public static void init(){
+		creativeTabXor = new CreativeTabXor("Xorbo");
+		
 		RenderingRegistry.registerBlockHandler(new RenderBlockCable());
 		renderIds.put("cable", RenderBlockCable.renderId);
 	}
