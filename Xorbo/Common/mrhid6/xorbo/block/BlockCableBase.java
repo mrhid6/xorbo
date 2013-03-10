@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 public class BlockCableBase extends BlockTexturedBase{
 
 	public BlockCableBase(int id, int textureid, String name,boolean craftable) {
-		super(id, textureid, name, craftable);
+		super(id, textureid, name, craftable, 0);
 		
 		this.setResistance(4.0F);
 		this.setHardness(4.0F);

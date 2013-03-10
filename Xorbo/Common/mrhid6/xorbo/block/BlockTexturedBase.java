@@ -8,11 +8,12 @@ import net.minecraft.block.material.Material;
 public abstract class BlockTexturedBase extends BlockContainer{
 
 	private String name;
+	private int textureImage;
 
-	public BlockTexturedBase(int id,int texture, String name, boolean craftable) {
+	public BlockTexturedBase(int id,int texture, String name, boolean craftable,int image) {
 
 		super(id, texture, Material.ground);
-
+		this.textureImage = image;
 		this.name = name;
 		if(craftable){
 			this.setCreativeTab(Config.creativeTabXor);
@@ -27,6 +28,12 @@ public abstract class BlockTexturedBase extends BlockContainer{
 
 	@Override
 	public String getTextureFile() {
+		switch (textureImage){
+		case 0:
+			return commonProxy.BLOCK_PNG;
+		case 1:
+			return commonProxy.BLOCK_TILES_PNG;
+		}
 		return commonProxy.BLOCK_PNG;
 	}
 	public String getName(){
