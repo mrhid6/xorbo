@@ -40,7 +40,27 @@ public class BlockCableBase extends BlockTexturedBase{
 	public boolean isOpaqueCube(){
 		return false;
 	}
+	
+	
 
+	@Override
+	public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
+		
+		TECableBase tile = (TECableBase)world.getBlockTileEntity(x, y, z);
+		
+		if(tile!=null){
+			tile.breakBlock();
+		}
+		
+		super.breakBlock(world, x, y, z, par5, par6);
+	}
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, int blockID) {
+		super.onNeighborBlockChange(world, x, y, z, blockID);
+		
+		TECableBase tile = (TECableBase)world.getBlockTileEntity(x, y, z);
+		tile.onNeighborBlockChange();
+	}
 	public void addCollidingBlockToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity){
 		setBlockBounds(0.25F, 0.25F, 0.25F, 0.75F, 0.75F, 0.75F);
 		super.addCollidingBlockToList(world, x, y, z, axis, list, entity);
