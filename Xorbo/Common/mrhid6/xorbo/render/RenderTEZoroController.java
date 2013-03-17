@@ -32,8 +32,6 @@ public class RenderTEZoroController extends TileEntitySpecialRenderer {
 		mc = FMLClientHandler.instance().getClient();
 		renderBlocks = new RenderBlocks();
 		renderItems  = new RenderItem() {
-			public byte getMiniItemCountForItemStack(ItemStack stack) { return 1; }
-			public byte getMiniBlockCountForItemStack(ItemStack stack){ return 1; }
 			public boolean shouldBob() { return false; }
 			public boolean shouldSpreadItems() { return false; }
 		};
@@ -62,7 +60,7 @@ public class RenderTEZoroController extends TileEntitySpecialRenderer {
 
 			EntityItem ei = new EntityItem(tpb.worldObj);
 			ei.hoverStart = 0f;
-			ei.func_92058_a(stack);
+			ei.setEntityItemStack(stack);
 			glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			glPushMatrix();
 			{

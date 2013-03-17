@@ -1,11 +1,11 @@
 package mrhid6.xorbo;
 
+import java.io.File;
 import java.util.HashMap;
-
-import cpw.mods.fml.client.registry.RenderingRegistry;
 
 import mrhid6.xorbo.render.RenderBlockCable;
 import net.minecraftforge.common.Configuration;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class Config extends Configuration{
 
@@ -15,14 +15,29 @@ public class Config extends Configuration{
 	static HashMap<String, Integer> renderIds = new HashMap<String, Integer>();
 
 	public static CreativeTabXor creativeTabXor;
+	
+	private static Configuration config;
 
 
-	public static void init(){
+	public static void init(File configFile){
 		creativeTabXor = new CreativeTabXor("Xorbo");
 		
 		RenderingRegistry.registerBlockHandler(new RenderBlockCable());
 		renderIds.put("cable", RenderBlockCable.renderId);
+		
+		config = new Configuration(configFile);
+        config.load();
+        ItemIds.addItemID(config, "ZoroIngot", 5001);
+        
+        BlockIds.addBlockID(config, "zoroCable", 500);
+        BlockIds.addBlockID(config, "zoroFurnace", 501);
+        BlockIds.addBlockID(config, "zoroController", 502);
+        BlockIds.addBlockID(config, "hazelspringLog", 503);
+        BlockIds.addBlockID(config, "winterbirchLog", 504);
+        config.save();
 	}
+	
+	
 
 	public static int getRenderId(String string) {
 		return renderIds.get(string);

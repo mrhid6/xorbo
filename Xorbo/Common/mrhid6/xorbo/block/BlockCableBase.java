@@ -7,13 +7,16 @@ import mrhid6.xorbo.tileEntity.TECableBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCableBase extends BlockTexturedBase{
 
-	public BlockCableBase(int id, int textureid, String name,boolean craftable) {
-		super(id, textureid, name, craftable, 0);
+	public BlockCableBase(int id, String textureName, String name,boolean craftable) {
+		super(id, textureName, name, craftable);
 		
 		this.setResistance(4.0F);
 		this.setHardness(4.0F);
@@ -61,40 +64,41 @@ public class BlockCableBase extends BlockTexturedBase{
 		TECableBase tile = (TECableBase)world.getBlockTileEntity(x, y, z);
 		tile.onNeighborBlockChange();
 	}
-	public void addCollidingBlockToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity){
+	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity){
 		setBlockBounds(0.25F, 0.25F, 0.25F, 0.75F, 0.75F, 0.75F);
-		super.addCollidingBlockToList(world, x, y, z, axis, list, entity);
+		
+		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 
 		TECableBase theTile = (TECableBase)world.getBlockTileEntity(x, y, z);
 
 		if (theTile.canInteractWith(world.getBlockTileEntity(x, y - 1, z))) {
 			setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.75F, 0.75F);
-			super.addCollidingBlockToList(world, x, y, z, axis, list, entity);
+			super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 		}
 
 		if (theTile.canInteractWith(world.getBlockTileEntity(x, y + 1, z))) {
 			setBlockBounds(0.25F, 0.25F, 0.25F, 0.75F, 1.0F, 0.75F);
-			super.addCollidingBlockToList(world, x, y, z, axis, list, entity);
+			super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 		}
 
 		if (theTile.canInteractWith(world.getBlockTileEntity(x, y, z - 1))) {
 			setBlockBounds(0.25F, 0.25F, 0.0F, 0.75F, 0.75F, 0.75F);
-			super.addCollidingBlockToList(world, x, y, z, axis, list, entity);
+			super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 		}
 
 		if (theTile.canInteractWith(world.getBlockTileEntity(x, y, z + 1))) {
 			setBlockBounds(0.25F, 0.25F, 0.25F, 0.75F, 0.75F, 1.0F);
-			super.addCollidingBlockToList(world, x, y, z, axis, list, entity);
+			super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 		}
 
 		if (theTile.canInteractWith(world.getBlockTileEntity(x - 1, y, z))) {
 			setBlockBounds(0.0F, 0.25F, 0.25F, 0.75F, 0.75F, 0.75F);
-			super.addCollidingBlockToList(world, x, y, z, axis, list, entity);
+			super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 		}
 
 		if (theTile.canInteractWith(world.getBlockTileEntity(x + 1, y, z))) {
 			setBlockBounds(0.25F, 0.25F, 0.25F, 1.0F, 0.75F, 0.75F);
-			super.addCollidingBlockToList(world, x, y, z, axis, list, entity);
+			super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 		}
 
 
@@ -146,6 +150,11 @@ public class BlockCableBase extends BlockTexturedBase{
 		if (cable.canInteractWith(world.getBlockTileEntity(x, y, z + 1))) maxZ = z + 1;
 
 		return AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
+	}
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int x, int y, int z, int blockSide) {
+		return this.field_94336_cN;
 	}
 
 }

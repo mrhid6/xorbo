@@ -10,7 +10,6 @@ public class TEZoroFurnace extends TEPoweredBase implements IXorGridObj{
 
 	@Override
 	public void updateGridObj() {
-		// TODO Auto-generated method stub
 		
 	}
 

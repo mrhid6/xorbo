@@ -14,12 +14,12 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
-@Mod(modid = "tutorial", name = "Tutorial Mod", version = "1.0.0")
+@Mod(modid = "xorbo", name = "Xorbo", version = "1.0.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
 public class Xorbo {
 
-	@Instance("tutorial")
+	@Instance("xorbo")
 	public static Xorbo instance;
 
 	
@@ -28,12 +28,11 @@ public class Xorbo {
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
-		
+		Config.init(event.getSuggestedConfigurationFile());
 	}
 
 	@Init
 	public void load(FMLInitializationEvent event) {
-		Config.init();
 		proxy.registerRenderers();
 		ModBlocks.init();
 		ModItems.init();

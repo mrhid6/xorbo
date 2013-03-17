@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -37,7 +38,7 @@ public class RenderBlockCable implements ISimpleBlockRenderingHandler{
 		int connectivity = 0;
 		int renderSide = 0;
 
-		int texture = block.getBlockTexture(world, x, y, z, 0);
+		Icon texture = block.getBlockTexture(world, x, y, z, 0);
 
 		tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 
