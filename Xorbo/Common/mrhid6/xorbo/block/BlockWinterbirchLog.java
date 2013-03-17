@@ -10,9 +10,9 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockHazelspringLog extends BlockTexturedBase
+public class BlockWinterbirchLog extends BlockTexturedBase
 {
-	public BlockHazelspringLog(int id, String textureName, String name){
+	public BlockWinterbirchLog(int id, String textureName, String name){
 		
 		super(id, textureName, name, true);
 		setHardness(5.0F);

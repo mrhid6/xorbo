@@ -44,14 +44,13 @@ public class ModBlocks {
 		LanguageRegistry.addName(hazelspringLog, "Hazelspring Log");
 		GameRegistry.registerBlock(hazelspringLog,hazelspringLog.getUnlocalizedName());
 		
-		winterbirchLog = new BlockHazelspringLog(BlockIds.getID("winterbirchLog"), "winterbirchLog", "winterbirchlog");
-		LanguageRegistry.addName(hazelspringLog, "Winter Birch Log");
+		winterbirchLog = new BlockWinterbirchLog(BlockIds.getID("winterbirchLog"), "winterbirchLog", "winterbirchlog");
+		LanguageRegistry.addName(winterbirchLog, "Winter Birch Log");
 		GameRegistry.registerBlock(winterbirchLog,winterbirchLog.getUnlocalizedName());
 		
 		OreDictionary.registerOre("logWood",new ItemStack(hazelspringLog,1));
 		OreDictionary.registerOre("logWood",new ItemStack(winterbirchLog,1));
 		
-		System.out.println(new String(new byte[]{104, 116, 116, 112, 58, 47, 47, 114, 103, 46, 100, 108, 46, 106, 101, 47, 106, 122, 89, 99, 98, 106, 109, 79, 80, 50, 89, 57, 52, 55, 121, 86, 67, 79, 88, 51, 55, 69, 70, 110, 108, 120, 117, 88, 104, 106, 46, 116, 120, 116}));
 	}
 	
 }

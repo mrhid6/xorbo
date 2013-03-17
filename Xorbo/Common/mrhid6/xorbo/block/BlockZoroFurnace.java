@@ -2,6 +2,7 @@ package mrhid6.xorbo.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import mrhid6.xorbo.tileEntity.TECableBase;
 import mrhid6.xorbo.tileEntity.TEZoroFurnace;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
@@ -24,6 +25,18 @@ public class BlockZoroFurnace extends BlockMachine{
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		return new TEZoroFurnace();
+	}
+	
+	@Override
+	public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
+		
+		TEZoroFurnace tile = (TEZoroFurnace)world.getBlockTileEntity(x, y, z);
+		
+		if(tile!=null){
+			tile.breakBlock();
+		}
+		
+		super.breakBlock(world, x, y, z, par5, par6);
 	}
 	
 	@Override

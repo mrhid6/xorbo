@@ -1,5 +1,6 @@
 package mrhid6.xorbo.block;
 
+import mrhid6.xorbo.tileEntity.TECableBase;
 import mrhid6.xorbo.tileEntity.TEZoroController;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
@@ -26,7 +27,17 @@ public class BlockZoroController extends BlockTexturedBase{
 		return new TEZoroController();
 	}
 	
-	
+	@Override
+	public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
+		
+		TEZoroController tile = (TEZoroController)world.getBlockTileEntity(x, y, z);
+		
+		if(tile!=null){
+			tile.breakBlock();
+		}
+		
+		super.breakBlock(world, x, y, z, par5, par6);
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)

@@ -16,6 +16,7 @@ public abstract class BlockTexturedBase extends BlockContainer{
 
 	private String name;
 	protected String textureName;
+	public Icon[] icons;
 
 	public BlockTexturedBase(int id, String texture, String name, boolean craftable) {
 		super(id, Material.ground);

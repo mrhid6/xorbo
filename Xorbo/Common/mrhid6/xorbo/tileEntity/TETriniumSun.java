@@ -20,12 +20,7 @@ public class TETriniumSun extends TEPoweredBase implements IXorGridObj{
 		//this.myProvider = new PowerProviderXor();
 		//this.myProvider.configure(1, 200);
 	}
-
-	@Override
-	public void updateGridObj() {
-		
-	}
-
+	
 	@Override
 	public void init() {
 		

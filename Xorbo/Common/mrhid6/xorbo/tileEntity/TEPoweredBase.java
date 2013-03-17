@@ -1,40 +1,17 @@
 package mrhid6.xorbo.tileEntity;
 
-import java.util.ArrayList;
-
 import mrhid6.xorbo.Config;
+import mrhid6.xorbo.GridPower;
+import mrhid6.xorbo.interfaces.IGridInterface;
 import net.minecraft.tileentity.TileEntity;
 
-public abstract class TEPoweredBase extends TileEntity{
+public abstract class TEPoweredBase extends TileEntity implements IGridInterface{
 	
-	
+	public GridPower myGrid;
 	public boolean isLoaded = false;
-	
-	public ArrayList<TEZoroController> controllers;
-	public ArrayList<TECableBase> cables;
-	
-	public TEPoweredBase(){
-		controllers = new ArrayList<TEZoroController>();
-		cables = new ArrayList<TECableBase>();
-	}
 	
 	public boolean isLoaded() {
 		return isLoaded;
-	}
-	
-	public void updateControllers(){
-
-		if(worldObj.isRemote)
-			return;
-
-		for(int i=0; i<controllers.size();i++){
-			TEZoroController controller = controllers.get(i);
-			
-			if(worldObj.getBlockTileEntity(controller.xCoord, controller.yCoord, controller.zCoord)!=null)
-				controller.updateGridObj();
-			else
-				controllers.remove(i);
-		}
 	}
 
 	
@@ -51,53 +28,64 @@ public abstract class TEPoweredBase extends TileEntity{
 		}
 	}
 	
-	public void findController(int x,int y,int z){
+	public abstract void init();
+	
+	public void findGrid(){
 		for(int i=0;i<6;i++){
-
-			int x1 = x+Config.SIDE_COORD_MOD[i][0];
-			int y1 = y+Config.SIDE_COORD_MOD[i][1];
-			int z1 = z+Config.SIDE_COORD_MOD[i][2];
+			
+			if(myGrid!=null)
+				return;
+			
+			int x1 = xCoord+Config.SIDE_COORD_MOD[i][0];
+			int y1 = yCoord+Config.SIDE_COORD_MOD[i][1];
+			int z1 = zCoord+Config.SIDE_COORD_MOD[i][2];
 
 			TileEntity te = this.worldObj.getBlockTileEntity(x1,y1,z1);
 			
-			if(te instanceof TEZoroController && !controllers.contains(te)){
-
-				TEZoroController controller = (TEZoroController) te;
-				if(controller.isLoaded()){
-					System.out.println("found controller!");
-
-					controllers.add((TEZoroController)te);
-				}
-
-			}
-
-			if(te instanceof TECableBase && !cables.contains(te)){
-				cables.add((TECableBase)te);
-
-				findController(x1,y1,z1);
-			}
-		}
-	}
-	
-	
-	public void addMeToGrid(TEPoweredBase te){
-		for(TEZoroController controller : controllers){
 			if(te instanceof TECableBase){
-				if(!controller.getGrid().hasCable((TECableBase)te)){
-					controller.getGrid().addCable((TECableBase)te);
+				TECableBase cable = (TECableBase)te;
+				
+				if(cable.getGrid()!=null){
+					myGrid=cable.getGrid();
+					break;
+				}
+			}else if(te instanceof TEZoroController){
+				TEZoroController controller = (TEZoroController)te;
+				
+				if(controller.getGrid()!=null){
+					myGrid=controller.getGrid();
+					break;
 				}
 			}
 		}
 	}
 	
-	public void removeMeFromGrid(TEPoweredBase te){
-		for(TEZoroController controller : controllers){
+	public void findGridOnlyCable(){
+		for(int i=0;i<6;i++){
+			
+			if(myGrid!=null)
+				return;
+			
+			int x1 = xCoord+Config.SIDE_COORD_MOD[i][0];
+			int y1 = yCoord+Config.SIDE_COORD_MOD[i][1];
+			int z1 = zCoord+Config.SIDE_COORD_MOD[i][2];
+
+			TileEntity te = this.worldObj.getBlockTileEntity(x1,y1,z1);
+			
 			if(te instanceof TECableBase){
-				if(controller.getGrid().hasCable((TECableBase)te)){
-					controller.getGrid().removeCable((TECableBase)te);
+				TECableBase cable = (TECableBase)te;
+				
+				if(cable.getGrid()!=null){
+					myGrid=cable.getGrid();
+					System.out.println("found Grid");
+					break;
 				}
 			}
 		}
 	}
-	public abstract void init();
+	
+	@Override
+	public GridPower getGrid() {
+		return myGrid;
+	}
 }
