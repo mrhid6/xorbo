@@ -2,6 +2,7 @@ package mrhid6.xorbo.tileEntity;
 
 import mrhid6.xorbo.Config;
 import mrhid6.xorbo.GridPower;
+import mrhid6.xorbo.Utils;
 import mrhid6.xorbo.interfaces.IXorGridObj;
 import mrhid6.xorbo.interfaces.IGridInterface;
 import net.minecraft.tileentity.TileEntity;
@@ -23,6 +24,9 @@ public class TECableBase extends TileEntity implements IGridInterface{
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
+		
+		if(Utils.isClientWorld(worldObj))
+			return;
 		
 		if((TickSinceUpdate % 10) == 0){
 			

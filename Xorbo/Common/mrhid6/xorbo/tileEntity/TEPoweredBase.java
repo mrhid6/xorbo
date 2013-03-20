@@ -1,34 +1,17 @@
 package mrhid6.xorbo.tileEntity;
 
 import mrhid6.xorbo.Config;
+import mrhid6.xorbo.GridManager;
 import mrhid6.xorbo.GridPower;
+import mrhid6.xorbo.Utils;
 import mrhid6.xorbo.interfaces.IGridInterface;
 import net.minecraft.tileentity.TileEntity;
 
-public abstract class TEPoweredBase extends TileEntity implements IGridInterface{
+public abstract class TEPoweredBase extends TileRoot implements IGridInterface{
 	
-	public GridPower myGrid;
 	public boolean isLoaded = false;
-	
-	public boolean isLoaded() {
-		return isLoaded;
-	}
-
-	
-	@Override
-	public void updateEntity() {
-		super.updateEntity();
-
-		if(worldObj.isRemote)
-			return;
-
-		if(!isLoaded){
-			init();
-			isLoaded=true;
-		}
-	}
-	
-	public abstract void init();
+	public GridPower myGrid;
+	public int gridindex = -1;
 	
 	public void findGrid(){
 		for(int i=0;i<6;i++){
@@ -46,14 +29,14 @@ public abstract class TEPoweredBase extends TileEntity implements IGridInterface
 				TECableBase cable = (TECableBase)te;
 				
 				if(cable.getGrid()!=null){
-					myGrid=cable.getGrid();
+					gridindex=cable.getGrid().gridIndex;
 					break;
 				}
 			}else if(te instanceof TEZoroController){
 				TEZoroController controller = (TEZoroController)te;
 				
 				if(controller.getGrid()!=null){
-					myGrid=controller.getGrid();
+					gridindex=controller.getGrid().gridIndex;
 					break;
 				}
 			}
@@ -86,6 +69,28 @@ public abstract class TEPoweredBase extends TileEntity implements IGridInterface
 	
 	@Override
 	public GridPower getGrid() {
-		return myGrid;
+		GridPower grid = GridManager.getGrid(this.gridindex);
+		
+		return grid;
+
+	}
+	
+	public abstract void init();
+	
+	public boolean isLoaded() {
+		return isLoaded;
+	}
+	
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		
+		if(Utils.isClientWorld(worldObj))
+			return;
+		
+		if(!isLoaded){
+			init();
+			isLoaded=true;
+		}
 	}
 }

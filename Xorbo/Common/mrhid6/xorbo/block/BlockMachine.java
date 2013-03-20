@@ -1,8 +1,11 @@
 package mrhid6.xorbo.block;
 
+import mrhid6.xorbo.Xorbo;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -19,6 +22,20 @@ public abstract class BlockMachine extends BlockTexturedBase{
 		this.setDefaultDirection(par1World, par2, par3, par4);
 	}
 
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int idk, float what, float these, float are)
+	{
+		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+
+		if (tileEntity == null || player.isSneaking()){
+			return false;
+		}
+
+		//code to open gui explained later
+		player.openGui(Xorbo.instance, 0, world, x, y, z);
+		return true;
+	}
+	
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack) {
 		int var6 = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;

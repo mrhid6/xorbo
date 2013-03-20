@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import mrhid6.xorbo.tileEntity.TECableBase;
 import mrhid6.xorbo.tileEntity.TEPoweredBase;
 import mrhid6.xorbo.tileEntity.TEZoroController;
+import mrhid6.xorbo.tileEntity.TEZoroFurnace;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -15,8 +16,8 @@ public class GridPower {
 	private ArrayList<TEPoweredBase> machineArray;
 	private float maxPower = 1000.0F;
 	
-	
-	private float power = 0.0F;
+	public int gridIndex;
+	private float Power = 0.0F;
 	private World worldObj;
 	
 	public GridPower(World w){
@@ -26,29 +27,35 @@ public class GridPower {
 		controllerArray = new ArrayList<TEZoroController>();
 		machineArray = new ArrayList<TEPoweredBase>();
 		
-		power = maxPower;
+		Power = maxPower;
+		
+		gridIndex = GridManager.addGridToManager(this);
 	}
 	
 	public void addCable(TECableBase te) {
 		cablesArray.remove(te);
 		cablesArray.add(te);
+
 	}
 	
 	public void addController(TEZoroController te){
 		controllerArray.remove(te);
 		controllerArray.add(te);
+		te.gridindex = this.gridIndex;
 	}
 
 	public void addMachine(TEPoweredBase te) {
 		machineArray.remove(te);
 		machineArray.add(te);
+		
+		te.gridindex = this.gridIndex;
 	}
 	
 	public ArrayList<TECableBase> getCableObjs(){
 		return cablesArray;
 	}
 
-	public float getMaxPower(){
+	public float getMaxEnergy(){
 		return controllerArray.size() * maxPower;
 	}
 	
@@ -69,28 +76,34 @@ public class GridPower {
 		}
 		
 		cablesArray.clear();
+		
+		for(TEPoweredBase te1 : machineArray){
+			te1.gridindex = -1;
+		}
+		
+		machineArray.clear();
 	}
 	
 	public void removeController(TEZoroController te) {
 		controllerArray.remove(te);
 		
-		for(TEZoroController te1 : controllerArray){
-			te1.myGrid = null;
-		}
-		
 		for(TECableBase te1 : cablesArray){
 			te1.myGrid = null;
 		}
 		
+		for(TEPoweredBase te1 : machineArray){
+			te1.gridindex = -1;
+		}
+		
+		machineArray.clear();
 		cablesArray.clear();
-		controllerArray.clear();
 	}
 
 	public void removeMachine(TEPoweredBase te) {
 		machineArray.remove(te);
 		
 		for(TEPoweredBase te1 : machineArray){
-			te1.myGrid = null;
+			te1.gridindex = -1;
 		}
 		
 		machineArray.clear();
@@ -98,17 +111,54 @@ public class GridPower {
 
 	public void subtractPower(float quantity){
 		
-		this.power -= quantity;
+		this.Power -= quantity;
 		
-		if(this.power < 0.0F){
-			this.power = 0.0F;
+		if(this.Power < 0.0F){
+			this.Power = 0.0F;
 		}
 		
-		System.out.println("subtracted:"+quantity+"power:"+power);
+		System.out.println("subtracted:"+quantity+"power:"+Power);
 	}
 	
 	public boolean hasPower(){
-		return (power>0);
+		return (Power>0);
 	}
 
+	public float getEnergyStored() {
+		return Power;
+	}
+	
+	public void setEnergyStored(float power){
+		this.Power = power;
+		
+		System.out.println(power);
+	}
+
+	public void addEnergy(float f) {
+		this.Power+=f;
+		
+		if(Power> getMaxEnergy()){
+			Power = getMaxEnergy();
+		}
+		
+	}
+	
+	public ArrayList<TEZoroController> getControllers(){
+		
+		return controllerArray;
+	}
+
+	public boolean hasMachine(TEPoweredBase te) {
+		for(TEPoweredBase te1 : machineArray){
+			
+			if(te.equals(te1))
+				return true;
+		}
+		
+		return false;
+	}
+	
+	public ArrayList<TEPoweredBase> getMachines(){
+		return this.machineArray;
+	}
 }

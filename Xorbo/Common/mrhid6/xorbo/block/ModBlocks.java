@@ -5,6 +5,7 @@ import mrhid6.xorbo.tileEntity.TECableBase;
 import mrhid6.xorbo.tileEntity.TEZoroController;
 import mrhid6.xorbo.tileEntity.TEZoroFurnace;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -17,6 +18,8 @@ public class ModBlocks {
 	public static Block zoroController;
 	public static Block hazelspringLog;
 	public static Block winterbirchLog;
+	public static BlockLeaves hazelspringLeaves;
+	public static BlockLeaves winterbirchLeaves;
 	
 	
 	public static void init(){
@@ -26,7 +29,6 @@ public class ModBlocks {
 		GameRegistry.registerBlock(cable,cable.getUnlocalizedName());
 		
 		GameRegistry.registerTileEntity(TECableBase.class, "te"+cable.getUnlocalizedName());
-		
 		
 		zoroFurnace = new BlockZoroFurnace(BlockIds.getID("zoroFurnace"), "zoroFurnace", "zorofurnace", true);
 		LanguageRegistry.addName(zoroFurnace, "Zoro Furnace");
@@ -44,9 +46,17 @@ public class ModBlocks {
 		LanguageRegistry.addName(hazelspringLog, "Hazelspring Log");
 		GameRegistry.registerBlock(hazelspringLog,hazelspringLog.getUnlocalizedName());
 		
+		hazelspringLeaves = new HazelspringLeaves(BlockIds.getID("hazelspringLeaves"),"hazelspringleaves");
+		LanguageRegistry.addName(hazelspringLeaves, "Hazelspring Leaves");
+		GameRegistry.registerBlock(hazelspringLeaves, hazelspringLeaves.getUnlocalizedName());
+		
 		winterbirchLog = new BlockWinterbirchLog(BlockIds.getID("winterbirchLog"), "winterbirchLog", "winterbirchlog");
 		LanguageRegistry.addName(winterbirchLog, "Winter Birch Log");
 		GameRegistry.registerBlock(winterbirchLog,winterbirchLog.getUnlocalizedName());
+		
+		winterbirchLeaves = new WinterbirchLeaves(BlockIds.getID("winterbirchLeaves"),"winterbirchleaves");
+		LanguageRegistry.addName(winterbirchLeaves, "Winter Birch Leaves");
+		GameRegistry.registerBlock(winterbirchLeaves, winterbirchLeaves.getUnlocalizedName());
 		
 		OreDictionary.registerOre("logWood",new ItemStack(hazelspringLog,1));
 		OreDictionary.registerOre("logWood",new ItemStack(winterbirchLog,1));

@@ -8,4 +8,6 @@ public class commonProxy {
 
 	public void registerRenderers() {
 	}
+
+	public void registerPacketInformation() {}
 }
