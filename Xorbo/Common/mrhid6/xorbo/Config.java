@@ -36,6 +36,12 @@ public class Config extends Configuration{
         BlockIds.addBlockID(config, "winterbirchLog", 504);
         BlockIds.addBlockID(config, "hazelspringLeaves", 505);
         BlockIds.addBlockID(config, "winterbirchLeaves", 506);
+        
+        BlockIds.addBlockID(config, "zoroStill", 507);
+        BlockIds.addBlockID(config, "zoroFlowing", 508);
+        
+        
+        ItemIds.addItemID(config, "zoroBucket", 5000);
         config.save();
 	}
 	

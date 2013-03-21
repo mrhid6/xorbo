@@ -60,14 +60,14 @@ public class HazelspringLeaves extends BlockLeaves
     @SideOnly(Side.CLIENT)
     public int colorMultiplier(IBlockAccess par1iBlockAccess, int par2, int par3, int par4)
     {
-        return 0x602c00;
+        return 0x4b301c;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public int getRenderColor(int par1)
     {
-        return 0x602c00;
+        return 0x4b301c;
     }
     
     public void getSubBlocks(int par1, CreativeTabs tabs, List par3List){

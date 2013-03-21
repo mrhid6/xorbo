@@ -39,8 +39,8 @@ public class Xorbo {
 	public void load(FMLInitializationEvent event) {
 		proxy.registerRenderers();
 		proxy.registerPacketInformation();
-		ModBlocks.init();
 		ModItems.init();
+		ModBlocks.init();
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 		GameRegistry.registerWorldGenerator(new WorldGenBase());
 	}

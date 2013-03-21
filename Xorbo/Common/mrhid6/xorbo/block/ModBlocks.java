@@ -1,12 +1,19 @@
 package mrhid6.xorbo.block;
 
 import mrhid6.xorbo.BlockIds;
+import mrhid6.xorbo.items.ModItems;
 import mrhid6.xorbo.tileEntity.TECableBase;
 import mrhid6.xorbo.tileEntity.TEZoroController;
 import mrhid6.xorbo.tileEntity.TEZoroFurnace;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFluid;
 import net.minecraft.block.BlockLeaves;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.liquids.LiquidContainerData;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
+import net.minecraftforge.liquids.LiquidDictionary;
+import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -20,6 +27,8 @@ public class ModBlocks {
 	public static Block winterbirchLog;
 	public static BlockLeaves hazelspringLeaves;
 	public static BlockLeaves winterbirchLeaves;
+	public static BlockFluid zoroStill;
+	public static BlockFluid zoroFlowing;
 	
 	
 	public static void init(){
@@ -42,6 +51,9 @@ public class ModBlocks {
 		
 		GameRegistry.registerTileEntity(TEZoroController.class, "te"+zoroController.getUnlocalizedName());
 		
+		
+		
+		//Trees 
 		hazelspringLog = new BlockHazelspringLog(BlockIds.getID("hazelspringLog"), "hazelspringLog", "hazelspringlog");
 		LanguageRegistry.addName(hazelspringLog, "Hazelspring Log");
 		GameRegistry.registerBlock(hazelspringLog,hazelspringLog.getUnlocalizedName());
@@ -61,6 +73,22 @@ public class ModBlocks {
 		OreDictionary.registerOre("logWood",new ItemStack(hazelspringLog,1));
 		OreDictionary.registerOre("logWood",new ItemStack(winterbirchLog,1));
 		
+		
+		//Liquids
+		
+		
+		zoroStill = new BlockZoroStill(BlockIds.getID("zoroStill"),"zorojuice");
+		zoroFlowing = new BlockZoroFlowing(BlockIds.getID("zoroFlowing"),"zorojuiceflowing");
+		
+		GameRegistry.registerBlock(zoroStill, zoroStill.getUnlocalizedName());
+		GameRegistry.registerBlock(zoroFlowing, zoroFlowing.getUnlocalizedName());
+		
+		LanguageRegistry.addName(zoroStill, "Volatile Zoro");
+		LanguageRegistry.addName(zoroFlowing, "Volatile Zoro");
+		
+		LiquidDictionary.getOrCreateLiquid("zorojuice", new LiquidStack(zoroStill, LiquidContainerRegistry.BUCKET_VOLUME));
+		
+		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(new LiquidStack(zoroStill, LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(ModItems.zoroBucket), new ItemStack(Item.bucketEmpty)));
 	}
 	
 }

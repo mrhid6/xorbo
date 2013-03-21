@@ -6,7 +6,7 @@ import mrhid6.xorbo.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
-public class WorldGenWinterbirch {
+public class WorldGenHazelspring {
 
 
 	public void generate(World world, Random random, int x, int z, int count){
@@ -39,7 +39,7 @@ public class WorldGenWinterbirch {
 
 		int height = getGrowHeight(world,x,y,z);
 
-		height -= random.nextInt(4)+1;
+		height -= random.nextInt(8)+1;
 
 		if(height<2)
 			return false;
@@ -48,43 +48,48 @@ public class WorldGenWinterbirch {
 			return false;
 
 		for(int i=0;i<height;i++){
-			world.setBlockAndMetadataWithNotify(x, y+i, z,ModBlocks.winterbirchLog.blockID,0,0);
+			world.setBlockAndMetadataWithNotify(x, y+i, z,ModBlocks.hazelspringLog.blockID,0,0);
 		}
 
 
-		boolean outdent = false;
-		int outdentCount = 0;
-		int width=0;
-
+		int width=3;
 		int treeTop = y+height+1;
 		
-		System.out.println(height);
+		world.setBlockAndMetadataWithNotify(x-1, y+5, z,ModBlocks.hazelspringLeaves.blockID,0,0);
+		world.setBlockAndMetadataWithNotify(x+1, y+5, z,ModBlocks.hazelspringLeaves.blockID,0,0);
+		world.setBlockAndMetadataWithNotify(x, y+5, z+1,ModBlocks.hazelspringLeaves.blockID,0,0);
+		world.setBlockAndMetadataWithNotify(x, y+5, z-1,ModBlocks.hazelspringLeaves.blockID,0,0);
 		
-		for(int y1=y+2;(y1<=treeTop);y1++){
-
-			if(outdentCount>=1 && (y1<treeTop && y1<(treeTop-1))){
-				width = 2;
-				outdent = !outdent;
-				outdentCount=0;
-			}else{
-				width = 1;
-				outdentCount++;
+		for(int y1=y+6;(y1<=treeTop);y1++){
+			
+			int distanceTopTop = treeTop-y1;
+			
+			if(distanceTopTop<=1){
+				width=1;
+			}else if(distanceTopTop==2){
+				width=2;
 			}
+			
 			if(y1<treeTop){
 				for(int x1=x-width;x1<=x+width;x1++){
 					for(int z1=z-width;z1<=z+width;z1++){
 	
 						if(world.getBlockId(x1, y1, z1)==0){
-							world.setBlockAndMetadataWithNotify(x1, y1, z1,ModBlocks.winterbirchLeaves.blockID,0,0);
+							world.setBlockAndMetadataWithNotify(x1, y1, z1,ModBlocks.hazelspringLeaves.blockID,0,0);
 						}
 					}
 				}
+				System.out.println(width);
+				if(width==1){
+					width=3;
+				}else
+					width--;
 			}else{
-				world.setBlockAndMetadataWithNotify(x, y1, z,ModBlocks.winterbirchLeaves.blockID,0,0);
-				world.setBlockAndMetadataWithNotify(x-1, y1, z,ModBlocks.winterbirchLeaves.blockID,0,0);
-				world.setBlockAndMetadataWithNotify(x+1, y1, z,ModBlocks.winterbirchLeaves.blockID,0,0);
-				world.setBlockAndMetadataWithNotify(x, y1, z+1,ModBlocks.winterbirchLeaves.blockID,0,0);
-				world.setBlockAndMetadataWithNotify(x, y1, z-1,ModBlocks.winterbirchLeaves.blockID,0,0);
+				world.setBlockAndMetadataWithNotify(x, y1, z,ModBlocks.hazelspringLeaves.blockID,0,0);
+				world.setBlockAndMetadataWithNotify(x-1, y1, z,ModBlocks.hazelspringLeaves.blockID,0,0);
+				world.setBlockAndMetadataWithNotify(x+1, y1, z,ModBlocks.hazelspringLeaves.blockID,0,0);
+				world.setBlockAndMetadataWithNotify(x, y1, z+1,ModBlocks.hazelspringLeaves.blockID,0,0);
+				world.setBlockAndMetadataWithNotify(x, y1, z-1,ModBlocks.hazelspringLeaves.blockID,0,0);
 			}
 
 		}
@@ -102,7 +107,7 @@ public class WorldGenWinterbirch {
 
 		int height = 1;
 
-		for (; (world.getBlockId(x, y + 1, z) == 0) && (height < 8); y++)
+		for (; (world.getBlockId(x, y + 1, z) == 0) && (height < 26); y++)
 		{
 			height++;
 		}
