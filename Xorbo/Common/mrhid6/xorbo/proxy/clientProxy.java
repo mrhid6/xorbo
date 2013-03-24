@@ -6,10 +6,12 @@ import mrhid6.xorbo.entities.EntityTitan;
 import mrhid6.xorbo.models.ModelTitan;
 import mrhid6.xorbo.network.PacketHandler;
 import mrhid6.xorbo.render.RenderTEStearilliumCrafter;
+import mrhid6.xorbo.render.RenderTETriniumConverter;
 import mrhid6.xorbo.render.RenderTETriniumMiner;
 import mrhid6.xorbo.render.RenderTEZoroController;
 import mrhid6.xorbo.render.RenderTitan;
 import mrhid6.xorbo.tileEntity.TEStearilliumCrafter;
+import mrhid6.xorbo.tileEntity.TETriniumConverter;
 import mrhid6.xorbo.tileEntity.TETriniumMiner;
 import mrhid6.xorbo.tileEntity.TEZoroController;
 import mrhid6.xorbo.tileEntity.TEZoroFurnace;
@@ -43,6 +45,7 @@ public class clientProxy extends commonProxy implements ITickHandler{
 		ClientRegistry.bindTileEntitySpecialRenderer(TEZoroController.class, new RenderTEZoroController());
 		ClientRegistry.bindTileEntitySpecialRenderer(TEStearilliumCrafter.class, new RenderTEStearilliumCrafter());
 		ClientRegistry.bindTileEntitySpecialRenderer(TETriniumMiner.class, new RenderTETriniumMiner());
+		ClientRegistry.bindTileEntitySpecialRenderer(TETriniumConverter.class, new RenderTETriniumConverter());
 		
 	}
 	

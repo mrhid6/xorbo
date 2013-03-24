@@ -3,6 +3,7 @@ package mrhid6.xorbo.tileEntity;
 import mrhid6.xorbo.Config;
 import mrhid6.xorbo.GridPower;
 import mrhid6.xorbo.Utils;
+import mrhid6.xorbo.interfaces.IConverterObj;
 import mrhid6.xorbo.interfaces.IGridInterface;
 import mrhid6.xorbo.interfaces.ITriniumObj;
 import mrhid6.xorbo.interfaces.IXorGridObj;
@@ -41,19 +42,20 @@ public class TECableBase extends TileEntity implements IGridInterface{
 
 	public double getCableThickness() {
 		switch(type){
-			case 0:return 4.0D / 16.0D;
-			case 1:return 6.0D / 16.0D;
+		case 0:return 4.0D / 16.0D;
+		case 1:return 6.0D / 16.0D;
 		}
-		
+
 		return 1.0D/16.0D;
 	}
 
 	public boolean canInteractWith(TileEntity te){
-		
-		
+
+
 		if(te instanceof ITriniumObj)return false;
 		if(te instanceof TECableBase)return true;
 		if(te instanceof IXorGridObj)return true;
+		if(te instanceof IConverterObj)return true;
 
 		return false;
 	}
@@ -90,6 +92,13 @@ public class TECableBase extends TileEntity implements IGridInterface{
 
 				if(cable.getGrid()!=null){
 					myGrid=cable.getGrid();
+					break;
+				}
+			}else if(te instanceof TETriniumConverter){
+				TETriniumConverter controller = (TETriniumConverter)te;
+
+				if(controller.getGrid()!=null){
+					myGrid=controller.getGrid();
 					break;
 				}
 			}else if(te instanceof TEZoroController){

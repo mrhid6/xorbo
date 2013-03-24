@@ -49,10 +49,6 @@ public abstract class BlockTexturedBase extends BlockContainer{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public abstract Icon getBlockTexture(IBlockAccess par1iBlockAccess, int x,int y, int z, int blockSide);
 	
 	
 

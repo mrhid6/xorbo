@@ -1,5 +1,6 @@
 package mrhid6.xorbo.tileEntity;
 
+import mrhid6.xorbo.Config;
 import mrhid6.xorbo.GridManager;
 import mrhid6.xorbo.GridPower;
 import mrhid6.xorbo.Utils;
@@ -42,6 +43,8 @@ public class TEZoroController extends TEMachineBase implements IXorGridObj{
 				getGrid().addEnergy(50F);
 				onInventoryChanged();
 			}
+
+			updateGrid();
 		}
 
 		TickSinceUpdate++;
@@ -77,7 +80,7 @@ public class TEZoroController extends TEMachineBase implements IXorGridObj{
 
 		if(i==0){
 			if(getGrid()!=null && imMaster == true){
-				
+
 				getGrid().setEnergyStored(j);
 			}else{
 				System.out.println("grid null!");
@@ -148,12 +151,81 @@ public class TEZoroController extends TEMachineBase implements IXorGridObj{
 	}
 
 	public boolean canInteractWith(TileEntity te){
-		
+
 		if(te instanceof ITriniumObj)return false;
 		if(te instanceof TECableBase)return true;
 		if(te instanceof IXorGridObj)return true;
 
 		return false;
+	}
+
+	public void onNeighborBlockChange() {
+
+		updateGrid();
+	}
+
+	public int cableCount(){
+		int count =0;
+		for(int i=0;i<6;i++){
+
+			int x1 = xCoord+Config.SIDE_COORD_MOD[i][0];
+			int y1 = yCoord+Config.SIDE_COORD_MOD[i][1];
+			int z1 = zCoord+Config.SIDE_COORD_MOD[i][2];
+
+			TileEntity te = this.worldObj.getBlockTileEntity(x1,y1,z1);
+
+			if(te instanceof TECableBase){
+				TECableBase cable = (TECableBase)te;
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public void updateGrid(){
+		
+		if(cableCount()==0){
+			if(getGrid()!=null){
+				getGrid().removeController(worldObj, xCoord, yCoord, zCoord);
+			}
+			gridindex=-1;
+			return;
+		}
+		
+		for(int i=0;i<6;i++){
+
+			int x1 = xCoord+Config.SIDE_COORD_MOD[i][0];
+			int y1 = yCoord+Config.SIDE_COORD_MOD[i][1];
+			int z1 = zCoord+Config.SIDE_COORD_MOD[i][2];
+
+			TileEntity te = this.worldObj.getBlockTileEntity(x1,y1,z1);
+
+			if(te instanceof TECableBase){
+				TECableBase cable = (TECableBase)te;
+
+				if(cable.getGrid()!=null){
+
+					if(cable.getGrid().gridIndex != gridindex){
+						getGrid().removeController(worldObj, xCoord, yCoord, zCoord);
+						gridindex=cable.getGrid().gridIndex;
+						getGrid().addController(this);
+						System.out.println("updated Grid");
+						return;
+					}
+				}
+			}
+		}
+
+		if(gridindex<0 || GridManager.getGrid(gridindex)==null){
+
+			System.out.println("grid is null creating new one!");
+			myGrid = new GridPower(worldObj);
+
+			myGrid.addController(this);
+			imMaster=true;
+
+		}
+
 	}
 
 

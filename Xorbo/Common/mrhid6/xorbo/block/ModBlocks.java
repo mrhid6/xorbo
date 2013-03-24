@@ -13,6 +13,7 @@ import mrhid6.xorbo.items.ModItems;
 import mrhid6.xorbo.tileEntity.TECableBase;
 import mrhid6.xorbo.tileEntity.TEStearilliumCrafter;
 import mrhid6.xorbo.tileEntity.TETriniumCable;
+import mrhid6.xorbo.tileEntity.TETriniumConverter;
 import mrhid6.xorbo.tileEntity.TETriniumMiner;
 import mrhid6.xorbo.tileEntity.TEZoroController;
 import mrhid6.xorbo.tileEntity.TEZoroFurnace;
@@ -48,6 +49,7 @@ public class ModBlocks {
 	public static Block stearilliumOre;
 	public static Block triniumOre;
 	public static Block stearilliumCrafter;
+	public static Block triniumConverter;
 
 
 	public static void init(){
@@ -87,6 +89,13 @@ public class ModBlocks {
 		GameRegistry.registerBlock(stearilliumCrafter,stearilliumCrafter.getUnlocalizedName());
 
 		GameRegistry.registerTileEntity(TEStearilliumCrafter.class, "te"+stearilliumCrafter.getUnlocalizedName());
+		
+		
+		triniumConverter = new BlockTriniumConverter(BlockIds.getID("triniumConverter"), "triniumConverter", "triniumconverter");
+		LanguageRegistry.addName(triniumConverter, "Trinium Converter");
+		GameRegistry.registerBlock(triniumConverter,triniumConverter.getUnlocalizedName());
+		
+		GameRegistry.registerTileEntity(TETriniumConverter.class, "te"+triniumConverter.getUnlocalizedName());
 		
 		zoroGrass = new BlockZoroGrass(BlockIds.getID("zoroGrass"), "zoroGrass", "zorograss");
 		LanguageRegistry.addName(zoroGrass, "Zoro Grass");

@@ -3,6 +3,7 @@ package mrhid6.xorbo;
 import java.io.File;
 import java.util.HashMap;
 
+import mrhid6.xorbo.render.BRTriniumConverter;
 import mrhid6.xorbo.render.RenderBlockCable;
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -25,8 +26,7 @@ public class Config extends Configuration{
 		RenderingRegistry.registerBlockHandler(new RenderBlockCable());
 		renderIds.put("zorocable", RenderBlockCable.renderId);
 		
-		/*RenderingRegistry.registerBlockHandler(new RenderBlockTriniumCable());
-		renderIds.put("triniumcable", RenderBlockTriniumCable.renderId);*/
+		RenderingRegistry.registerBlockHandler(new BRTriniumConverter());
 
 		config = new Configuration(configFile);
 		config.load();
@@ -37,19 +37,20 @@ public class Config extends Configuration{
 		BlockIds.addBlockID(config, "zoroFurnace", 502);
 		BlockIds.addBlockID(config, "zoroController", 503);
 		BlockIds.addBlockID(config, "triniumMiner", 504);
-		BlockIds.addBlockID(config, "stearilliumCrafter", 505);
-		BlockIds.addBlockID(config, "zoroGrass", 506);
-		BlockIds.addBlockID(config, "hazelspringLog", 507);
-		BlockIds.addBlockID(config, "winterbirchLog", 508);
-		BlockIds.addBlockID(config, "hazelspringLeaves", 509);
-		BlockIds.addBlockID(config, "winterbirchLeaves", 510);
+		BlockIds.addBlockID(config, "triniumConverter", 505);
+		BlockIds.addBlockID(config, "stearilliumCrafter", 506);
+		BlockIds.addBlockID(config, "zoroGrass", 507);
+		BlockIds.addBlockID(config, "hazelspringLog", 508);
+		BlockIds.addBlockID(config, "winterbirchLog", 509);
+		BlockIds.addBlockID(config, "hazelspringLeaves", 510);
+		BlockIds.addBlockID(config, "winterbirchLeaves", 511);
 
-		BlockIds.addBlockID(config, "zoroStill", 511);
-		BlockIds.addBlockID(config, "zoroFlowing", 512);
+		BlockIds.addBlockID(config, "zoroStill", 512);
+		BlockIds.addBlockID(config, "zoroFlowing", 513);
 
-		BlockIds.addBlockID(config, "zoroOre", 513);
-		BlockIds.addBlockID(config, "stearilliumOre", 514);
-		BlockIds.addBlockID(config, "triniumOre", 515);
+		BlockIds.addBlockID(config, "zoroOre", 514);
+		BlockIds.addBlockID(config, "stearilliumOre", 515);
+		BlockIds.addBlockID(config, "triniumOre", 516);
 
 
 

@@ -21,6 +21,14 @@ public class BlockZoroController extends BlockTexturedBase{
 		this.setHardness(6.0F);
 		icons = new Icon[2];
 	}
+	
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, int blockID) {
+		super.onNeighborBlockChange(world, x, y, z, blockID);
+		
+		TEZoroController tile = (TEZoroController)world.getBlockTileEntity(x, y, z);
+		tile.onNeighborBlockChange();
+	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {

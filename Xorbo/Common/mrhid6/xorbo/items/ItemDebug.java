@@ -24,6 +24,8 @@ public class ItemDebug extends ItemTexturedBase{
 	public ItemDebug(int id, String name) {
 		super(id, 1, Config.creativeTabXor, name);
 	}
+	
+	
 
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{

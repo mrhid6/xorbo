@@ -1,8 +1,8 @@
 package mrhid6.xorbo.tileEntity;
 
 import mrhid6.xorbo.Config;
+import mrhid6.xorbo.interfaces.IConverterObj;
 import mrhid6.xorbo.interfaces.ITriniumObj;
-import mrhid6.xorbo.interfaces.IXorGridObj;
 import net.minecraft.tileentity.TileEntity;
 
 public class TETriniumCable extends TECableBase implements ITriniumObj{
@@ -16,6 +16,7 @@ public class TETriniumCable extends TECableBase implements ITriniumObj{
 	public boolean canInteractWith(TileEntity te){
 		
 		if(te instanceof ITriniumObj)return true;
+		if(te instanceof IConverterObj)return true;
 
 		return false;
 	}
@@ -40,14 +41,14 @@ public class TETriniumCable extends TECableBase implements ITriniumObj{
 					myGrid=cable.getGrid();
 					break;
 				}
-			}/*else if(te instanceof TEZoroController){
-				TEZoroController controller = (TEZoroController)te;
+			}else if(te instanceof TETriniumConverter){
+				TETriniumConverter controller = (TETriniumConverter)te;
 
 				if(controller.getGrid()!=null){
 					myGrid=controller.getGrid();
 					break;
 				}
-			}*/
+			}
 		}
 	}
 }
