@@ -9,6 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public abstract class TEPoweredBase extends TileRoot implements IGridInterface{
 	
+	public int TickSinceUpdate = 0;
 	public boolean isLoaded = false;
 	public GridPower myGrid;
 	public int gridindex = -1;
@@ -59,7 +60,7 @@ public abstract class TEPoweredBase extends TileRoot implements IGridInterface{
 				TECableBase cable = (TECableBase)te;
 				
 				if(cable.getGrid()!=null){
-					myGrid=cable.getGrid();
+					gridindex=cable.getGrid().gridIndex;
 					System.out.println("found Grid");
 					break;
 				}

@@ -6,11 +6,11 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-public class GuiZoroFurnace extends GuiMain
+public class GuiStearilliumCrafter extends GuiMain
 {
-	public ContainerZoroFurnace container;
+	public ContainerStearilliumCrafter container;
 
-	public GuiZoroFurnace(ContainerZoroFurnace container)
+	public GuiStearilliumCrafter(ContainerStearilliumCrafter container)
 	{
 		super(container);
 		this.container = container;

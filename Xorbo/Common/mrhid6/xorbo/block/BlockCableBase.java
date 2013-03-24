@@ -44,7 +44,6 @@ public class BlockCableBase extends BlockTexturedBase{
 		return false;
 	}
 	
-	
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
@@ -154,7 +153,7 @@ public class BlockCableBase extends BlockTexturedBase{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int x, int y, int z, int blockSide) {
-		return this.field_94336_cN;
+		return this.blockIcon;
 	}
 
 }

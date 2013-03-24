@@ -51,10 +51,10 @@ public class BlockZoroController extends BlockTexturedBase{
 	}
 	
 	@Override
-	public void func_94332_a(IconRegister iconRegister)
+	public void registerIcons(IconRegister iconRegister)
     {
-		icons[0] = iconRegister.func_94245_a("xorbo:"+textureName+"_top");
-		icons[1] = iconRegister.func_94245_a("xorbo:"+textureName+"_side");
+		icons[0] = iconRegister.registerIcon("xorbo:"+textureName+"_top");
+		icons[1] = iconRegister.registerIcon("xorbo:"+textureName+"_side");
     }
 
 	@Override

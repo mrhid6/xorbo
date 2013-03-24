@@ -9,6 +9,7 @@ import static org.lwjgl.opengl.GL11.glRotatef;
 import static org.lwjgl.opengl.GL11.glScalef;
 import static org.lwjgl.opengl.GL11.glTranslatef;
 import mrhid6.xorbo.block.ModBlocks;
+import mrhid6.xorbo.items.ModItems;
 import mrhid6.xorbo.tileEntity.TEZoroController;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -56,7 +57,7 @@ public class RenderTEZoroController extends TileEntitySpecialRenderer {
 
 		if (tpb.worldObj.getBlockId(tpb.xCoord, tpb.yCoord + 1, tpb.zCoord) == 0 && tpb.worldObj.getClosestPlayer(tpb.xCoord, tpb.yCoord, tpb.zCoord, 15) != null && !mc.isGamePaused) {
 
-			ItemStack stack = new ItemStack(ModBlocks.zoroController,1);
+			ItemStack stack = new ItemStack(ModItems.zoroBucket,1);
 
 			EntityItem ei = new EntityItem(tpb.worldObj);
 			ei.hoverStart = 0f;

@@ -1,7 +1,8 @@
-package mrhid6.xorbo.block;
+package mrhid6.xorbo.block.fancy;
 
 import java.util.Random;
 
+import mrhid6.xorbo.block.BlockTexturedBase;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
@@ -10,9 +11,9 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockWinterbirchLog extends BlockTexturedBase
+public class BlockHazelspringLog extends BlockTexturedBase
 {
-	public BlockWinterbirchLog(int id, String textureName, String name){
+	public BlockHazelspringLog(int id, String textureName, String name){
 		
 		super(id, textureName, name, true);
 		setHardness(5.0F);
@@ -48,9 +49,9 @@ public class BlockWinterbirchLog extends BlockTexturedBase
 	}
 	
 	@Override
-	public void func_94332_a(IconRegister iconRegister)
+	public void registerIcons(IconRegister iconRegister)
     {
-		icons[0] = iconRegister.func_94245_a("xorbo:"+textureName+"_top");
-		icons[1] = iconRegister.func_94245_a("xorbo:"+textureName+"_side");
+		icons[0] = iconRegister.registerIcon("xorbo:"+textureName+"_top");
+		icons[1] = iconRegister.registerIcon("xorbo:"+textureName+"_side");
     }
 }

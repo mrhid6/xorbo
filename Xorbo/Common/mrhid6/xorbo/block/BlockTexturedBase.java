@@ -1,6 +1,5 @@
 package mrhid6.xorbo.block;
 
-import mrhid6.xorbo.BlockIds;
 import mrhid6.xorbo.Config;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -41,8 +40,8 @@ public abstract class BlockTexturedBase extends BlockContainer{
 	
 	
 	@Override
-	public void func_94332_a(IconRegister iconRegister){
-		field_94336_cN = iconRegister.func_94245_a("xorbo:"+textureName);
+	public void registerIcons(IconRegister iconRegister){
+		this.blockIcon = iconRegister.registerIcon("xorbo:"+textureName);
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package mrhid6.xorbo.block;
+package mrhid6.xorbo.block.fancy;
 
 import java.util.List;
 import java.util.Random;
@@ -8,7 +8,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;

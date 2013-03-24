@@ -1,24 +1,33 @@
 package mrhid6.xorbo.gui;
 
-import mrhid6.xorbo.tileEntity.TEZoroFurnace;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import mrhid6.xorbo.tileEntity.TEStearilliumCrafter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class ContainerZoroFurnace extends ContainerXorbo
+public class ContainerStearilliumCrafter extends ContainerXorbo
 {
 	public float energy = -1;
-	protected TEZoroFurnace tileEntity;
+	protected TEStearilliumCrafter tileEntity;
 
-	public ContainerZoroFurnace(EntityPlayer inventory, TEZoroFurnace te)
+	public ContainerStearilliumCrafter(EntityPlayer inventory, TEStearilliumCrafter te)
 	{
 		tileEntity = te;
-		addSlotToContainer(new Slot(this.tileEntity, 0, 56, 24));
-		addSlotToContainer(new SlotFurnace(inventory, this.tileEntity, 1, 116, 33));
+		
+		int l;
+        int i1;
+		
+		for (l = 0; l < 3; ++l)
+        {
+            for (i1 = 0; i1 < 3; ++i1)
+            {
+                this.addSlotToContainer(new Slot(this.tileEntity, i1 + l * 3, 30 + i1 * 18, 17 + l * 18));
+            }
+        }
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -103,8 +112,6 @@ public class ContainerZoroFurnace extends ContainerXorbo
 		super.updateProgressBar(i, j);
 		tileEntity.receiveGuiNetworkData(i, j);
 	}
-
-	
 	
 	
 }

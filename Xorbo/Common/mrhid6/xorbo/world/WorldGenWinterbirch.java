@@ -33,7 +33,7 @@ public class WorldGenWinterbirch {
 			return false;
 		}
 
-		if(random.nextInt(20)>4)
+		if(random.nextInt(20)<5)
 			return false;
 
 
@@ -48,7 +48,7 @@ public class WorldGenWinterbirch {
 			return false;
 
 		for(int i=0;i<height;i++){
-			world.setBlockAndMetadataWithNotify(x, y+i, z,ModBlocks.winterbirchLog.blockID,0,0);
+			world.setBlock(x, y+i, z,ModBlocks.winterbirchLog.blockID);
 		}
 
 
@@ -75,16 +75,16 @@ public class WorldGenWinterbirch {
 					for(int z1=z-width;z1<=z+width;z1++){
 	
 						if(world.getBlockId(x1, y1, z1)==0){
-							world.setBlockAndMetadataWithNotify(x1, y1, z1,ModBlocks.winterbirchLeaves.blockID,0,0);
+							world.setBlock(x1, y1, z1,ModBlocks.winterbirchLeaves.blockID);
 						}
 					}
 				}
 			}else{
-				world.setBlockAndMetadataWithNotify(x, y1, z,ModBlocks.winterbirchLeaves.blockID,0,0);
-				world.setBlockAndMetadataWithNotify(x-1, y1, z,ModBlocks.winterbirchLeaves.blockID,0,0);
-				world.setBlockAndMetadataWithNotify(x+1, y1, z,ModBlocks.winterbirchLeaves.blockID,0,0);
-				world.setBlockAndMetadataWithNotify(x, y1, z+1,ModBlocks.winterbirchLeaves.blockID,0,0);
-				world.setBlockAndMetadataWithNotify(x, y1, z-1,ModBlocks.winterbirchLeaves.blockID,0,0);
+				world.setBlock(x, y1, z,ModBlocks.winterbirchLeaves.blockID);
+				world.setBlock(x-1, y1, z,ModBlocks.winterbirchLeaves.blockID);
+				world.setBlock(x+1, y1, z,ModBlocks.winterbirchLeaves.blockID);
+				world.setBlock(x, y1, z+1,ModBlocks.winterbirchLeaves.blockID);
+				world.setBlock(x, y1, z-1,ModBlocks.winterbirchLeaves.blockID);
 			}
 
 		}
@@ -95,7 +95,7 @@ public class WorldGenWinterbirch {
 	}
 
 	public static int getGrowHeight(World world, int x, int y, int z){
-		if (((world.getBlockId(x, y - 1, z) != Block.grass.blockID) && (world.getBlockId(x, y - 1, z) != Block.dirt.blockID)) || ((world.getBlockId(x, y, z) != 0)))
+		if (((world.getBlockId(x, y - 1, z) != Block.grass.blockID) && (world.getBlockId(x, y - 1, z) != Block.dirt.blockID))&& (world.getBlockId(x, y, z) != Block.snow.blockID) || ((world.getBlockId(x, y, z) != 0)))
 		{
 			return 0;
 		}

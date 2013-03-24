@@ -2,6 +2,9 @@ package mrhid6.xorbo.block;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFluid;
 import net.minecraft.block.material.Material;
@@ -9,27 +12,13 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.liquids.ILiquid;
 
-public class BlockZoroFlowing extends BlockFluid
+public class BlockZoroFlowing extends BlockFluid implements ILiquid
 {
-    /**
-     * Number of horizontally adjacent liquid source blocks. Diagonal doesn't count. Only source blocks of the same
-     * liquid as the block using the field are counted.
-     */
-    int numAdjacentSources = 0;
 
-    /**
-     * Indicates whether the flow direction is optimal. Each array index corresponds to one of the four cardinal
-     * directions.
-     */
+	int numAdjacentSources = 0;
     boolean[] isOptimalFlowDirection = new boolean[4];
-
-    /**
-     * The estimated cost to flow in a given direction from the current point. Each array index corresponds to one of
-     * the four cardinal directions.
-     */
     int[] flowCost = new int[4];
 
     protected BlockZoroFlowing(int par1, String name)
@@ -44,7 +33,7 @@ public class BlockZoroFlowing extends BlockFluid
     private void updateFlow(World par1World, int par2, int par3, int par4)
     {
         int l = par1World.getBlockMetadata(par2, par3, par4);
-        par1World.setBlockAndMetadataWithNotify(par2, par3, par4, ModBlocks.zoroStill.blockID, l, 2);
+        par1World.setBlock(par2, par3, par4, ModBlocks.zoroStill.blockID, l, 2);
     }
 
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
@@ -128,7 +117,7 @@ public class BlockZoroFlowing extends BlockFluid
 
                 if (i1 < 0)
                 {
-                    par1World.func_94571_i(par2, par3, par4);
+                    par1World.setBlockToAir(par2, par3, par4);
                 }
                 else
                 {
@@ -147,7 +136,7 @@ public class BlockZoroFlowing extends BlockFluid
         {
             if (this.blockMaterial == Material.lava && par1World.getBlockMaterial(par2, par3 - 1, par4) == Material.water)
             {
-                par1World.func_94575_c(par2, par3 - 1, par4, Block.stone.blockID);
+                par1World.setBlock(par2, par3 - 1, par4, Block.stone.blockID);
                 this.triggerLavaMixEffects(par1World, par2, par3 - 1, par4);
                 return;
             }
@@ -220,7 +209,7 @@ public class BlockZoroFlowing extends BlockFluid
                 }
             }
 
-            par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par5, 3);
+            par1World.setBlock(par2, par3, par4, this.blockID, par5, 3);
         }
     }
 
@@ -432,17 +421,30 @@ public class BlockZoroFlowing extends BlockFluid
         return false;
     }
 
-    @Override
-	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
-		return this.field_94336_cN;
+	@Override
+	public int stillLiquidId() {
+		return ModBlocks.zoroStill.blockID;
 	}
-    
-    @Override
-	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister iconRegister) {
-		this.field_94336_cN = iconRegister.func_94245_a("xorbo:zoroFlowing");
+
+	@Override
+	public boolean isMetaSensitive() {
+		return false;
 	}
-    
-    
+
+	@Override
+	public int stillLiquidMeta() {
+		return 0;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
+		return this.blockIcon;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister iconRegister) {
+		this.blockIcon = iconRegister.registerIcon("xorbo:zoroFlowing");
+	}
 }

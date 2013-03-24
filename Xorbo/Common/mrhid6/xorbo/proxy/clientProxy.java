@@ -2,13 +2,21 @@ package mrhid6.xorbo.proxy;
 
 import java.util.EnumSet;
 
+import mrhid6.xorbo.entities.EntityTitan;
+import mrhid6.xorbo.models.ModelTitan;
 import mrhid6.xorbo.network.PacketHandler;
+import mrhid6.xorbo.render.RenderTEStearilliumCrafter;
+import mrhid6.xorbo.render.RenderTETriniumMiner;
 import mrhid6.xorbo.render.RenderTEZoroController;
+import mrhid6.xorbo.render.RenderTitan;
+import mrhid6.xorbo.tileEntity.TEStearilliumCrafter;
+import mrhid6.xorbo.tileEntity.TETriniumMiner;
 import mrhid6.xorbo.tileEntity.TEZoroController;
 import mrhid6.xorbo.tileEntity.TEZoroFurnace;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.registry.TickRegistry;
@@ -21,7 +29,7 @@ public class clientProxy extends commonProxy implements ITickHandler{
 	private int playerCounter;
 
 	String[] capeUsers = {"mrhid6","tommo1590","danzo1997","Wolfyart", "GreatCannonba11","Blackout656"};
-	public boolean allHaveCape=true;
+	public boolean allHaveCape=false;
 	
 	public clientProxy() {
 		TickRegistry.registerTickHandler(this, Side.CLIENT);
@@ -30,12 +38,11 @@ public class clientProxy extends commonProxy implements ITickHandler{
 	@Override
 	public void registerRenderers() {
 		
-		
-		//MinecraftForgeClient.preloadTexture(BLOCK_PNG);
-		//MinecraftForgeClient.preloadTexture(BLOCK_TILES_PNG);
-		//MinecraftForgeClient.preloadTexture(ITEMS_PNG);
+		RenderingRegistry.registerEntityRenderingHandler(EntityTitan.class, new RenderTitan(new ModelTitan(),0.3F));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TEZoroController.class, new RenderTEZoroController());
+		ClientRegistry.bindTileEntitySpecialRenderer(TEStearilliumCrafter.class, new RenderTEStearilliumCrafter());
+		ClientRegistry.bindTileEntitySpecialRenderer(TETriniumMiner.class, new RenderTETriniumMiner());
 		
 	}
 	

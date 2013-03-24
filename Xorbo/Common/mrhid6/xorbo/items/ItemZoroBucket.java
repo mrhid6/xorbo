@@ -17,17 +17,13 @@ public class ItemZoroBucket extends ItemBucket{
 		
 		setCreativeTab(Config.creativeTabXor);
 		setContainerItem(Item.bucketEmpty);
-		
 		setUnlocalizedName(name);
 	}
-
+	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94581_a(IconRegister iconRegister) {
-		this.iconIndex = iconRegister.func_94245_a("xorbo:"+getUnlocalizedName());
+	public void updateIcons(IconRegister iconRegister) {
+		this.iconIndex = iconRegister.registerIcon("xorbo:zorobucket");
 	}	
-	
-	
-	
 
 }

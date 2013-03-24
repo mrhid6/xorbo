@@ -106,15 +106,13 @@ public abstract class TEMachineBase extends TEBlock implements ISidedInventory, 
 
 		this.processCur = data.getFloat("process.cur");
 		this.processEnd = data.getFloat("process.end");
-		if(getGrid()!=null)
-			getGrid().setEnergyStored(data.getFloat("grid.power"));
 
 	}
 
 	public int getScaledEnergyStored(int scale)
 	{
-		if(myGrid!=null){
-			return Math.round(this.myGrid.getEnergyStored() * scale / this.myGrid.getMaxEnergy());
+		if(getGrid()!=null){
+			return Math.round(getGrid().getEnergyStored() * scale / getGrid().getMaxEnergy());
 		}
 		return 0;
 	}
@@ -124,8 +122,5 @@ public abstract class TEMachineBase extends TEBlock implements ISidedInventory, 
 
 		data.setFloat("process.cur", this.processCur);
 		data.setFloat("process.end", this.processEnd);
-		
-		if(getGrid()!=null)
-			data.setFloat("grid.power", getGrid().getEnergyStored());
 	}
 }

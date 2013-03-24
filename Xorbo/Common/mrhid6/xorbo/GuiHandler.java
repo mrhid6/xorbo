@@ -1,7 +1,10 @@
 package mrhid6.xorbo;
 
+import mrhid6.xorbo.gui.ContainerStearilliumCrafter;
 import mrhid6.xorbo.gui.ContainerZoroFurnace;
+import mrhid6.xorbo.gui.GuiStearilliumCrafter;
 import mrhid6.xorbo.gui.GuiZoroFurnace;
+import mrhid6.xorbo.tileEntity.TEStearilliumCrafter;
 import mrhid6.xorbo.tileEntity.TEZoroFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -19,16 +22,11 @@ public class GuiHandler implements IGuiHandler
 
 		if (tileEntity instanceof TEZoroFurnace){
 			return new ContainerZoroFurnace(player, (TEZoroFurnace) tileEntity);
-		}/*else if (tileEntity instanceof TileZoroGen){
-			return new ContainerZoroGen(player, (TileZoroGen) tileEntity);
-		}else if (tileEntity instanceof TEStearilliumGrinder){
-			return new ContainerStearilliumGrinder(player, (TEStearilliumGrinder) tileEntity);
-		}else if (tileEntity instanceof TETriniumCore){
-			return new ContainerTriniumCore(player, (TETriniumCore) tileEntity);
-		}else if (tileEntity instanceof TETriniumLaserBase){
-			return new ContainerTLaser(player, (TETriniumLaserBase) tileEntity);
 		}
-		
+		if (tileEntity instanceof TEStearilliumCrafter){
+			return new ContainerStearilliumCrafter(player, (TEStearilliumCrafter) tileEntity);
+		}
+		/*
 		if(tileEntity instanceof TETriniumChillerBase || tileEntity instanceof TETriniumChillerCore){
 			TETriniumChillerCore core = null;
 			if(tileEntity instanceof TETriniumChillerBase){
@@ -53,16 +51,11 @@ public class GuiHandler implements IGuiHandler
 
 		if (tileEntity instanceof TEZoroFurnace){
 			return new GuiZoroFurnace(new ContainerZoroFurnace(player, (TEZoroFurnace) tileEntity));
-		}/*else if (tileEntity instanceof TileZoroGen){
-			return new GuiZoroGen(new ContainerZoroGen(player, (TileZoroGen) tileEntity));
-		}else if (tileEntity instanceof TEStearilliumGrinder){
-			return new GuiStearilliumGrinder(new ContainerStearilliumGrinder(player, (TEStearilliumGrinder) tileEntity));
-		}else if (tileEntity instanceof TETriniumCore){
-			return new GuiTriniumCore(new ContainerTriniumCore(player, (TETriniumCore) tileEntity));
-		}else if (tileEntity instanceof TETriniumLaserBase){
-			return new GuiTriniumLaser(new ContainerTLaser(player, (TETriniumLaserBase) tileEntity));
 		}
-		
+		if (tileEntity instanceof TEStearilliumCrafter){
+			return new GuiStearilliumCrafter(new ContainerStearilliumCrafter(player, (TEStearilliumCrafter) tileEntity));
+		}
+		/*
 		if(tileEntity instanceof TETriniumChillerBase || tileEntity instanceof TETriniumChillerCore){
 			TETriniumChillerCore core = null;
 			if(tileEntity instanceof TETriniumChillerBase){

@@ -48,17 +48,17 @@ public class WorldGenHazelspring {
 			return false;
 
 		for(int i=0;i<height;i++){
-			world.setBlockAndMetadataWithNotify(x, y+i, z,ModBlocks.hazelspringLog.blockID,0,0);
+			world.setBlock(x, y+i, z,ModBlocks.hazelspringLog.blockID,0,0);
 		}
 
 
 		int width=3;
 		int treeTop = y+height+1;
 		
-		world.setBlockAndMetadataWithNotify(x-1, y+5, z,ModBlocks.hazelspringLeaves.blockID,0,0);
-		world.setBlockAndMetadataWithNotify(x+1, y+5, z,ModBlocks.hazelspringLeaves.blockID,0,0);
-		world.setBlockAndMetadataWithNotify(x, y+5, z+1,ModBlocks.hazelspringLeaves.blockID,0,0);
-		world.setBlockAndMetadataWithNotify(x, y+5, z-1,ModBlocks.hazelspringLeaves.blockID,0,0);
+		world.setBlock(x-1, y+5, z,ModBlocks.hazelspringLeaves.blockID,0,0);
+		world.setBlock(x+1, y+5, z,ModBlocks.hazelspringLeaves.blockID,0,0);
+		world.setBlock(x, y+5, z+1,ModBlocks.hazelspringLeaves.blockID,0,0);
+		world.setBlock(x, y+5, z-1,ModBlocks.hazelspringLeaves.blockID,0,0);
 		
 		for(int y1=y+6;(y1<=treeTop);y1++){
 			
@@ -75,7 +75,7 @@ public class WorldGenHazelspring {
 					for(int z1=z-width;z1<=z+width;z1++){
 	
 						if(world.getBlockId(x1, y1, z1)==0){
-							world.setBlockAndMetadataWithNotify(x1, y1, z1,ModBlocks.hazelspringLeaves.blockID,0,0);
+							world.setBlock(x1, y1, z1,ModBlocks.hazelspringLeaves.blockID,0,0);
 						}
 					}
 				}
@@ -85,11 +85,11 @@ public class WorldGenHazelspring {
 				}else
 					width--;
 			}else{
-				world.setBlockAndMetadataWithNotify(x, y1, z,ModBlocks.hazelspringLeaves.blockID,0,0);
-				world.setBlockAndMetadataWithNotify(x-1, y1, z,ModBlocks.hazelspringLeaves.blockID,0,0);
-				world.setBlockAndMetadataWithNotify(x+1, y1, z,ModBlocks.hazelspringLeaves.blockID,0,0);
-				world.setBlockAndMetadataWithNotify(x, y1, z+1,ModBlocks.hazelspringLeaves.blockID,0,0);
-				world.setBlockAndMetadataWithNotify(x, y1, z-1,ModBlocks.hazelspringLeaves.blockID,0,0);
+				world.setBlock(x, y1, z,ModBlocks.hazelspringLeaves.blockID,0,0);
+				world.setBlock(x-1, y1, z,ModBlocks.hazelspringLeaves.blockID,0,0);
+				world.setBlock(x+1, y1, z,ModBlocks.hazelspringLeaves.blockID,0,0);
+				world.setBlock(x, y1, z+1,ModBlocks.hazelspringLeaves.blockID,0,0);
+				world.setBlock(x, y1, z-1,ModBlocks.hazelspringLeaves.blockID,0,0);
 			}
 
 		}
