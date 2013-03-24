@@ -42,7 +42,7 @@ public class TECableBase extends TileEntity implements IGridInterface{
 	public double getCableThickness() {
 		switch(type){
 			case 0:return 4.0D / 16.0D;
-			case 1:return 5.0D / 16.0D;
+			case 1:return 6.0D / 16.0D;
 		}
 		
 		return 1.0D/16.0D;
