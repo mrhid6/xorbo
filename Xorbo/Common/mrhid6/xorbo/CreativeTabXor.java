@@ -10,7 +10,7 @@ public class CreativeTabXor extends CreativeTabs{
 	}
 	
 	public int getTabIconItemIndex(){
-		return ModBlocks.cable.blockID;
+		return ModBlocks.stearilliumCrafter.blockID;
 	}
 	
 	public String getTranslatedTabLabel(){

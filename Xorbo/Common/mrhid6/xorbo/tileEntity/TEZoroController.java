@@ -3,6 +3,7 @@ package mrhid6.xorbo.tileEntity;
 import mrhid6.xorbo.GridManager;
 import mrhid6.xorbo.GridPower;
 import mrhid6.xorbo.Utils;
+import mrhid6.xorbo.interfaces.ITriniumObj;
 import mrhid6.xorbo.interfaces.IXorGridObj;
 import mrhid6.xorbo.network.PacketUtils;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,6 +11,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 public class TEZoroController extends TEMachineBase implements IXorGridObj{
 
@@ -23,7 +25,7 @@ public class TEZoroController extends TEMachineBase implements IXorGridObj{
 
 	public void breakBlock() {
 		if(getGrid()!=null){
-			getGrid().removeController(xCoord,yCoord,zCoord);
+			getGrid().removeController(worldObj,xCoord,yCoord,zCoord);
 		}
 	}
 
@@ -57,7 +59,7 @@ public class TEZoroController extends TEMachineBase implements IXorGridObj{
 			myGrid.addController(this);
 			imMaster=true;
 
-		}else if(getGrid()!=null && !getGrid().hasController(xCoord,yCoord,zCoord)){
+		}else if(getGrid()!=null && !getGrid().hasController(worldObj,xCoord,yCoord,zCoord)){
 			getGrid().addController(this);
 			imMaster=false;
 		}
@@ -142,6 +144,15 @@ public class TEZoroController extends TEMachineBase implements IXorGridObj{
 	@Override
 	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
 		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean canInteractWith(TileEntity te){
+		
+		if(te instanceof ITriniumObj)return false;
+		if(te instanceof TECableBase)return true;
+		if(te instanceof IXorGridObj)return true;
+
 		return false;
 	}
 

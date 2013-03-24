@@ -31,7 +31,7 @@ public class RenderBlockCable implements ISimpleBlockRenderingHandler{
 
 		TECableBase cable = (TECableBase)te;
 
-		float th = (float)TECableBase.getCableThickness();
+		float th = (float)cable.getCableThickness();
 		float sp = (1.0F - th) / 2.0F;
 
 		Tessellator tessellator = Tessellator.instance;
@@ -61,9 +61,9 @@ public class RenderBlockCable implements ISimpleBlockRenderingHandler{
 			}
 
 			if ((neighbor != null)) {
-				connectivity |= mask;
 
-				if (((neighbor instanceof TECableBase)) && (TECableBase.getCableThickness() < th)) {
+				if (cable.canInteractWith(neighbor)) {
+					connectivity |= mask;
 					renderSide |= mask;
 				}
 			}

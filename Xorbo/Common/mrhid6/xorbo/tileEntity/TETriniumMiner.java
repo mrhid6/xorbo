@@ -4,6 +4,7 @@ import java.util.List;
 
 import mrhid6.xorbo.Config;
 import mrhid6.xorbo.Utils;
+import mrhid6.xorbo.interfaces.ITriniumObj;
 import mrhid6.xorbo.interfaces.IXorGridObj;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
@@ -12,7 +13,7 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TETriniumMiner extends TEMachineBase implements IXorGridObj{
+public class TETriniumMiner extends TEMachineBase implements IXorGridObj, ITriniumObj{
 
 	private int depth;
 	private boolean doneMineing = false;

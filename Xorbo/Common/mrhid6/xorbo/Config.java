@@ -23,29 +23,33 @@ public class Config extends Configuration{
 		creativeTabXor = new CreativeTabXor("Xorbo");
 
 		RenderingRegistry.registerBlockHandler(new RenderBlockCable());
-		renderIds.put("cable", RenderBlockCable.renderId);
+		renderIds.put("zorocable", RenderBlockCable.renderId);
+		
+		/*RenderingRegistry.registerBlockHandler(new RenderBlockTriniumCable());
+		renderIds.put("triniumcable", RenderBlockTriniumCable.renderId);*/
 
 		config = new Configuration(configFile);
 		config.load();
 
 
 		BlockIds.addBlockID(config, "zoroCable", 500);
-		BlockIds.addBlockID(config, "zoroFurnace", 501);
-		BlockIds.addBlockID(config, "zoroController", 502);
-		BlockIds.addBlockID(config, "triniumMiner", 503);
-		BlockIds.addBlockID(config, "stearilliumCrafter", 504);
-		BlockIds.addBlockID(config, "zoroGrass", 505);
-		BlockIds.addBlockID(config, "hazelspringLog", 506);
-		BlockIds.addBlockID(config, "winterbirchLog", 507);
-		BlockIds.addBlockID(config, "hazelspringLeaves", 508);
-		BlockIds.addBlockID(config, "winterbirchLeaves", 509);
+		BlockIds.addBlockID(config, "triniumCable", 501);
+		BlockIds.addBlockID(config, "zoroFurnace", 502);
+		BlockIds.addBlockID(config, "zoroController", 503);
+		BlockIds.addBlockID(config, "triniumMiner", 504);
+		BlockIds.addBlockID(config, "stearilliumCrafter", 505);
+		BlockIds.addBlockID(config, "zoroGrass", 506);
+		BlockIds.addBlockID(config, "hazelspringLog", 507);
+		BlockIds.addBlockID(config, "winterbirchLog", 508);
+		BlockIds.addBlockID(config, "hazelspringLeaves", 509);
+		BlockIds.addBlockID(config, "winterbirchLeaves", 510);
 
-		BlockIds.addBlockID(config, "zoroStill", 510);
-		BlockIds.addBlockID(config, "zoroFlowing", 511);
+		BlockIds.addBlockID(config, "zoroStill", 511);
+		BlockIds.addBlockID(config, "zoroFlowing", 512);
 
-		BlockIds.addBlockID(config, "zoroOre", 512);
-		BlockIds.addBlockID(config, "stearilliumOre", 513);
-		BlockIds.addBlockID(config, "triniumOre", 514);
+		BlockIds.addBlockID(config, "zoroOre", 513);
+		BlockIds.addBlockID(config, "stearilliumOre", 514);
+		BlockIds.addBlockID(config, "triniumOre", 515);
 
 
 

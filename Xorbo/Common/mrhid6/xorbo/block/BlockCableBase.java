@@ -23,10 +23,6 @@ public class BlockCableBase extends BlockTexturedBase{
 		this.setStepSound(soundClothFootstep);
 
 	}
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TECableBase();
-	}
 
 	public boolean isBlockNormalCube(){
 		return false;
@@ -37,7 +33,7 @@ public class BlockCableBase extends BlockTexturedBase{
 	}
 
 	public int getRenderType(){
-		return Config.getRenderId("cable");
+		return Config.getRenderId("zorocable");
 	}
 
 	public boolean isOpaqueCube(){
@@ -109,7 +105,7 @@ public class BlockCableBase extends BlockTexturedBase{
 		
 		TECableBase cable = (TECableBase)world.getBlockTileEntity(x, y, z);
 		
-		double halfThickness = TECableBase.getCableThickness()/2.0D;
+		double halfThickness = cable.getCableThickness()/2.0D;
 		
 		float minX = (float) (0.5F - halfThickness);
 		float minY = (float) (0.5F - halfThickness);
@@ -132,7 +128,7 @@ public class BlockCableBase extends BlockTexturedBase{
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z){
 
 		TECableBase cable = (TECableBase)world.getBlockTileEntity(x, y, z);
-		double halfThickness = TECableBase.getCableThickness()/2.0D;
+		double halfThickness = cable.getCableThickness()/2.0D;
 
 		double minX = x + 0.5D - halfThickness;
 		double minY = y + 0.5D - halfThickness;

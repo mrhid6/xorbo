@@ -3,8 +3,9 @@ package mrhid6.xorbo.tileEntity;
 import mrhid6.xorbo.Config;
 import mrhid6.xorbo.GridPower;
 import mrhid6.xorbo.Utils;
-import mrhid6.xorbo.interfaces.IXorGridObj;
 import mrhid6.xorbo.interfaces.IGridInterface;
+import mrhid6.xorbo.interfaces.ITriniumObj;
+import mrhid6.xorbo.interfaces.IXorGridObj;
 import net.minecraft.tileentity.TileEntity;
 
 public class TECableBase extends TileEntity implements IGridInterface{
@@ -15,6 +16,7 @@ public class TECableBase extends TileEntity implements IGridInterface{
 	public boolean hasController = false;
 
 	public GridPower myGrid;
+	public int type = 0;
 
 	public TECableBase(){
 
@@ -37,25 +39,24 @@ public class TECableBase extends TileEntity implements IGridInterface{
 	}
 
 
-	public static double getCableThickness() {
-		return 4.0D / 16.0D;
+	public double getCableThickness() {
+		switch(type){
+			case 0:return 4.0D / 16.0D;
+			case 1:return 5.0D / 16.0D;
+		}
+		
+		return 1.0D/16.0D;
 	}
 
 	public boolean canInteractWith(TileEntity te){
-
+		
+		
+		if(te instanceof ITriniumObj)return false;
 		if(te instanceof TECableBase)return true;
 		if(te instanceof IXorGridObj)return true;
 
 		return false;
 	}
-
-	public boolean isMachine(TileEntity te){
-
-		if(te instanceof IXorGridObj)return true;
-
-		return false;
-	}
-
 	public void breakBlock() {
 
 		if(myGrid!=null){
@@ -84,7 +85,7 @@ public class TECableBase extends TileEntity implements IGridInterface{
 
 			TileEntity te = this.worldObj.getBlockTileEntity(x1,y1,z1);
 
-			if(te instanceof TECableBase){
+			if(te instanceof TECableBase && !(te instanceof ITriniumObj)){
 				TECableBase cable = (TECableBase)te;
 
 				if(cable.getGrid()!=null){

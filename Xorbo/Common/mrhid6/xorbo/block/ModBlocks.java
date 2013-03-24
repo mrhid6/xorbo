@@ -12,6 +12,7 @@ import mrhid6.xorbo.block.minable.BlockZoroOre;
 import mrhid6.xorbo.items.ModItems;
 import mrhid6.xorbo.tileEntity.TECableBase;
 import mrhid6.xorbo.tileEntity.TEStearilliumCrafter;
+import mrhid6.xorbo.tileEntity.TETriniumCable;
 import mrhid6.xorbo.tileEntity.TETriniumMiner;
 import mrhid6.xorbo.tileEntity.TEZoroController;
 import mrhid6.xorbo.tileEntity.TEZoroFurnace;
@@ -31,7 +32,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ModBlocks {
 
-	public static Block cable;
+	public static Block zoroCable;
+	public static Block triniumCable;
 	public static Block zoroFurnace;
 	public static Block zoroController;
 	public static Block hazelspringLog;
@@ -50,11 +52,17 @@ public class ModBlocks {
 
 	public static void init(){
 
-		cable = new BlockCableBase(BlockIds.getID("zoroCable"),"zoroCable", "zorocable", true);
-		LanguageRegistry.addName(cable, "Zoro Cable");
-		GameRegistry.registerBlock(cable,cable.getUnlocalizedName());
+		zoroCable = new BlockZoroCable(BlockIds.getID("zoroCable"),"zorocable", true);
+		LanguageRegistry.addName(zoroCable, "Zoro Cable");
+		GameRegistry.registerBlock(zoroCable,zoroCable.getUnlocalizedName());
 
-		GameRegistry.registerTileEntity(TECableBase.class, "te"+cable.getUnlocalizedName());
+		GameRegistry.registerTileEntity(TECableBase.class, "te"+zoroCable.getUnlocalizedName());
+		
+		triniumCable = new BlockTriniumCable(BlockIds.getID("triniumCable"),"triniumcable", true);
+		LanguageRegistry.addName(triniumCable, "Trinium Cable");
+		GameRegistry.registerBlock(triniumCable,triniumCable.getUnlocalizedName());
+		
+		GameRegistry.registerTileEntity(TETriniumCable.class, "te"+triniumCable.getUnlocalizedName());
 
 		zoroFurnace = new BlockZoroFurnace(BlockIds.getID("zoroFurnace"), "zoroFurnace", "zorofurnace", true);
 		LanguageRegistry.addName(zoroFurnace, "Zoro Furnace");

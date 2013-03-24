@@ -18,10 +18,8 @@ public class GridPower {
 
 	public int gridIndex;
 	private float Power = 0.0F;
-	private World worldObj;
 
 	public GridPower(World w){
-		worldObj = w;
 
 		cablesArray = new ArrayList<TECableBase>();
 		controllerArray = new ArrayList<TEZoroController>();
@@ -160,10 +158,10 @@ public class GridPower {
 		return false;
 	}
 	
-	public boolean hasController(int x,int y,int z){
+	public boolean hasController(World w, int x,int y,int z){
 		
 		for(TEZoroController te : controllerArray){
-			TileEntity te1 = worldObj.getBlockTileEntity(x, y, z);
+			TileEntity te1 = w.getBlockTileEntity(x, y, z);
 			
 			if(te1!=null && te1 instanceof TEZoroController){
 				if(te.xCoord==x && te.yCoord==y && te.zCoord==z){
@@ -175,11 +173,11 @@ public class GridPower {
 		return false;
 	}
 	
-	public void removeController(int x,int y,int z){
+	public void removeController(World w,int x,int y,int z){
 		
 		for(int i=0;i<controllerArray.size();i++){
 			TEZoroController te = controllerArray.get(i);
-			TileEntity te1 = worldObj.getBlockTileEntity(x, y, z);
+			TileEntity te1 = w.getBlockTileEntity(x, y, z);
 			
 			if(te1!=null && te1 instanceof TEZoroController){
 				if(te.xCoord==x && te.yCoord==y && te.zCoord==z){
