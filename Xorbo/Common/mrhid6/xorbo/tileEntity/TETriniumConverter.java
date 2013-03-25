@@ -17,6 +17,13 @@ public class TETriniumConverter extends TEMachineBase implements IConverterObj{
 	public TETriniumConverter() {
 		this.inventory = new ItemStack[0];
 	}
+	
+	public boolean canConnectSide(int side){
+		
+		if(side==1 || side==0)return false;
+		
+		return true;
+	}
 
 	@Override
 	public int[] getSizeInventorySide(int var1) {
@@ -68,7 +75,7 @@ public class TETriniumConverter extends TEMachineBase implements IConverterObj{
 	public void updateEntity() {
 		super.updateEntity();
 		
-		if(Utils.isClientWorld(worldObj))
+		if(Utils.isClientWorld())
 			return;
 		
 		if((TickSinceUpdate  % 10) == 0){
@@ -100,7 +107,7 @@ public class TETriniumConverter extends TEMachineBase implements IConverterObj{
 			int y1 = yCoord+Config.SIDE_COORD_MOD[i][1];
 			int z1 = zCoord+Config.SIDE_COORD_MOD[i][2];
 
-			GridPower gridCheck = GridManager.getGridAt(x1, y1, z1, worldObj);
+			GridPower gridCheck = GridManager.getGridAt(x1, y1, z1, worldObj,i);
 			
 			if(getGrid()!=null && gridCheck!=null){
 				

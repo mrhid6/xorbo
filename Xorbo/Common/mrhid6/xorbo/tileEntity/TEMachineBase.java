@@ -35,6 +35,50 @@ public abstract class TEMachineBase extends TEBlock implements ISidedInventory, 
 		descPacketId = id;
 		return true;
 	}
+	
+	@Override
+	public Packet getDescriptionPacket() {
+		Payload payload = new Payload(2, 0, 1, 2, 0);
+
+	    payload.boolPayload[0] = this.isActive;
+	    payload.boolPayload[1] = this.transmitpower;
+	    
+	    payload.intPayload[0] = this.gridindex;
+	    
+		payload.floatPayload[0] = this.processCur;
+		payload.floatPayload[1] = this.processEnd;
+
+		PacketTile packet = new PacketTile(descPacketId,this.xCoord,this.yCoord,this.zCoord,payload);
+		return packet.getPacket();
+	}
+	
+	@Override
+	public void handleTilePacket(PacketTile packet) {
+
+		this.isActive = packet.payload.boolPayload[0];
+		this.transmitpower = packet.payload.boolPayload[0];
+
+		this.processCur = packet.payload.floatPayload[0];
+		this.processEnd = packet.payload.floatPayload[1];
+		
+		this.gridindex = packet.payload.intPayload[0];
+		
+		if (Utils.isClientWorld()) {
+			this.processCur = packet.payload.floatPayload[0];
+			this.processEnd = packet.payload.floatPayload[1];
+			this.gridindex = packet.payload.intPayload[0];
+			//System.out.println(gridindex);
+		}
+		
+		
+
+		this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+		this.worldObj.updateAllLightTypes(this.xCoord, this.yCoord, this.zCoord);
+
+		if (Utils.isServerWorld())
+			PacketUtils.sendToPlayers(getDescriptionPacket(), this.worldObj, this.xCoord, this.yCoord, this.zCoord, 192);
+
+	}
 
 	public int getScaledProgress(int scale)
 	{
@@ -66,39 +110,6 @@ public abstract class TEMachineBase extends TEBlock implements ISidedInventory, 
 	@Override
 	public void closeChest(){}
 
-	@Override
-	public Packet getDescriptionPacket() {
-		Payload payload = new Payload(2, 0, 1, 3, 0);
-
-		payload.boolPayload[0] = this.isActive;
-		payload.boolPayload[1] = this.transmitpower;
-
-		payload.intPayload[0] = this.gridindex;
-
-		if(getGrid()!=null){
-			//System.out.println("grid is correct");
-			payload.floatPayload[0] = getGrid().getEnergyStored();
-		}
-		payload.floatPayload[1] = this.processCur;
-		payload.floatPayload[2] = this.processEnd;
-
-		PacketTile packet = new PacketTile(descPacketId,this.xCoord,this.yCoord,this.zCoord,payload);
-		return packet.getPacket();
-	}
-
-	@Override
-	public void handleTilePacket(PacketTile packet) {
-
-		this.isActive = packet.payload.boolPayload[0];
-
-		this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
-		this.worldObj.updateAllLightTypes(this.xCoord, this.yCoord, this.zCoord);
-		this.worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, ModBlocks.zoroFurnace.blockID);
-
-		if (Utils.isServerWorld(this.worldObj))
-			PacketUtils.sendToPlayers(getDescriptionPacket(), this.worldObj, this.xCoord, this.yCoord, this.zCoord, 192);
-
-	}
 
 	public void readFromNBT(NBTTagCompound data)
 	{

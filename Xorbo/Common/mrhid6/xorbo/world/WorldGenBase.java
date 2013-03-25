@@ -15,7 +15,7 @@ public class WorldGenBase implements IWorldGenerator{
 
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
-		if(Utils.isClientWorld(world))
+		if(Utils.isClientWorld())
 			return;
 
 		switch (world.provider.dimensionId){

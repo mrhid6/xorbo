@@ -3,6 +3,7 @@ package mrhid6.xorbo;
 import java.util.ArrayList;
 
 import mrhid6.xorbo.tileEntity.TECableBase;
+import mrhid6.xorbo.tileEntity.TEPoweredBase;
 import mrhid6.xorbo.tileEntity.TETriniumConverter;
 import mrhid6.xorbo.tileEntity.TEZoroController;
 import net.minecraft.tileentity.TileEntity;
@@ -29,7 +30,7 @@ public class GridManager {
 		return grids.get(gridindex);
 	}
 	
-	public static GridPower getGridAt(int x,int y, int z, World w){
+	public static GridPower getGridAt(int x,int y, int z, World w,int side){
 		TileEntity te = w.getBlockTileEntity(x, y, z);
 		
 		if(te!=null){
@@ -40,17 +41,22 @@ public class GridManager {
 				if(cable.getGrid()!=null){
 					return cable.getGrid();
 				}
-			}
-			
-			if(te instanceof TEZoroController){
+			}else if(te instanceof TEZoroController){
 				TEZoroController controller = (TEZoroController)te;
 				
 				if(controller.getGrid()!=null){
 					return controller.getGrid();
 				}
-			}
-			if(te instanceof TETriniumConverter){
+			}else if(te instanceof TETriniumConverter){
 				TETriniumConverter converter = (TETriniumConverter)te;
+				
+				if(converter.canConnectSide(side)){
+					if(converter.getGrid()!=null){
+						return converter.getGrid();
+					}
+				}
+			}else if(te instanceof TEPoweredBase){
+				TEPoweredBase converter = (TEPoweredBase)te;
 				
 				if(converter.getGrid()!=null){
 					return converter.getGrid();

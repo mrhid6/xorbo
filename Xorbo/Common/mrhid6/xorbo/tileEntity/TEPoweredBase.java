@@ -29,7 +29,7 @@ public abstract class TEPoweredBase extends TileRoot implements IGridInterface{
 			if(te instanceof TECableBase){
 				TECableBase cable = (TECableBase)te;
 				
-				if(cable.canInteractWith(this) && cable.getGrid()!=null){
+				if(cable.canInteractWith(this,i) && cable.getGrid()!=null){
 					gridindex=cable.getGrid().gridIndex;
 					break;
 				}
@@ -86,7 +86,7 @@ public abstract class TEPoweredBase extends TileRoot implements IGridInterface{
 	public void updateEntity() {
 		super.updateEntity();
 		
-		if(Utils.isClientWorld(worldObj))
+		if(Utils.isClientWorld())
 			return;
 		
 		if(!isLoaded){

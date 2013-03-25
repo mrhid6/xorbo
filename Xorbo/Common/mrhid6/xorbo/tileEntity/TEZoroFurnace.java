@@ -4,9 +4,12 @@ import java.util.HashMap;
 
 import mrhid6.xorbo.Utils;
 import mrhid6.xorbo.interfaces.IXorGridObj;
+import mrhid6.xorbo.network.PacketUtils;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
+import cpw.mods.fml.relauncher.Side;
 
 public class TEZoroFurnace extends TEMachineBase implements IXorGridObj{
 
@@ -50,7 +53,7 @@ public class TEZoroFurnace extends TEMachineBase implements IXorGridObj{
 	public void updateEntity() {
 		super.updateEntity();
 		
-		if(Utils.isClientWorld(worldObj))
+		if(Utils.isClientWorld())
 			return;
 		
 		if((TickSinceUpdate  % 10) == 0){
@@ -61,8 +64,10 @@ public class TEZoroFurnace extends TEMachineBase implements IXorGridObj{
 				if(getGrid()!=null){
 					System.out.println("found Grid zoroFurnace"+(worldObj.isRemote));
 					getGrid().addMachine(this);
+					sendUpdatePacket(Side.CLIENT);
 				}else{
 					System.out.println("im still null!"+(worldObj.isRemote));
+					sendUpdatePacket(Side.CLIENT);
 				}
 			}
 		}
@@ -76,26 +81,13 @@ public class TEZoroFurnace extends TEMachineBase implements IXorGridObj{
 	}
 
 	public void receiveGuiNetworkData(int i, int j){
-		
-		if(i==0){
-			if(getGrid()!=null){
-				//getGrid().setEnergyStored(j);
-			}else{
-				//System.out.println("grid null!");
-			}
-		}
-		
-		if(i == 1){
-			this.gridindex = j;
-		}
 	}
 
-	public void sendGuiNetworkData(Container container, ICrafting iCrafting){
-		if(getGrid()!=null && tempEng!=((int)getGrid().getEnergyStored())){
-			iCrafting.sendProgressBarUpdate(container, 0, (int)getGrid().getEnergyStored());
-			tempEng = (int)getGrid().getEnergyStored();
-		}
-		iCrafting.sendProgressBarUpdate(container, 1, this.gridindex);
+	public void sendGuiNetworkData(Container container, ICrafting iCrafting)
+	{
+		if (((iCrafting instanceof EntityPlayer)) && 
+				(Utils.isServerWorld()))
+			PacketUtils.sendToPlayer((EntityPlayer)iCrafting, getDescriptionPacket());
 	}
 
 	@Override

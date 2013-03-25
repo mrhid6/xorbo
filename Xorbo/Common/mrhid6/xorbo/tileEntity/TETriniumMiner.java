@@ -62,7 +62,7 @@ public class TETriniumMiner extends TEMachineBase implements IXorGridObj, ITrini
 	public void updateEntity() {
 		super.updateEntity();
 
-		if(Utils.isClientWorld(worldObj))
+		if(Utils.isClientWorld())
 			return;
 
 		if(doneMineing==true){

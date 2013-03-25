@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class Utils {
 
@@ -43,12 +44,12 @@ public class Utils {
 		
 	}
 	
-	public static boolean isServerWorld(World w){
-		return !w.isRemote;
+	public static boolean isServerWorld(){
+		return !isClientWorld();
 	}
 
-	public static boolean isClientWorld(World w) {
-		return w.isRemote;
+	public static boolean isClientWorld() {
+		return FMLCommonHandler.instance().getEffectiveSide().isClient();
 	}
 
 	public static TileEntity getTileEntity(World world, int x, int y, int z, int meta, int blockId) {

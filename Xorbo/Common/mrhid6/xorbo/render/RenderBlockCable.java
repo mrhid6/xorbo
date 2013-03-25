@@ -66,7 +66,7 @@ public class RenderBlockCable implements ISimpleBlockRenderingHandler{
 
 			if ((neighbor != null)) {
 
-				if (cable.canInteractWith(neighbor)) {
+				if (cable.canInteractRender(neighbor,i)) {
 					connectivity |= mask;
 					renderSide |= mask;
 				}

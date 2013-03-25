@@ -71,7 +71,7 @@ public class GridPower {
 		cablesArray.remove(te);
 
 		for(TECableBase te1 : cablesArray){
-			te1.myGrid = null;
+			te1.gridindex = -1;
 		}
 
 		cablesArray.clear();
@@ -171,7 +171,7 @@ public class GridPower {
 		masterController=null;
 
 		for(TECableBase te1 : cablesArray){
-			te1.myGrid = null;
+			te1.gridindex = -1;
 		}
 
 		for(TEPoweredBase te1 : machineArray){
@@ -199,5 +199,11 @@ public class GridPower {
 			return true;
 		}
 		return false;
+	}
+	
+	public int getScaledEnergyStored(int scale)
+	{
+		return Math.round(getEnergyStored() * scale / getMaxEnergy());
+
 	}
 }

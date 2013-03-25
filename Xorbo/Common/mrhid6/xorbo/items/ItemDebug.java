@@ -1,22 +1,13 @@
 package mrhid6.xorbo.items;
 
-import java.util.List;
-
 import mrhid6.xorbo.Config;
-import mrhid6.xorbo.block.ModBlocks;
-import mrhid6.xorbo.entities.EntityTitan;
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityBoat;
+import mrhid6.xorbo.tileEntity.TECableBase;
+import mrhid6.xorbo.tileEntity.TEPoweredBase;
+import mrhid6.xorbo.tileEntity.TEZoroController;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.EnumMovingObjectType;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 
 public class ItemDebug extends ItemTexturedBase{
 
@@ -25,11 +16,32 @@ public class ItemDebug extends ItemTexturedBase{
 		super(id, 1, Config.creativeTabXor, name);
 	}
 	
-	
+	@Override
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player,
+			World world, int x, int y, int z, int side, float hitX, float hitY,
+			float hitZ) {
+		
+		TileEntity te = world.getBlockTileEntity(x, y, z);
+		
+		if(te instanceof TEZoroController){
+			
+			System.out.println( ((TEZoroController)te).gridindex );
+		}else if(te instanceof TECableBase){
+			System.out.println( ((TECableBase)te).gridindex );
+
+		}else if(te instanceof TEPoweredBase){
+			System.out.println( ((TEPoweredBase)te).gridindex );
+			
+		}
+		
+		return true;
+	}
 
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
-		float f = 1.0F;
+		return null;
+		
+		/*float f = 1.0F;
 		float f1 = par3EntityPlayer.prevRotationPitch + (par3EntityPlayer.rotationPitch - par3EntityPlayer.prevRotationPitch) * f;
 		float f2 = par3EntityPlayer.prevRotationYaw + (par3EntityPlayer.rotationYaw - par3EntityPlayer.prevRotationYaw) * f;
 		double d0 = par3EntityPlayer.prevPosX + (par3EntityPlayer.posX - par3EntityPlayer.prevPosX) * (double)f;
@@ -112,6 +124,6 @@ public class ItemDebug extends ItemTexturedBase{
 
 				return par1ItemStack;
 			}
-		}
+		}*/
 	}
 }

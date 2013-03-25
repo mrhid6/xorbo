@@ -35,15 +35,20 @@ public class GuiZoroFurnace extends GuiMain
 		int y = (height - ySize) / 2;
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
-		int l = this.container.tileEntity.getScaledEnergyStored(102);
-		if (l > 0) {
-			drawTexturedModalRect(x + 42, y + 61, 0, 166, l, 10);
+		GridPower grid = GridManager.getGrid(this.container.tileEntity.gridindex);
+		
+		if(grid!=null){
+			int l = grid.getScaledEnergyStored(102);
+			if (l > 0) {
+				drawTexturedModalRect(x + 42, y + 61, 0, 166, l, 10);
+			}
 		}
 	}
 
 	@Override
 	protected void drawTooltips()
 	{
+		System.out.println(container.tileEntity.gridindex);
 		GridPower grid = GridManager.getGrid(this.container.tileEntity.gridindex);
 		
 		if(grid==null)
