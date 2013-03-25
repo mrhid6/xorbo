@@ -4,9 +4,11 @@ import mrhid6.xorbo.Config;
 import mrhid6.xorbo.GridManager;
 import mrhid6.xorbo.GridPower;
 import mrhid6.xorbo.Utils;
+import mrhid6.xorbo.block.ModBlocks;
 import mrhid6.xorbo.interfaces.ITriniumObj;
 import mrhid6.xorbo.interfaces.IXorGridObj;
 import mrhid6.xorbo.network.PacketUtils;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
@@ -17,7 +19,7 @@ import net.minecraft.tileentity.TileEntity;
 public class TEZoroController extends TEMachineBase implements IXorGridObj{
 
 	private int tempEng;
-	private boolean imMaster = false;
+	public boolean imMaster = false;
 
 	public TEZoroController(){
 
@@ -43,8 +45,7 @@ public class TEZoroController extends TEMachineBase implements IXorGridObj{
 				getGrid().addEnergy(50F);
 				onInventoryChanged();
 			}
-
-			updateGrid();
+			gridCheck();
 		}
 
 		TickSinceUpdate++;
@@ -59,13 +60,45 @@ public class TEZoroController extends TEMachineBase implements IXorGridObj{
 			System.out.println("grid is null creating new one!");
 			myGrid = new GridPower(worldObj);
 
-			myGrid.addController(this);
+			myGrid.setController(this);
 			imMaster=true;
 
-		}else if(getGrid()!=null && !getGrid().hasController(worldObj,xCoord,yCoord,zCoord)){
-			getGrid().addController(this);
-			imMaster=false;
+		}else if(getGrid()!=null){
+			breakController();
 		}
+	}
+	
+	public void gridCheck(){
+		for(int i=0;i<6;i++){
+
+			int x1 = xCoord+Config.SIDE_COORD_MOD[i][0];
+			int y1 = yCoord+Config.SIDE_COORD_MOD[i][1];
+			int z1 = zCoord+Config.SIDE_COORD_MOD[i][2];
+
+			GridPower gridCheck = GridManager.getGridAt(x1, y1, z1, worldObj);
+			
+			if(myGrid!=null && gridCheck!=null){
+				
+				
+				if(gridCheck.gridIndex!=myGrid.gridIndex){
+					myGrid.removeController(worldObj, xCoord, yCoord, zCoord);
+					breakController();
+				}
+			}
+		}
+	}
+	
+	public void breakController(){
+		worldObj.setBlock(xCoord, yCoord, zCoord, 0);
+		EntityItem entityitem = new EntityItem(worldObj, xCoord, yCoord, zCoord, new ItemStack(ModBlocks.zoroController,1));
+
+		entityitem.lifespan = 5200;
+		entityitem.delayBeforeCanPickup = 10;
+		
+		entityitem.motionX = 0;
+		entityitem.motionY = 0;
+		entityitem.motionZ = 0;
+		worldObj.spawnEntityInWorld(entityitem);
 	}
 
 	public static boolean setDescPacketId(int id){
@@ -161,7 +194,7 @@ public class TEZoroController extends TEMachineBase implements IXorGridObj{
 
 	public void onNeighborBlockChange() {
 
-		updateGrid();
+		//updateGrid();
 	}
 
 	public int cableCount(){
@@ -180,52 +213,6 @@ public class TEZoroController extends TEMachineBase implements IXorGridObj{
 			}
 		}
 		return count;
-	}
-
-	public void updateGrid(){
-		
-		if(cableCount()==0){
-			if(getGrid()!=null){
-				getGrid().removeController(worldObj, xCoord, yCoord, zCoord);
-			}
-			gridindex=-1;
-			return;
-		}
-		
-		for(int i=0;i<6;i++){
-
-			int x1 = xCoord+Config.SIDE_COORD_MOD[i][0];
-			int y1 = yCoord+Config.SIDE_COORD_MOD[i][1];
-			int z1 = zCoord+Config.SIDE_COORD_MOD[i][2];
-
-			TileEntity te = this.worldObj.getBlockTileEntity(x1,y1,z1);
-
-			if(te instanceof TECableBase){
-				TECableBase cable = (TECableBase)te;
-
-				if(cable.getGrid()!=null){
-
-					if(cable.getGrid().gridIndex != gridindex){
-						getGrid().removeController(worldObj, xCoord, yCoord, zCoord);
-						gridindex=cable.getGrid().gridIndex;
-						getGrid().addController(this);
-						System.out.println("updated Grid");
-						return;
-					}
-				}
-			}
-		}
-
-		if(gridindex<0 || GridManager.getGrid(gridindex)==null){
-
-			System.out.println("grid is null creating new one!");
-			myGrid = new GridPower(worldObj);
-
-			myGrid.addController(this);
-			imMaster=true;
-
-		}
-
 	}
 
 

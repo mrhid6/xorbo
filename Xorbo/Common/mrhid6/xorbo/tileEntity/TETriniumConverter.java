@@ -1,6 +1,8 @@
 package mrhid6.xorbo.tileEntity;
 
 import mrhid6.xorbo.Config;
+import mrhid6.xorbo.GridManager;
+import mrhid6.xorbo.GridPower;
 import mrhid6.xorbo.Utils;
 import mrhid6.xorbo.interfaces.IConverterObj;
 import net.minecraft.item.ItemStack;
@@ -75,7 +77,7 @@ public class TETriniumConverter extends TEMachineBase implements IConverterObj{
 				findGrid();
 
 				if(getGrid()!=null){
-					System.out.println("found Grid zoroFurnace"+(worldObj.isRemote));
+					System.out.println("found Grid triniumconverter"+getGrid().gridIndex);
 					getGrid().addMachine(this);
 				}else{
 					System.out.println("im still null!"+(worldObj.isRemote));
@@ -83,9 +85,34 @@ public class TETriniumConverter extends TEMachineBase implements IConverterObj{
 			}
 			
 			updateConnections();
+			gridCheck();
 		}
 		
 		TickSinceUpdate++;
+	}
+	
+	public void gridCheck(){
+		
+		//System.out.println("updateCheck!");
+		for(int i=0;i<6;i++){
+
+			int x1 = xCoord+Config.SIDE_COORD_MOD[i][0];
+			int y1 = yCoord+Config.SIDE_COORD_MOD[i][1];
+			int z1 = zCoord+Config.SIDE_COORD_MOD[i][2];
+
+			GridPower gridCheck = GridManager.getGridAt(x1, y1, z1, worldObj);
+			
+			if(getGrid()!=null && gridCheck!=null){
+				
+				
+				if(gridCheck.gridIndex<getGrid().gridIndex){
+					getGrid().removeMachine(this);
+					gridindex = gridCheck.gridIndex;
+					
+					System.out.println("teconverter grid Was Changed to"+gridCheck.gridIndex);
+				}
+			}
+		}
 	}
 	
 }

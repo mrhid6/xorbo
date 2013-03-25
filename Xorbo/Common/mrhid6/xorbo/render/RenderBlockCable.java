@@ -1,9 +1,13 @@
 package mrhid6.xorbo.render;
 
+import org.lwjgl.opengl.GL11;
+
 import mrhid6.xorbo.tileEntity.TECableBase;
+import mrhid6.xorbo.tileEntity.TETriniumConverter;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;

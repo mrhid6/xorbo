@@ -23,7 +23,7 @@ public class RenderTETriniumConverter extends TileEntitySpecialRenderer {
 			return;
 
 		if(tileentity.worldObj==null){
-			bindTextureByName("/mods/xorbo/textures/blocks/TriniumConverter.png");
+			bindTextureByName("/mods/xorbo/textures/blocks/TriniumConverterOff.png");
 			GL11.glPushMatrix();
 			{
 				GL11.glTranslatef((float)x + 0.5F, (float)y+1.5f, (float)z + 0.5F);
@@ -36,7 +36,12 @@ public class RenderTETriniumConverter extends TileEntitySpecialRenderer {
 
 		TETriniumConverter te = (TETriniumConverter)tileentity;
 		te.updateConnections();
-		bindTextureByName("/mods/xorbo/textures/blocks/TriniumConverter.png");
+		
+		if(true){
+			bindTextureByName("/mods/xorbo/textures/blocks/TriniumConverterOn.png");
+		}else{
+			bindTextureByName("/mods/xorbo/textures/blocks/TriniumConverterOff.png");
+		}
 		GL11.glPushMatrix();
 		{
 			GL11.glTranslatef((float)x + 0.5F, (float)y+1.5f, (float)z + 0.5F);

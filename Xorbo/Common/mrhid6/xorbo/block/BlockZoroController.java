@@ -19,7 +19,7 @@ public class BlockZoroController extends BlockTexturedBase{
 
 		this.setResistance(6.0F);
 		this.setHardness(6.0F);
-		icons = new Icon[2];
+		icons = new Icon[4];
 	}
 	
 	@Override
@@ -54,6 +54,12 @@ public class BlockZoroController extends BlockTexturedBase{
 		if(side==1){
 			return icons[0];
 		}
+		if(side==0){
+			return icons[3];
+		}
+		if(side == 2 || side == 4){
+			return icons[2];
+		}
 		
 		return icons[1];
 	}
@@ -62,7 +68,9 @@ public class BlockZoroController extends BlockTexturedBase{
 	public void registerIcons(IconRegister iconRegister)
     {
 		icons[0] = iconRegister.registerIcon("xorbo:"+textureName+"_top");
-		icons[1] = iconRegister.registerIcon("xorbo:"+textureName+"_side");
+		icons[1] = iconRegister.registerIcon("xorbo:"+textureName+"_side1");
+		icons[2] = iconRegister.registerIcon("xorbo:"+textureName+"_side2");
+		icons[3] = iconRegister.registerIcon("xorbo:zorofurnace_top");
     }
 
 	@Override

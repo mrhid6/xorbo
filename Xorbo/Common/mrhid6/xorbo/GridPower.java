@@ -12,9 +12,9 @@ import net.minecraft.world.World;
 public class GridPower {
 
 	private ArrayList<TECableBase> cablesArray;
-	private ArrayList<TEZoroController> controllerArray;
+	public TEZoroController masterController;
 	private ArrayList<TEPoweredBase> machineArray;
-	private float maxPower = 3000.0F;
+	private float maxPower = 12000.0F;
 
 	public int gridIndex;
 	private float Power = 0.0F;
@@ -22,7 +22,6 @@ public class GridPower {
 	public GridPower(World w){
 
 		cablesArray = new ArrayList<TECableBase>();
-		controllerArray = new ArrayList<TEZoroController>();
 		machineArray = new ArrayList<TEPoweredBase>();
 
 		Power = 0;
@@ -36,9 +35,8 @@ public class GridPower {
 
 	}
 
-	public void addController(TEZoroController te){
-		controllerArray.remove(te);
-		controllerArray.add(te);
+	public void setController(TEZoroController te){
+		masterController = te;
 		te.gridindex = this.gridIndex;
 		System.out.println("addedcontroller!");
 	}
@@ -57,7 +55,7 @@ public class GridPower {
 	}
 
 	public float getMaxEnergy(){
-		return controllerArray.size() * maxPower;
+		return  maxPower;
 	}
 
 	public boolean hasCable(TECableBase te) {
@@ -79,6 +77,7 @@ public class GridPower {
 		cablesArray.clear();
 
 		for(TEPoweredBase te1 : machineArray){
+			te1.myGrid = null;
 			te1.gridindex = -1;
 		}
 
@@ -143,11 +142,6 @@ public class GridPower {
 
 	}
 
-	public ArrayList<TEZoroController> getControllers(){
-
-		return controllerArray;
-	}
-
 	public boolean hasMachine(TEPoweredBase te) {
 		for(TEPoweredBase te1 : machineArray){
 
@@ -157,35 +151,25 @@ public class GridPower {
 
 		return false;
 	}
-	
+
 	public boolean hasController(World w, int x,int y,int z){
-		
-		for(TEZoroController te : controllerArray){
-			TileEntity te1 = w.getBlockTileEntity(x, y, z);
-			
-			if(te1!=null && te1 instanceof TEZoroController){
-				if(te.xCoord==x && te.yCoord==y && te.zCoord==z){
-					return true;
-				}
+
+		TileEntity te1 = w.getBlockTileEntity(x, y, z);
+
+		if(te1!=null && te1 instanceof TEZoroController){
+			if(masterController.xCoord==x && masterController.yCoord==y && masterController.zCoord==z){
+				return true;
 			}
 		}
-		
+
+
 		return false;
 	}
-	
+
 	public void removeController(World w,int x,int y,int z){
-		
-		for(int i=0;i<controllerArray.size();i++){
-			TEZoroController te = controllerArray.get(i);
-			TileEntity te1 = w.getBlockTileEntity(x, y, z);
-			
-			if(te1!=null && te1 instanceof TEZoroController){
-				if(te.xCoord==x && te.yCoord==y && te.zCoord==z){
-					controllerArray.remove(i);
-				}
-			}
-		}
-		
+
+		masterController=null;
+
 		for(TECableBase te1 : cablesArray){
 			te1.myGrid = null;
 		}
@@ -207,5 +191,13 @@ public class GridPower {
 
 			te.TickSinceUpdate=0;
 		}
+	}
+	
+	public boolean gridConfigured(){
+		
+		if(masterController!=null){
+			return true;
+		}
+		return false;
 	}
 }

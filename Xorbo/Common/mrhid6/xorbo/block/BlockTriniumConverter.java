@@ -26,13 +26,13 @@ public class BlockTriniumConverter extends BlockMachine{
 	
 	@Override
 	public void registerIcons(IconRegister iconRegister){
-		return;
+		this.blockIcon = iconRegister.registerIcon("xorbo:TriniumConverterOff");
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
-		return null;
+		return this.blockIcon;
 	}
 	
 	public boolean isOpaqueCube() {

@@ -44,7 +44,7 @@ public class BlockStearilliumCrafter extends BlockMachine{
 		icons[0] = iconRegister.registerIcon("xorbo:"+textureName+"_top");
 		icons[1] = iconRegister.registerIcon("xorbo:"+textureName+"_side");
 		icons[2] = iconRegister.registerIcon("xorbo:"+textureName+"_front");
-		icons[3] = iconRegister.registerIcon("xorbo:zorocontroller_side");
+		icons[3] = iconRegister.registerIcon("xorbo:zorofurnace_top");
     }
 
 	
