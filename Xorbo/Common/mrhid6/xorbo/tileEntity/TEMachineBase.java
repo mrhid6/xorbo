@@ -120,13 +120,6 @@ public abstract class TEMachineBase extends TEBlock implements ISidedInventory, 
 
 	}
 
-	public int getScaledEnergyStored(int scale)
-	{
-		if(getGrid()!=null){
-			return Math.round(getGrid().getEnergyStored() * scale / getGrid().getMaxEnergy());
-		}
-		return 0;
-	}
 
 	public void writeToNBT(NBTTagCompound data){
 		super.writeToNBT(data);

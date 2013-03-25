@@ -1,5 +1,6 @@
 package mrhid6.xorbo.tileEntity;
 
+import cpw.mods.fml.relauncher.Side;
 import mrhid6.xorbo.Config;
 import mrhid6.xorbo.GridManager;
 import mrhid6.xorbo.GridPower;
@@ -17,6 +18,8 @@ public class TETriniumConverter extends TEMachineBase implements IConverterObj{
 	public TETriniumConverter() {
 		this.inventory = new ItemStack[0];
 	}
+	
+	
 	
 	public boolean canConnectSide(int side){
 		
@@ -93,6 +96,7 @@ public class TETriniumConverter extends TEMachineBase implements IConverterObj{
 			
 			updateConnections();
 			gridCheck();
+			sendUpdatePacket(Side.CLIENT);
 		}
 		
 		TickSinceUpdate++;

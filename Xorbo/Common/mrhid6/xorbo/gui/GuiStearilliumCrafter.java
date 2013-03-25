@@ -28,16 +28,20 @@ public class GuiStearilliumCrafter extends GuiMain
 	{
 		//draw your Gui here, only thing you need to change is the path
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		
-		
+
+
 		this.mc.renderEngine.bindTexture("/mods/xorbo/textures/gui/furnace.png");
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
-		int l = this.container.tileEntity.getScaledEnergyStored(102);
-		if (l > 0) {
-			drawTexturedModalRect(x + 42, y + 61, 0, 166, l, 10);
+		GridPower grid = GridManager.getGrid(this.container.tileEntity.gridindex);
+
+		if(grid!=null){
+			int l = grid.getScaledEnergyStored(102);
+			if (l > 0) {
+				drawTexturedModalRect(x + 42, y + 61, 0, 166, l, 10);
+			}
 		}
 	}
 
@@ -45,13 +49,13 @@ public class GuiStearilliumCrafter extends GuiMain
 	protected void drawTooltips()
 	{
 		GridPower grid = GridManager.getGrid(this.container.tileEntity.gridindex);
-		
+
 		if(grid==null)
 			return;
-		
+
 		if ((this.mousex >= 42) && (this.mousex < 144) && (this.mousey >= 61) && (this.mousey < 71)){
 			drawToolTip("" + (int)grid.getEnergyStored()+ " / " + (int)grid.getMaxEnergy() + " MJ");
 		}
-		
+
 	}
 }
