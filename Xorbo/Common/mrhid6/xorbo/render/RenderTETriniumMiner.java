@@ -23,8 +23,7 @@ public class RenderTETriniumMiner extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt( TileEntity te, double x, double y,
-			double z, float f ) {
+	public void renderTileEntityAt( TileEntity te, double x, double y, double z, float f ) {
 
 		if (te == null || !(te instanceof TETriniumMiner)) {
 			return;
@@ -33,8 +32,7 @@ public class RenderTETriniumMiner extends TileEntitySpecialRenderer {
 		int count = 0;
 		TETriniumMiner tpb = (TETriniumMiner) te;
 		try {
-			renderBlocks.renderBlockByRenderType(ModBlocks.triniumMiner,
-					(int) x, (int) y, (int) z);
+			renderBlocks.renderBlockByRenderType(ModBlocks.triniumMiner, (int) x, (int) y, (int) z);
 		} catch (NullPointerException ex) {
 			count++;
 			if (count > 2) {

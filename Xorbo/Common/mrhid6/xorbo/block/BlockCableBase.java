@@ -27,8 +27,7 @@ public class BlockCableBase extends BlockTexturedBase {
 	}
 
 	@Override
-	public void addCollisionBoxesToList( World world, int x, int y, int z,
-			AxisAlignedBB axis, List list, Entity entity ) {
+	public void addCollisionBoxesToList( World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity ) {
 		setBlockBounds(0.25F, 0.25F, 0.25F, 0.75F, 0.75F, 0.75F);
 
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
@@ -82,8 +81,7 @@ public class BlockCableBase extends BlockTexturedBase {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTexture( IBlockAccess par1iBlockAccess, int x, int y,
-			int z, int blockSide ) {
+	public Icon getBlockTexture( IBlockAccess par1iBlockAccess, int x, int y, int z, int blockSide ) {
 
 		if (blockSide == 0) {
 			return icons[0];
@@ -98,8 +96,7 @@ public class BlockCableBase extends BlockTexturedBase {
 	}
 
 	@Override
-	public AxisAlignedBB getSelectedBoundingBoxFromPool( World world, int x,
-			int y, int z ) {
+	public AxisAlignedBB getSelectedBoundingBoxFromPool( World world, int x, int y, int z ) {
 
 		TECableBase cable = (TECableBase) world.getBlockTileEntity(x, y, z);
 		double halfThickness = cable.getCableThickness() / 2.0D;
@@ -143,8 +140,7 @@ public class BlockCableBase extends BlockTexturedBase {
 	}
 
 	@Override
-	public void onNeighborBlockChange( World world, int x, int y, int z,
-			int blockID ) {
+	public void onNeighborBlockChange( World world, int x, int y, int z, int blockID ) {
 		super.onNeighborBlockChange(world, x, y, z, blockID);
 
 		TECableBase tile = (TECableBase) world.getBlockTileEntity(x, y, z);
@@ -153,6 +149,7 @@ public class BlockCableBase extends BlockTexturedBase {
 
 	@Override
 	public void registerIcons( IconRegister iconRegister ) {
+		blockIcon = iconRegister.registerIcon("xorbo:zorocableOff");
 		icons[0] = iconRegister.registerIcon("xorbo:zorocableOff");
 		icons[1] = iconRegister.registerIcon("xorbo:zorocableOn");
 	}
@@ -163,8 +160,7 @@ public class BlockCableBase extends BlockTexturedBase {
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState( IBlockAccess world, int x, int y,
-			int z ) {
+	public void setBlockBoundsBasedOnState( IBlockAccess world, int x, int y, int z ) {
 
 		TECableBase cable = (TECableBase) world.getBlockTileEntity(x, y, z);
 

@@ -46,8 +46,7 @@ public class RenderTEStearilliumCrafter extends TileEntitySpecialRenderer {
 		renderItems.setRenderManager(RenderManager.instance);
 	}
 
-	public void renderItemInSlot( ItemStack stack, int slotid, World w,
-			double x, double y, double z ) {
+	public void renderItemInSlot( ItemStack stack, int slotid, World w, double x, double y, double z ) {
 
 		EntityItem ei = new EntityItem(w);
 		ei.hoverStart = 0f;
@@ -58,16 +57,13 @@ public class RenderTEStearilliumCrafter extends TileEntitySpecialRenderer {
 			glEnable(32826 /* rescale */);
 			glTranslatef((float) x, (float) y, (float) z);
 
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit,
-					150F, 150F);
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 150F, 150F);
 			glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 			if (!ei.getEntityItem().equals(stack)) {
 				return;
 			}
-			if (stack.itemID < Block.blocksList.length
-					&& Block.blocksList[stack.itemID] != null
-					&& Block.blocksList[stack.itemID].blockID != 0) {
+			if (stack.itemID < Block.blocksList.length && Block.blocksList[stack.itemID] != null && Block.blocksList[stack.itemID].blockID != 0) {
 				glPushMatrix();
 				{
 					float[] coords = setItemPosition(slotid);
@@ -93,8 +89,7 @@ public class RenderTEStearilliumCrafter extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt( TileEntity te, double x, double y,
-			double z, float f ) {
+	public void renderTileEntityAt( TileEntity te, double x, double y, double z, float f ) {
 
 		if (te == null || !(te instanceof TEStearilliumCrafter)) {
 			return;
@@ -103,8 +98,7 @@ public class RenderTEStearilliumCrafter extends TileEntitySpecialRenderer {
 		int count = 0;
 		TEStearilliumCrafter tpb = (TEStearilliumCrafter) te;
 		try {
-			renderBlocks.renderBlockByRenderType(ModBlocks.stearilliumCrafter,
-					(int) x, (int) y, (int) z);
+			renderBlocks.renderBlockByRenderType(ModBlocks.stearilliumCrafter, (int) x, (int) y, (int) z);
 		} catch (NullPointerException ex) {
 			count++;
 			if (count > 2) {
@@ -113,9 +107,7 @@ public class RenderTEStearilliumCrafter extends TileEntitySpecialRenderer {
 			renderBlocks = new RenderBlocks(tpb.worldObj);
 		}
 
-		if (tpb.worldObj.getBlockId(tpb.xCoord, tpb.yCoord + 1, tpb.zCoord) == 0
-				&& tpb.worldObj.getClosestPlayer(tpb.xCoord, tpb.yCoord,
-						tpb.zCoord, 15) != null) {
+		if (tpb.worldObj.getBlockId(tpb.xCoord, tpb.yCoord + 1, tpb.zCoord) == 0 && tpb.worldObj.getClosestPlayer(tpb.xCoord, tpb.yCoord, tpb.zCoord, 15) != null) {
 			for (int i = 0; i < 9; i++) {
 
 				if (tpb.inventory[i] != null) {

@@ -11,13 +11,10 @@ import cpw.mods.fml.common.FMLCommonHandler;
 
 public class Utils {
 
-	public static final int[][] SIDE_COORD_MOD = { { 0, -1, 0 }, { 0, 1, 0 },
-			{ 0, 0, -1 }, { 0, 0, 1 }, { -1, 0, 0 }, { 1, 0, 0 } };
+	public static final int[][] SIDE_COORD_MOD = { { 0, -1, 0 }, { 0, 1, 0 }, { 0, 0, -1 }, { 0, 0, 1 }, { -1, 0, 0 }, { 1, 0, 0 } };
 
-	public static int[] getAdjacentCoordinatesForSide( int x, int y, int z,
-			int side ) {
-		return new int[] { x + SIDE_COORD_MOD[side][0],
-				y + SIDE_COORD_MOD[side][1], z + SIDE_COORD_MOD[side][2] };
+	public static int[] getAdjacentCoordinatesForSide( int x, int y, int z, int side ) {
+		return new int[] { x + SIDE_COORD_MOD[side][0], y + SIDE_COORD_MOD[side][1], z + SIDE_COORD_MOD[side][2] };
 	}
 
 	public static int getFuelFor( ItemStack item ) {
@@ -36,8 +33,7 @@ public class Utils {
 
 	}
 
-	public static List<ItemStack> getItemStackFromBlock( World world, int i,
-			int j, int k ) {
+	public static List<ItemStack> getItemStackFromBlock( World world, int i, int j, int k ) {
 		Block block = Block.blocksList[world.getBlockId(i, j, k)];
 
 		if (block == null) {
@@ -49,8 +45,7 @@ public class Utils {
 		return block.getBlockDropped(world, i, j, k, meta, 0);
 	}
 
-	public static TileEntity getTileEntity( World world, int x, int y, int z,
-			int meta, int blockId ) {
+	public static TileEntity getTileEntity( World world, int x, int y, int z, int meta, int blockId ) {
 		for (int yy = -2; yy <= 2; yy++) {
 			for (int xx = -2; xx <= 2; xx++) {
 				for (int zz = -2; zz <= 2; zz++) {

@@ -20,16 +20,14 @@ public class BlockZoroGrass extends BlockTexturedBase {
 	}
 
 	@Override
-	public int colorMultiplier( IBlockAccess par1IBlockAccess, int par2,
-			int par3, int par4 ) {
+	public int colorMultiplier( IBlockAccess par1IBlockAccess, int par2, int par3, int par4 ) {
 		int l = 0;
 		int i1 = 0;
 		int j1 = 0;
 
 		for (int k1 = -1; k1 <= 1; ++k1) {
 			for (int l1 = -1; l1 <= 1; ++l1) {
-				int i2 = par1IBlockAccess.getBiomeGenForCoords(par2 + l1,
-						par4 + k1).getBiomeGrassColor();
+				int i2 = par1IBlockAccess.getBiomeGenForCoords(par2 + l1, par4 + k1).getBiomeGrassColor();
 				l += (i2 & 16711680) >> 16;
 				i1 += (i2 & 65280) >> 8;
 				j1 += i2 & 255;
@@ -49,14 +47,12 @@ public class BlockZoroGrass extends BlockTexturedBase {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTexture( IBlockAccess par1iBlockAccess, int x, int y,
-			int z, int blockSide ) {
+	public Icon getBlockTexture( IBlockAccess par1iBlockAccess, int x, int y, int z, int blockSide ) {
 		if (blockSide == 1) {
 			return icons[0];
 		}
 		if (blockSide == 0) {
-			return Block.dirt.getBlockTexture(par1iBlockAccess, x, y, z,
-					blockSide);
+			return Block.dirt.getBlockTexture(par1iBlockAccess, x, y, z, blockSide);
 		}
 		return icons[1];
 	}
@@ -84,14 +80,11 @@ public class BlockZoroGrass extends BlockTexturedBase {
 	}
 
 	@Override
-	public void randomDisplayTick( World par1World, int par2, int par3,
-			int par4, Random par5Random ) {
+	public void randomDisplayTick( World par1World, int par2, int par3, int par4, Random par5Random ) {
 		super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
 
 		if (par5Random.nextInt(50) == 0) {
-			par1World.spawnParticle("smoke", par2 + par5Random.nextFloat(),
-					par3 + 1.1F, par4 + par5Random.nextFloat(), 0.0D, 0.0D,
-					0.0D);
+			par1World.spawnParticle("smoke", par2 + par5Random.nextFloat(), par3 + 1.1F, par4 + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
 		}
 	}
 

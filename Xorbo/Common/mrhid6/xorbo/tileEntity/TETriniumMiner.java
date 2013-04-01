@@ -11,8 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.relauncher.Side;
 
-public class TETriniumMiner extends TEMachineBase implements IXorGridObj,
-		ITriniumObj {
+public class TETriniumMiner extends TEMachineBase implements IXorGridObj, ITriniumObj {
 
 	private int depth;
 	private boolean doneMineing = false;
@@ -70,17 +69,12 @@ public class TETriniumMiner extends TEMachineBase implements IXorGridObj,
 			}
 		}
 
-		worldObj.playAuxSFXAtEntity(null, 2001, i, j, k,
-				blockId + (worldObj.getBlockMetadata(i, j, k) << 12));
+		worldObj.playAuxSFXAtEntity(null, 2001, i, j, k, blockId + (worldObj.getBlockMetadata(i, j, k) << 12));
 		worldObj.setBlock(i, j, k, 0);
 	}
 
 	public boolean minedLevel() {
-		int[][] coord_mod = { { -2, -2 }, { -1, -2 }, { 0, -2 }, { 1, -2 },
-				{ 2, -2 }, { -2, -1 }, { -1, -1 }, { 0, -1 }, { 1, -1 },
-				{ 2, -1 }, { -2, 0 }, { -1, 0 }, { 0, 0 }, { 1, 0 }, { 2, 0 },
-				{ -2, 1 }, { -1, 1 }, { 0, 1 }, { 1, 1 }, { 2, 1 }, { -2, 2 },
-				{ -1, 2 }, { 0, 2 }, { 1, 2 }, { 2, 2 }, };
+		int[][] coord_mod = { { -2, -2 }, { -1, -2 }, { 0, -2 }, { 1, -2 }, { 2, -2 }, { -2, -1 }, { -1, -1 }, { 0, -1 }, { 1, -1 }, { 2, -1 }, { -2, 0 }, { -1, 0 }, { 0, 0 }, { 1, 0 }, { 2, 0 }, { -2, 1 }, { -1, 1 }, { 0, 1 }, { 1, 1 }, { 2, 1 }, { -2, 2 }, { -1, 2 }, { 0, 2 }, { 1, 2 }, { 2, 2 }, };
 		int[] ar1 = Config.spiralArray(5);
 
 		for (int i = 0; i < ar1.length; i++) {
@@ -107,11 +101,7 @@ public class TETriniumMiner extends TEMachineBase implements IXorGridObj,
 			depth--;
 		}
 
-		int[][] coord_mod = { { -2, -2 }, { -1, -2 }, { 0, -2 }, { 1, -2 },
-				{ 2, -2 }, { -2, -1 }, { -1, -1 }, { 0, -1 }, { 1, -1 },
-				{ 2, -1 }, { -2, 0 }, { -1, 0 }, { 0, 0 }, { 1, 0 }, { 2, 0 },
-				{ -2, 1 }, { -1, 1 }, { 0, 1 }, { 1, 1 }, { 2, 1 }, { -2, 2 },
-				{ -1, 2 }, { 0, 2 }, { 1, 2 }, { 2, 2 }, };
+		int[][] coord_mod = { { -2, -2 }, { -1, -2 }, { 0, -2 }, { 1, -2 }, { 2, -2 }, { -2, -1 }, { -1, -1 }, { 0, -1 }, { 1, -1 }, { 2, -1 }, { -2, 0 }, { -1, 0 }, { 0, 0 }, { 1, 0 }, { 2, 0 }, { -2, 1 }, { -1, 1 }, { 0, 1 }, { 1, 1 }, { 2, 1 }, { -2, 2 }, { -1, 2 }, { 0, 2 }, { 1, 2 }, { 2, 2 }, };
 		int[] ar1 = Config.spiralArray(5);
 
 		for (int i = 0; i < ar1.length; i++) {
@@ -146,16 +136,14 @@ public class TETriniumMiner extends TEMachineBase implements IXorGridObj,
 			float f1 = worldObj.rand.nextFloat() * 0.8F + 0.1F;
 			float f2 = worldObj.rand.nextFloat() * 0.8F + 0.1F;
 
-			EntityItem entityitem = new EntityItem(worldObj, xCoord + f, yCoord
-					+ f1 + 0.5F, zCoord + f2, stack);
+			EntityItem entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1 + 0.5F, zCoord + f2, stack);
 
 			entityitem.lifespan = 5200;
 			entityitem.delayBeforeCanPickup = 10;
 
 			float f3 = 0.05F;
 			entityitem.motionX = (float) worldObj.rand.nextGaussian() * f3;
-			entityitem.motionY = (float) worldObj.rand.nextGaussian() * f3
-					+ 0.5F;
+			entityitem.motionY = (float) worldObj.rand.nextGaussian() * f3 + 0.5F;
 			entityitem.motionZ = (float) worldObj.rand.nextGaussian() * f3;
 			worldObj.spawnEntityInWorld(entityitem);
 		}
@@ -212,8 +200,7 @@ public class TETriniumMiner extends TEMachineBase implements IXorGridObj,
 				findGrid();
 
 				if (getGrid() != null) {
-					System.out.println("found Grid zoroMiner"
-							+ (worldObj.isRemote));
+					System.out.println("found Grid zoroMiner" + (worldObj.isRemote));
 					getGrid().addMachine(this);
 				} else {
 					// System.out.println("im still null!"+(worldObj.isRemote));

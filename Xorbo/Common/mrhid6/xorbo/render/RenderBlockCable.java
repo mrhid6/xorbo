@@ -26,14 +26,12 @@ public class RenderBlockCable implements ISimpleBlockRenderingHandler {
 	}
 
 	@Override
-	public void renderInventoryBlock( Block block, int metadata, int modelID,
-			RenderBlocks renderer ) {
+	public void renderInventoryBlock( Block block, int metadata, int modelID, RenderBlocks renderer ) {
 
 	}
 
 	@Override
-	public boolean renderWorldBlock( IBlockAccess world, int x, int y, int z,
-			Block block, int modelId, RenderBlocks renderer ) {
+	public boolean renderWorldBlock( IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer ) {
 
 		TileEntity te = world.getBlockTileEntity(x, y, z);
 		if (!(te instanceof TECableBase)) {
@@ -59,8 +57,7 @@ public class RenderBlockCable implements ISimpleBlockRenderingHandler {
 			texture = block.getBlockTexture(world, x, y, z, 0);
 		}
 
-		tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y,
-				z));
+		tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 
 		double xD = x;
 		double yD = y;
@@ -76,11 +73,8 @@ public class RenderBlockCable implements ISimpleBlockRenderingHandler {
 
 			coords[(i / 2)] += (i % 2 * 2 - 1);
 
-			if ((cable.worldObj != null)
-					&& (cable.worldObj.blockExists(coords[0], coords[1],
-							coords[2]))) {
-				neighbor = cable.worldObj.getBlockTileEntity(coords[0],
-						coords[1], coords[2]);
+			if ((cable.worldObj != null) && (cable.worldObj.blockExists(coords[0], coords[1], coords[2]))) {
+				neighbor = cable.worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
 			}
 
 			if ((neighbor != null)) {

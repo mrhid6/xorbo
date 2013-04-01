@@ -17,8 +17,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.util.AxisAlignedBB;
 import cpw.mods.fml.relauncher.Side;
 
-public class TEZoroChest extends TEBlock implements ISidedInventory,
-		IPacketXorHandler, IXorGridObj {
+public class TEZoroChest extends TEBlock implements ISidedInventory, IPacketXorHandler, IXorGridObj {
 
 	protected static int descPacketId;
 	private byte facing = 3;
@@ -46,8 +45,7 @@ public class TEZoroChest extends TEBlock implements ISidedInventory,
 			return;
 		}
 		numUsingPlayers--;
-		worldObj.addBlockEvent(xCoord, yCoord, zCoord,
-				ModBlocks.zoroChest.blockID, 1, numUsingPlayers);
+		worldObj.addBlockEvent(xCoord, yCoord, zCoord, ModBlocks.zoroChest.blockID, 1, numUsingPlayers);
 	}
 
 	@Override
@@ -99,8 +97,7 @@ public class TEZoroChest extends TEBlock implements ISidedInventory,
 		payload.intPayload[0] = numUsingPlayers;
 		payload.intPayload[1] = gridindex;
 
-		PacketTile packet = new PacketTile(descPacketId, xCoord, yCoord,
-				zCoord, payload);
+		PacketTile packet = new PacketTile(descPacketId, xCoord, yCoord, zCoord, payload);
 		return packet.getPacket();
 	}
 
@@ -178,8 +175,7 @@ public class TEZoroChest extends TEBlock implements ISidedInventory,
 		worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
 
 		if (Utils.isServerWorld()) {
-			PacketUtils.sendToPlayers(getDescriptionPacket(), worldObj, xCoord,
-					yCoord, zCoord, 192);
+			PacketUtils.sendToPlayers(getDescriptionPacket(), worldObj, xCoord, yCoord, zCoord, 192);
 		}
 
 	}
@@ -207,8 +203,7 @@ public class TEZoroChest extends TEBlock implements ISidedInventory,
 		if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this) {
 			return false;
 		}
-		return entityplayer.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D,
-				zCoord + 0.5D) <= 64D;
+		return entityplayer.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64D;
 
 	}
 
@@ -218,8 +213,7 @@ public class TEZoroChest extends TEBlock implements ISidedInventory,
 			return;
 		}
 		numUsingPlayers++;
-		worldObj.addBlockEvent(xCoord, yCoord, zCoord,
-				ModBlocks.zoroChest.blockID, 1, numUsingPlayers);
+		worldObj.addBlockEvent(xCoord, yCoord, zCoord, ModBlocks.zoroChest.blockID, 1, numUsingPlayers);
 	}
 
 	@Override
@@ -243,8 +237,7 @@ public class TEZoroChest extends TEBlock implements ISidedInventory,
 	public void setInventorySlotContents( int par1, ItemStack par2ItemStack ) {
 		inventory[par1] = par2ItemStack;
 
-		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > this.getInventoryStackLimit()) {
+		if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit()) {
 			par2ItemStack.stackSize = this.getInventoryStackLimit();
 		}
 
@@ -255,15 +248,10 @@ public class TEZoroChest extends TEBlock implements ISidedInventory,
 	public void updateEntity() {
 		super.updateEntity();
 		// Resynchronize clients with the server state
-		if (worldObj != null && !worldObj.isRemote && numUsingPlayers != 0
-				&& (ticksSinceSync + xCoord + yCoord + zCoord) % 200 == 0) {
+		if (worldObj != null && !worldObj.isRemote && numUsingPlayers != 0 && (ticksSinceSync + xCoord + yCoord + zCoord) % 200 == 0) {
 			numUsingPlayers = 0;
 			float var1 = 5.0F;
-			List var2 = worldObj.getEntitiesWithinAABB(
-					EntityPlayer.class,
-					AxisAlignedBB.getAABBPool().getAABB(xCoord - var1,
-							yCoord - var1, zCoord - var1, xCoord + 1 + var1,
-							yCoord + 1 + var1, zCoord + 1 + var1));
+			List var2 = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getAABBPool().getAABB(xCoord - var1, yCoord - var1, zCoord - var1, xCoord + 1 + var1, yCoord + 1 + var1, zCoord + 1 + var1));
 			Iterator var3 = var2.iterator();
 
 			while (var3.hasNext()) {
@@ -276,9 +264,7 @@ public class TEZoroChest extends TEBlock implements ISidedInventory,
 		}
 
 		if (worldObj != null && !worldObj.isRemote && ticksSinceSync < 0) {
-			worldObj.addBlockEvent(xCoord, yCoord, zCoord,
-					ModBlocks.zoroChest.blockID, 3,
-					((numUsingPlayers << 3) & 0xF8) | (facing & 0x7));
+			worldObj.addBlockEvent(xCoord, yCoord, zCoord, ModBlocks.zoroChest.blockID, 3, ((numUsingPlayers << 3) & 0xF8) | (facing & 0x7));
 		}
 
 		ticksSinceSync++;
@@ -287,11 +273,9 @@ public class TEZoroChest extends TEBlock implements ISidedInventory,
 		if (numUsingPlayers > 0 && lidAngle == 0.0F) {
 			double d = xCoord + 0.5D;
 			double d1 = zCoord + 0.5D;
-			worldObj.playSoundEffect(d, yCoord + 0.5D, d1, "random.chestopen",
-					0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			worldObj.playSoundEffect(d, yCoord + 0.5D, d1, "random.chestopen", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 		}
-		if (numUsingPlayers == 0 && lidAngle > 0.0F || numUsingPlayers > 0
-				&& lidAngle < 1.0F) {
+		if (numUsingPlayers == 0 && lidAngle > 0.0F || numUsingPlayers > 0 && lidAngle < 1.0F) {
 			float f1 = lidAngle;
 			if (numUsingPlayers > 0) {
 				lidAngle += f;
@@ -305,9 +289,7 @@ public class TEZoroChest extends TEBlock implements ISidedInventory,
 			if (lidAngle < f2 && f1 >= f2) {
 				double d2 = xCoord + 0.5D;
 				double d3 = zCoord + 0.5D;
-				worldObj.playSoundEffect(d2, yCoord + 0.5D, d3,
-						"random.chestclosed", 0.5F,
-						worldObj.rand.nextFloat() * 0.1F + 0.9F);
+				worldObj.playSoundEffect(d2, yCoord + 0.5D, d3, "random.chestclosed", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
 			if (lidAngle < 0.0F) {
 				lidAngle = 0.0F;

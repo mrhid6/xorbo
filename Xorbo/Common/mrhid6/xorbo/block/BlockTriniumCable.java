@@ -31,6 +31,7 @@ public class BlockTriniumCable extends BlockCableBase {
 
 	@Override
 	public void registerIcons( IconRegister iconRegister ) {
+		blockIcon = iconRegister.registerIcon("xorbo:triniumcableOff");
 		icons[0] = iconRegister.registerIcon("xorbo:triniumcableOff");
 		icons[1] = iconRegister.registerIcon("xorbo:triniumcableOn");
 	}

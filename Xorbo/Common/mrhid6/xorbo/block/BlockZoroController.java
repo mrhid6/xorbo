@@ -13,8 +13,7 @@ public class BlockZoroController extends BlockTexturedBase {
 
 	public Icon[] icons;
 
-	public BlockZoroController( int id, String textureName, String name,
-			boolean craftable ) {
+	public BlockZoroController( int id, String textureName, String name, boolean craftable ) {
 		super(id, textureName, name, craftable);
 
 		this.setResistance(6.0F);
@@ -25,8 +24,7 @@ public class BlockZoroController extends BlockTexturedBase {
 	@Override
 	public void breakBlock( World world, int x, int y, int z, int par5, int par6 ) {
 
-		TEZoroController tile = (TEZoroController) world.getBlockTileEntity(x,
-				y, z);
+		TEZoroController tile = (TEZoroController) world.getBlockTileEntity(x, y, z);
 
 		if (tile != null) {
 			tile.breakBlock();
@@ -42,8 +40,7 @@ public class BlockZoroController extends BlockTexturedBase {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTexture( IBlockAccess par1iBlockAccess, int x, int y,
-			int z, int blockSide ) {
+	public Icon getBlockTexture( IBlockAccess par1iBlockAccess, int x, int y, int z, int blockSide ) {
 
 		return getBlockTextureFromSideAndMetadata(blockSide, 0);
 	}
@@ -66,12 +63,10 @@ public class BlockZoroController extends BlockTexturedBase {
 	}
 
 	@Override
-	public void onNeighborBlockChange( World world, int x, int y, int z,
-			int blockID ) {
+	public void onNeighborBlockChange( World world, int x, int y, int z, int blockID ) {
 		super.onNeighborBlockChange(world, x, y, z, blockID);
 
-		TEZoroController tile = (TEZoroController) world.getBlockTileEntity(x,
-				y, z);
+		TEZoroController tile = (TEZoroController) world.getBlockTileEntity(x, y, z);
 		tile.onNeighborBlockChange();
 	}
 

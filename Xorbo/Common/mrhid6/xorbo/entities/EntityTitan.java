@@ -62,8 +62,7 @@ public class EntityTitan extends Entity {
 			this.setTimeSinceHit(10);
 			this.setDamageTaken(this.getDamageTaken() + par2 * 10);
 			this.setBeenAttacked();
-			boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer
-					&& ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode;
+			boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode;
 
 			if (flag || this.getDamageTaken() > 40) {
 				if (riddenByEntity != null) {
@@ -173,8 +172,7 @@ public class EntityTitan extends Entity {
 	 */
 	@Override
 	public boolean interact( EntityPlayer par1EntityPlayer ) {
-		if (riddenByEntity != null && riddenByEntity instanceof EntityPlayer
-				&& riddenByEntity != par1EntityPlayer) {
+		if (riddenByEntity != null && riddenByEntity instanceof EntityPlayer && riddenByEntity != par1EntityPlayer) {
 			return true;
 		} else {
 			if (!worldObj.isRemote) {
@@ -207,15 +205,9 @@ public class EntityTitan extends Entity {
 		double d0 = 0.0D;
 
 		for (int i = 0; i < b0; ++i) {
-			double d1 = boundingBox.minY
-					+ (boundingBox.maxY - boundingBox.minY) * (i + 0) / b0
-					- 0.125D;
-			double d2 = boundingBox.minY
-					+ (boundingBox.maxY - boundingBox.minY) * (i + 1) / b0
-					- 0.125D;
-			AxisAlignedBB axisalignedbb = AxisAlignedBB.getAABBPool().getAABB(
-					boundingBox.minX, d1, boundingBox.minZ, boundingBox.maxX,
-					d2, boundingBox.maxZ);
+			double d1 = boundingBox.minY + (boundingBox.maxY - boundingBox.minY) * (i + 0) / b0 - 0.125D;
+			double d2 = boundingBox.minY + (boundingBox.maxY - boundingBox.minY) * (i + 1) / b0 - 0.125D;
+			AxisAlignedBB axisalignedbb = AxisAlignedBB.getAABBPool().getAABB(boundingBox.minX, d1, boundingBox.minZ, boundingBox.maxX, d2, boundingBox.maxZ);
 
 			if (worldObj.isAABBInMaterial(axisalignedbb, Material.water)) {
 				d0 += 3.0D / b0;
@@ -235,10 +227,8 @@ public class EntityTitan extends Entity {
 				d5 = posY + (boatY - posY) / boatPosRotationIncrements;
 				d11 = posZ + (boatZ - posZ) / boatPosRotationIncrements;
 				d10 = MathHelper.wrapAngleTo180_double(boatYaw - rotationYaw);
-				rotationYaw = (float) (rotationYaw + d10
-						/ boatPosRotationIncrements);
-				rotationPitch = (float) (rotationPitch + (boatPitch - rotationPitch)
-						/ boatPosRotationIncrements);
+				rotationYaw = (float) (rotationYaw + d10 / boatPosRotationIncrements);
+				rotationPitch = (float) (rotationPitch + (boatPitch - rotationPitch) / boatPosRotationIncrements);
 				--boatPosRotationIncrements;
 				this.setPosition(d4, d5, d11);
 				this.setRotation(rotationYaw, rotationPitch);
@@ -333,16 +323,14 @@ public class EntityTitan extends Entity {
 			this.setRotation(rotationYaw, rotationPitch);
 
 			if (!worldObj.isRemote) {
-				List list = worldObj.getEntitiesWithinAABBExcludingEntity(this,
-						boundingBox.expand(0.5, 0.0D, 0.5));
+				List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(0.5, 0.0D, 0.5));
 				int l;
 
 				if (list != null && !list.isEmpty()) {
 					for (l = 0; l < list.size(); ++l) {
 						Entity entity = (Entity) list.get(l);
 
-						if (entity != riddenByEntity && entity.canBePushed()
-								&& entity instanceof EntityTitan) {
+						if (entity != riddenByEntity && entity.canBePushed() && entity instanceof EntityTitan) {
 							// entity.applyEntityCollision(this);
 						}
 					}
@@ -393,8 +381,7 @@ public class EntityTitan extends Entity {
 	 * posY, posZ, yaw, pitch
 	 */
 	@Override
-	public void setPositionAndRotation2( double par1, double par3, double par5,
-			float par7, float par8, int par9 ) {
+	public void setPositionAndRotation2( double par1, double par3, double par5, float par7, float par8, int par9 ) {
 		if (field_70279_a) {
 			boatPosRotationIncrements = par9 + 5;
 		} else {
@@ -443,10 +430,7 @@ public class EntityTitan extends Entity {
 		if (riddenByEntity != null) {
 			double d0 = Math.cos(rotationYaw * Math.PI / 180.0D) * 0.4D;
 			double d1 = Math.sin(rotationYaw * Math.PI / 180.0D) * 0.4D;
-			riddenByEntity.setPosition(
-					posX + d0,
-					posY + this.getMountedYOffset()
-							+ riddenByEntity.getYOffset(), posZ + d1);
+			riddenByEntity.setPosition(posX + d0, posY + this.getMountedYOffset() + riddenByEntity.getYOffset(), posZ + d1);
 		}
 	}
 

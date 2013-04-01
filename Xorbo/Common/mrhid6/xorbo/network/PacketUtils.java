@@ -16,21 +16,16 @@ public class PacketUtils {
 
 	public static void sendToPlayers( Packet packet, TileEntity theTile ) {
 		if (!theTile.worldObj.isRemote) {
-			sendToPlayers(packet, theTile.worldObj, theTile.xCoord,
-					theTile.yCoord, theTile.zCoord, 192);
+			sendToPlayers(packet, theTile.worldObj, theTile.xCoord, theTile.yCoord, theTile.zCoord, 192);
 		}
 	}
 
-	public static void sendToPlayers( Packet packet, World w, int x, int y,
-			int z, int maxDistance ) {
+	public static void sendToPlayers( Packet packet, World w, int x, int y, int z, int maxDistance ) {
 		if (packet != null) {
 			for (int j = 0; j < w.playerEntities.size(); j++) {
-				EntityPlayerMP player = (EntityPlayerMP) w.playerEntities
-						.get(j);
+				EntityPlayerMP player = (EntityPlayerMP) w.playerEntities.get(j);
 
-				if ((Math.abs(player.posX - x) <= maxDistance)
-						&& (Math.abs(player.posY - y) <= maxDistance)
-						&& (Math.abs(player.posZ - z) <= maxDistance)) {
+				if ((Math.abs(player.posX - x) <= maxDistance) && (Math.abs(player.posY - y) <= maxDistance) && (Math.abs(player.posZ - z) <= maxDistance)) {
 					player.playerNetServerHandler.sendPacketToPlayer(packet);
 				}
 			}
@@ -39,8 +34,7 @@ public class PacketUtils {
 
 	public static void sendToServer( Packet packet ) {
 		if (packet != null) {
-			FMLClientHandler.instance().getClient().getNetHandler()
-					.addToSendQueue(packet);
+			FMLClientHandler.instance().getClient().getNetHandler().addToSendQueue(packet);
 		}
 	}
 }

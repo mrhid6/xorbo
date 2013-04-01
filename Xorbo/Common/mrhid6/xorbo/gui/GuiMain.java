@@ -15,8 +15,7 @@ public abstract class GuiMain extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer( float var1, int var2,
-			int var3 ) {
+	protected void drawGuiContainerBackgroundLayer( float var1, int var2, int var3 ) {
 		// TODO Auto-generated method stub
 
 	}

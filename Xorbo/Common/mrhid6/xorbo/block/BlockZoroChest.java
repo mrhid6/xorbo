@@ -43,8 +43,7 @@ public class BlockZoroChest extends BlockMachine {
 	}
 
 	@Override
-	public Icon getBlockTexture( IBlockAccess par1IBlockAccess, int x, int y,
-			int z, int blockSide ) {
+	public Icon getBlockTexture( IBlockAccess par1IBlockAccess, int x, int y, int z, int blockSide ) {
 
 		return null;
 	}
@@ -66,8 +65,7 @@ public class BlockZoroChest extends BlockMachine {
 	}
 
 	@Override
-	public boolean onBlockActivated( World world, int x, int y, int z,
-			EntityPlayer player, int idk, float what, float these, float are ) {
+	public boolean onBlockActivated( World world, int x, int y, int z, EntityPlayer player, int idk, float what, float these, float are ) {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
 		if (tileEntity == null || player.isSneaking()) {
@@ -79,11 +77,9 @@ public class BlockZoroChest extends BlockMachine {
 	}
 
 	@Override
-	public void onBlockPlacedBy( World world, int i, int j, int k,
-			EntityLiving entityliving, ItemStack itemStack ) {
+	public void onBlockPlacedBy( World world, int i, int j, int k, EntityLiving entityliving, ItemStack itemStack ) {
 		byte chestFacing = 0;
-		int facing = MathHelper
-				.floor_double((entityliving.rotationYaw * 4F) / 360F + 0.5D) & 3;
+		int facing = MathHelper.floor_double((entityliving.rotationYaw * 4F) / 360F + 0.5D) & 3;
 		if (facing == 0) {
 			chestFacing = 2;
 		}

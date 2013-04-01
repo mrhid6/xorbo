@@ -15,8 +15,7 @@ public class RenderTEZoroChest extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt( TileEntity te, double x, double y,
-			double z, float f ) {
+	public void renderTileEntityAt( TileEntity te, double x, double y, double z, float f ) {
 		if (te == null || !(te instanceof TEZoroChest)) {
 			return;
 		}
@@ -47,8 +46,7 @@ public class RenderTEZoroChest extends TileEntitySpecialRenderer {
 			}
 			GL11.glRotatef(k, 0.0F, 1.0F, 0.0F);
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-			float lidangle = tile.prevLidAngle
-					+ (tile.lidAngle - tile.prevLidAngle) * f;
+			float lidangle = tile.prevLidAngle + (tile.lidAngle - tile.prevLidAngle) * f;
 			lidangle = 1.0F - lidangle;
 			lidangle = 1.0F - lidangle * lidangle * lidangle;
 			model.chestLid.rotateAngleX = -((lidangle * 3.141593F) / 2.0F);

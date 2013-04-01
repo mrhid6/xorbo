@@ -14,8 +14,7 @@ public abstract class BlockTexturedBase extends BlockContainer {
 	private String name;
 	protected String textureName;
 
-	public BlockTexturedBase( int id, String texture, String name,
-			boolean craftable ) {
+	public BlockTexturedBase( int id, String texture, String name, boolean craftable ) {
 		super(id, Material.ground);
 
 		textureName = texture.toLowerCase();

@@ -64,8 +64,7 @@ public class RenderTETriniumConverter extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt( TileEntity tileentity, double x, double y,
-			double z, float f ) {
+	public void renderTileEntityAt( TileEntity tileentity, double x, double y, double z, float f ) {
 
 		if (!(tileentity instanceof TETriniumConverter) || tileentity == null) {
 			return;
@@ -75,8 +74,7 @@ public class RenderTETriniumConverter extends TileEntitySpecialRenderer {
 			bindTextureByName("/mods/xorbo/textures/models/TriniumConverterOff.png");
 			GL11.glPushMatrix();
 			{
-				GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5f,
-						(float) z + 0.5F);
+				GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5f, (float) z + 0.5F);
 				GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
 				renderAll();
 			}
@@ -96,8 +94,7 @@ public class RenderTETriniumConverter extends TileEntitySpecialRenderer {
 		}
 		GL11.glPushMatrix();
 		{
-			GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5f,
-					(float) z + 0.5F);
+			GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5f, (float) z + 0.5F);
 			GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
 			renderMain();
 			if (te.connections[2] == true) {

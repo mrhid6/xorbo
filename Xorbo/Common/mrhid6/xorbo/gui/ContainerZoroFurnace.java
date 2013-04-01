@@ -21,8 +21,7 @@ public class ContainerZoroFurnace extends ContainerXorbo {
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
-				addSlotToContainer(new Slot(inventory.inventory, j + i * 9 + 9,
-						8 + j * 18, 84 + i * 18));
+				addSlotToContainer(new Slot(inventory.inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 			}
 		}
 
@@ -73,10 +72,7 @@ public class ContainerZoroFurnace extends ContainerXorbo {
 					if (!mergeItemStack(stackInSlot, invPlayer, invFull, false)) {
 						return null;
 					}
-				} else if ((i >= invPlayer)
-						&& (i < invFull)
-						&& (!mergeItemStack(stackInSlot, invTile, invPlayer,
-								false))) {
+				} else if ((i >= invPlayer) && (i < invFull) && (!mergeItemStack(stackInSlot, invTile, invPlayer, false))) {
 					return null;
 				}
 			} else if (!mergeItemStack(stackInSlot, invTile, invFull, false)) {

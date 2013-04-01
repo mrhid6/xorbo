@@ -11,14 +11,12 @@ public abstract class ContainerXorbo extends Container {
 	public abstract boolean canInteractWith( EntityPlayer player );
 
 	@Override
-	public ItemStack slotClick( int par1, int par2, int par3,
-			EntityPlayer player ) {
+	public ItemStack slotClick( int par1, int par2, int par3, EntityPlayer player ) {
 
 		if ((par1 >= 0) && (par1 < inventorySlots.size())) {
 			Slot slot = getSlot(par1);
 			if ((slot instanceof DummySlot)) {
-				((DummySlot) slot).slotClick(player.inventory.getItemStack(),
-						par2, par3 == 1);
+				((DummySlot) slot).slotClick(player.inventory.getItemStack(), par2, par3 == 1);
 				return null;
 			}
 		}
@@ -26,8 +24,7 @@ public abstract class ContainerXorbo extends Container {
 		return super.slotClick(par1, par2, par3, player);
 	}
 
-	public boolean transferToSlots( ItemStack stack, int startIndex,
-			int endIndex, boolean lookBackwards ) {
+	public boolean transferToSlots( ItemStack stack, int startIndex, int endIndex, boolean lookBackwards ) {
 		return mergeItemStack(stack, startIndex, endIndex, lookBackwards);
 	}
 }

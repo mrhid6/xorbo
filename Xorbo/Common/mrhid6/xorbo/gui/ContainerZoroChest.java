@@ -14,9 +14,7 @@ public class ContainerZoroChest extends ContainerXorbo {
 
 		for (int chestRow = 0; chestRow < tileEntity.getRowCount(); chestRow++) {
 			for (int chestCol = 0; chestCol < tileEntity.getRowLength(); chestCol++) {
-				addSlotToContainer(new Slot(tileEntity, chestCol + chestRow
-						* tileEntity.getRowLength(), 12 + chestCol * 18,
-						8 + chestRow * 18));
+				addSlotToContainer(new Slot(tileEntity, chestCol + chestRow * tileEntity.getRowLength(), 12 + chestCol * 18, 8 + chestRow * 18));
 			}
 
 		}
@@ -24,16 +22,13 @@ public class ContainerZoroChest extends ContainerXorbo {
 		int leftCol = (238 - 162) / 2 + 1;
 		for (int playerInvRow = 0; playerInvRow < 3; playerInvRow++) {
 			for (int playerInvCol = 0; playerInvCol < 9; playerInvCol++) {
-				addSlotToContainer(new Slot(inventory.inventory, playerInvCol
-						+ playerInvRow * 9 + 9, leftCol + playerInvCol * 18,
-						256 - (4 - playerInvRow) * 18 - 10));
+				addSlotToContainer(new Slot(inventory.inventory, playerInvCol + playerInvRow * 9 + 9, leftCol + playerInvCol * 18, 256 - (4 - playerInvRow) * 18 - 10));
 			}
 
 		}
 
 		for (int hotbarSlot = 0; hotbarSlot < 9; hotbarSlot++) {
-			addSlotToContainer(new Slot(inventory.inventory, hotbarSlot,
-					leftCol + hotbarSlot * 18, 256 - 24));
+			addSlotToContainer(new Slot(inventory.inventory, hotbarSlot, leftCol + hotbarSlot * 18, 256 - 24));
 		}
 	}
 

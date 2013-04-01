@@ -31,8 +31,7 @@ public class clientProxy extends commonProxy implements ITickHandler {
 	public static final Minecraft mc = Minecraft.getMinecraft();
 	public boolean allHaveCape = false;
 
-	String[] capeUsers = { "mrhid6", "tommo1590", "danzo1997", "Wolfyart",
-			"GreatCannonba11", "Blackout656" };
+	String[] capeUsers = { "mrhid6", "tommo1590", "danzo1997", "Wolfyart", "GreatCannonba11", "Blackout656" };
 	private int playerCounter;
 
 	public clientProxy() {
@@ -70,19 +69,13 @@ public class clientProxy extends commonProxy implements ITickHandler {
 	@Override
 	public void registerRenderers() {
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityTitan.class,
-				new RenderTitan(new ModelTitan(), 0.3F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTitan.class, new RenderTitan(new ModelTitan(), 0.3F));
 
-		ClientRegistry.bindTileEntitySpecialRenderer(TEZoroController.class,
-				new RenderTEZoroController());
-		ClientRegistry.bindTileEntitySpecialRenderer(
-				TEStearilliumCrafter.class, new RenderTEStearilliumCrafter());
-		ClientRegistry.bindTileEntitySpecialRenderer(TETriniumMiner.class,
-				new RenderTETriniumMiner());
-		ClientRegistry.bindTileEntitySpecialRenderer(TETriniumConverter.class,
-				new RenderTETriniumConverter());
-		ClientRegistry.bindTileEntitySpecialRenderer(TEZoroChest.class,
-				new RenderTEZoroChest());
+		ClientRegistry.bindTileEntitySpecialRenderer(TEZoroController.class, new RenderTEZoroController());
+		ClientRegistry.bindTileEntitySpecialRenderer(TEStearilliumCrafter.class, new RenderTEStearilliumCrafter());
+		ClientRegistry.bindTileEntitySpecialRenderer(TETriniumMiner.class, new RenderTETriniumMiner());
+		ClientRegistry.bindTileEntitySpecialRenderer(TETriniumConverter.class, new RenderTETriniumConverter());
+		ClientRegistry.bindTileEntitySpecialRenderer(TEZoroChest.class, new RenderTEZoroChest());
 
 	}
 
@@ -107,8 +100,7 @@ public class clientProxy extends commonProxy implements ITickHandler {
 				playerCounter = 0;
 			}
 
-			EntityPlayer lplayer = (EntityPlayer) mc.theWorld.playerEntities
-					.get(playerCounter);
+			EntityPlayer lplayer = (EntityPlayer) mc.theWorld.playerEntities.get(playerCounter);
 			if (allHaveCape || playerCanHaveCape(lplayer.username)) {
 				String oldCape = lplayer.cloakUrl;
 

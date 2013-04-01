@@ -8,9 +8,7 @@ import net.minecraft.world.World;
 public class WorldGenHazelspring {
 
 	public static int getGrowHeight( World world, int x, int y, int z ) {
-		if (((world.getBlockId(x, y - 1, z) != Block.grass.blockID) && (world
-				.getBlockId(x, y - 1, z) != Block.dirt.blockID))
-				|| ((world.getBlockId(x, y, z) != 0))) {
+		if (((world.getBlockId(x, y - 1, z) != Block.grass.blockID) && (world.getBlockId(x, y - 1, z) != Block.dirt.blockID)) || ((world.getBlockId(x, y, z) != 0))) {
 			return 0;
 		}
 
@@ -42,9 +40,7 @@ public class WorldGenHazelspring {
 
 	public boolean growTree( World world, int x, int y, int z, Random random ) {
 		if ((world == null) || (ModBlocks.winterbirchLog == null)) {
-			System.out
-					.println("[ERROR] Had a null that shouldn't have been. Winter Birch did not spawn! w="
-							+ world + " r=" + ModBlocks.winterbirchLog);
+			System.out.println("[ERROR] Had a null that shouldn't have been. Winter Birch did not spawn! w=" + world + " r=" + ModBlocks.winterbirchLog);
 			return false;
 		}
 
@@ -71,14 +67,10 @@ public class WorldGenHazelspring {
 		int width = 3;
 		int treeTop = y + height + 1;
 
-		world.setBlock(x - 1, y + 5, z, ModBlocks.hazelspringLeaves.blockID, 0,
-				0);
-		world.setBlock(x + 1, y + 5, z, ModBlocks.hazelspringLeaves.blockID, 0,
-				0);
-		world.setBlock(x, y + 5, z + 1, ModBlocks.hazelspringLeaves.blockID, 0,
-				0);
-		world.setBlock(x, y + 5, z - 1, ModBlocks.hazelspringLeaves.blockID, 0,
-				0);
+		world.setBlock(x - 1, y + 5, z, ModBlocks.hazelspringLeaves.blockID, 0, 0);
+		world.setBlock(x + 1, y + 5, z, ModBlocks.hazelspringLeaves.blockID, 0, 0);
+		world.setBlock(x, y + 5, z + 1, ModBlocks.hazelspringLeaves.blockID, 0, 0);
+		world.setBlock(x, y + 5, z - 1, ModBlocks.hazelspringLeaves.blockID, 0, 0);
 
 		for (int y1 = y + 6; (y1 <= treeTop); y1++) {
 
@@ -95,8 +87,7 @@ public class WorldGenHazelspring {
 					for (int z1 = z - width; z1 <= z + width; z1++) {
 
 						if (world.getBlockId(x1, y1, z1) == 0) {
-							world.setBlock(x1, y1, z1,
-									ModBlocks.hazelspringLeaves.blockID, 0, 0);
+							world.setBlock(x1, y1, z1, ModBlocks.hazelspringLeaves.blockID, 0, 0);
 						}
 					}
 				}
@@ -107,16 +98,11 @@ public class WorldGenHazelspring {
 					width--;
 				}
 			} else {
-				world.setBlock(x, y1, z, ModBlocks.hazelspringLeaves.blockID,
-						0, 0);
-				world.setBlock(x - 1, y1, z,
-						ModBlocks.hazelspringLeaves.blockID, 0, 0);
-				world.setBlock(x + 1, y1, z,
-						ModBlocks.hazelspringLeaves.blockID, 0, 0);
-				world.setBlock(x, y1, z + 1,
-						ModBlocks.hazelspringLeaves.blockID, 0, 0);
-				world.setBlock(x, y1, z - 1,
-						ModBlocks.hazelspringLeaves.blockID, 0, 0);
+				world.setBlock(x, y1, z, ModBlocks.hazelspringLeaves.blockID, 0, 0);
+				world.setBlock(x - 1, y1, z, ModBlocks.hazelspringLeaves.blockID, 0, 0);
+				world.setBlock(x + 1, y1, z, ModBlocks.hazelspringLeaves.blockID, 0, 0);
+				world.setBlock(x, y1, z + 1, ModBlocks.hazelspringLeaves.blockID, 0, 0);
+				world.setBlock(x, y1, z - 1, ModBlocks.hazelspringLeaves.blockID, 0, 0);
 			}
 
 		}

@@ -16,8 +16,7 @@ public abstract class BlockMachine extends BlockTexturedBase {
 	}
 
 	@Override
-	public boolean onBlockActivated( World world, int x, int y, int z,
-			EntityPlayer player, int idk, float what, float these, float are ) {
+	public boolean onBlockActivated( World world, int x, int y, int z, EntityPlayer player, int idk, float what, float these, float are ) {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
 		if (tileEntity == null || player.isSneaking()) {
@@ -36,10 +35,8 @@ public abstract class BlockMachine extends BlockTexturedBase {
 	}
 
 	@Override
-	public void onBlockPlacedBy( World par1World, int par2, int par3, int par4,
-			EntityLiving par5EntityLiving, ItemStack par6ItemStack ) {
-		int var6 = MathHelper
-				.floor_double(par5EntityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+	public void onBlockPlacedBy( World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack ) {
+		int var6 = MathHelper.floor_double(par5EntityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
 		if (var6 == 0) {
 			par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 0);
@@ -58,8 +55,7 @@ public abstract class BlockMachine extends BlockTexturedBase {
 		}
 	}
 
-	private void setDefaultDirection( World par1World, int par2, int par3,
-			int par4 ) {
+	private void setDefaultDirection( World par1World, int par2, int par3, int par4 ) {
 		if (!par1World.isRemote) {
 			int var5 = par1World.getBlockId(par2, par3, par4 - 1);
 			int var6 = par1World.getBlockId(par2, par3, par4 + 1);

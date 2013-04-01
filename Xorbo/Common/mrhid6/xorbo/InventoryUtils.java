@@ -20,7 +20,7 @@ public class InventoryUtils {
 		return stack;
 	}
 
-	public static IRecipe findMatchingRecipe(InventoryCrafting par1InventoryCrafting, World par2World ) {
+	public static IRecipe findMatchingRecipe( InventoryCrafting par1InventoryCrafting, World par2World ) {
 		int var3 = 0;
 		ItemStack var4 = null;
 		ItemStack var5 = null;
@@ -42,9 +42,7 @@ public class InventoryUtils {
 			}
 		}
 
-		if (var3 == 2 && var4.itemID == var5.itemID && var4.stackSize == 1
-				&& var5.stackSize == 1
-				&& Item.itemsList[var4.itemID].isRepairable()) {
+		if (var3 == 2 && var4.itemID == var5.itemID && var4.stackSize == 1 && var5.stackSize == 1 && Item.itemsList[var4.itemID].isRepairable()) {
 			Item var11 = Item.itemsList[var4.itemID];
 			int var13 = var11.getMaxDamage() - var4.getItemDamageForDisplay();
 			int var8 = var11.getMaxDamage() - var5.getItemDamageForDisplay();
@@ -58,8 +56,7 @@ public class InventoryUtils {
 			ArrayList ingredients = new ArrayList<ItemStack>(2);
 			ingredients.add(var4);
 			ingredients.add(var5);
-			return new ShapelessRecipes(new ItemStack(var4.itemID, 1, var10),
-					ingredients);
+			return new ShapelessRecipes(new ItemStack(var4.itemID, 1, var10), ingredients);
 		} else {
 			List recipes = CraftingManager.getInstance().getRecipeList();
 			for (var6 = 0; var6 < recipes.size(); ++var6) {

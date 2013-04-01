@@ -16,8 +16,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.relauncher.Side;
 
-public class TECableBase extends TileEntity implements IGridInterface,
-		IPacketXorHandler {
+public class TECableBase extends TileEntity implements IGridInterface, IPacketXorHandler {
 
 	protected static int descPacketId;
 	public int gridindex = -1;
@@ -138,8 +137,7 @@ public class TECableBase extends TileEntity implements IGridInterface,
 
 		payload.intPayload[0] = gridindex;
 
-		PacketTile packet = new PacketTile(descPacketId, xCoord, yCoord,
-				zCoord, payload);
+		PacketTile packet = new PacketTile(descPacketId, xCoord, yCoord, zCoord, payload);
 		return packet.getPacket();
 	}
 
@@ -158,8 +156,7 @@ public class TECableBase extends TileEntity implements IGridInterface,
 			int y1 = yCoord + Config.SIDE_COORD_MOD[i][1];
 			int z1 = zCoord + Config.SIDE_COORD_MOD[i][2];
 
-			GridPower gridCheck = GridManager
-					.getGridAt(x1, y1, z1, worldObj, i);
+			GridPower gridCheck = GridManager.getGridAt(x1, y1, z1, worldObj, i);
 
 			if (getGrid() != null && gridCheck != null) {
 
@@ -168,8 +165,7 @@ public class TECableBase extends TileEntity implements IGridInterface,
 					gridindex = gridCheck.gridIndex;
 					getGrid().addCable(this);
 
-					System.out.println("grid Was Changed to"
-							+ gridCheck.gridIndex);
+					System.out.println("grid Was Changed to" + gridCheck.gridIndex);
 					return true;
 				}
 			}
@@ -192,8 +188,7 @@ public class TECableBase extends TileEntity implements IGridInterface,
 		worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
 
 		if (Utils.isServerWorld()) {
-			PacketUtils.sendToPlayers(getDescriptionPacket(), worldObj, xCoord,
-					yCoord, zCoord, 192);
+			PacketUtils.sendToPlayers(getDescriptionPacket(), worldObj, xCoord, yCoord, zCoord, 192);
 		}
 
 	}
@@ -205,8 +200,7 @@ public class TECableBase extends TileEntity implements IGridInterface,
 
 	public void sendUpdatePacket( Side side ) {
 		if ((Utils.isServerWorld()) && (side == Side.CLIENT)) {
-			PacketUtils.sendToPlayers(getDescriptionPacket(), worldObj, xCoord,
-					yCoord, zCoord, 192);
+			PacketUtils.sendToPlayers(getDescriptionPacket(), worldObj, xCoord, yCoord, zCoord, 192);
 
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);

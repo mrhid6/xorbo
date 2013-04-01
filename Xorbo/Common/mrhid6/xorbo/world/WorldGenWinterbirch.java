@@ -8,10 +8,7 @@ import net.minecraft.world.World;
 public class WorldGenWinterbirch {
 
 	public static int getGrowHeight( World world, int x, int y, int z ) {
-		if (((world.getBlockId(x, y - 1, z) != Block.grass.blockID) && (world
-				.getBlockId(x, y - 1, z) != Block.dirt.blockID))
-				&& (world.getBlockId(x, y, z) != Block.snow.blockID)
-				|| ((world.getBlockId(x, y, z) != 0))) {
+		if (((world.getBlockId(x, y - 1, z) != Block.grass.blockID) && (world.getBlockId(x, y - 1, z) != Block.dirt.blockID)) && (world.getBlockId(x, y, z) != Block.snow.blockID) || ((world.getBlockId(x, y, z) != 0))) {
 			return 0;
 		}
 
@@ -43,9 +40,7 @@ public class WorldGenWinterbirch {
 
 	public boolean growTree( World world, int x, int y, int z, Random random ) {
 		if ((world == null) || (ModBlocks.winterbirchLog == null)) {
-			System.out
-					.println("[ERROR] Had a null that shouldn't have been. Winter Birch did not spawn! w="
-							+ world + " r=" + ModBlocks.winterbirchLog);
+			System.out.println("[ERROR] Had a null that shouldn't have been. Winter Birch did not spawn! w=" + world + " r=" + ModBlocks.winterbirchLog);
 			return false;
 		}
 
@@ -92,21 +87,16 @@ public class WorldGenWinterbirch {
 					for (int z1 = z - width; z1 <= z + width; z1++) {
 
 						if (world.getBlockId(x1, y1, z1) == 0) {
-							world.setBlock(x1, y1, z1,
-									ModBlocks.winterbirchLeaves.blockID);
+							world.setBlock(x1, y1, z1, ModBlocks.winterbirchLeaves.blockID);
 						}
 					}
 				}
 			} else {
 				world.setBlock(x, y1, z, ModBlocks.winterbirchLeaves.blockID);
-				world.setBlock(x - 1, y1, z,
-						ModBlocks.winterbirchLeaves.blockID);
-				world.setBlock(x + 1, y1, z,
-						ModBlocks.winterbirchLeaves.blockID);
-				world.setBlock(x, y1, z + 1,
-						ModBlocks.winterbirchLeaves.blockID);
-				world.setBlock(x, y1, z - 1,
-						ModBlocks.winterbirchLeaves.blockID);
+				world.setBlock(x - 1, y1, z, ModBlocks.winterbirchLeaves.blockID);
+				world.setBlock(x + 1, y1, z, ModBlocks.winterbirchLeaves.blockID);
+				world.setBlock(x, y1, z + 1, ModBlocks.winterbirchLeaves.blockID);
+				world.setBlock(x, y1, z - 1, ModBlocks.winterbirchLeaves.blockID);
 			}
 
 		}

@@ -11,8 +11,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTriniumMiner extends BlockMachine {
 
-	public BlockTriniumMiner( int id, String textureName, String name,
-			boolean craftable ) {
+	public BlockTriniumMiner( int id, String textureName, String name, boolean craftable ) {
 		super(id, textureName, name, craftable);
 
 		this.setResistance(6.0F);
@@ -26,8 +25,7 @@ public class BlockTriniumMiner extends BlockMachine {
 	}
 
 	@Override
-	public Icon getBlockTexture( IBlockAccess par1IBlockAccess, int x, int y,
-			int z, int blockSide ) {
+	public Icon getBlockTexture( IBlockAccess par1IBlockAccess, int x, int y, int z, int blockSide ) {
 		if (blockSide == 1) {
 			return icons[0];
 		} else if (blockSide == 0) {
@@ -58,8 +56,7 @@ public class BlockTriniumMiner extends BlockMachine {
 		icons[0] = iconRegister.registerIcon("xorbo:" + textureName + "_top");
 		icons[1] = iconRegister.registerIcon("xorbo:" + textureName + "_side");
 		icons[2] = iconRegister.registerIcon("xorbo:" + textureName + "_front");
-		icons[3] = iconRegister
-				.registerIcon("xorbo:" + textureName + "_bottom");
+		icons[3] = iconRegister.registerIcon("xorbo:" + textureName + "_bottom");
 	}
 
 }

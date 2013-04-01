@@ -83,14 +83,12 @@ public class GridManager {
 
 	}
 
-	public static void sendUpdatePacket( Side side, World worldObj, int xCoord,
-			int yCoord, int zCoord, int id ) {
+	public static void sendUpdatePacket( Side side, World worldObj, int xCoord, int yCoord, int zCoord, int id ) {
 
 		GridPower grid = getGrid(id);
 		if (grid != null) {
 			if ((Utils.isServerWorld()) && (side == Side.CLIENT)) {
-				PacketUtils.sendToPlayers(grid.getDescriptionPacket(),
-						worldObj, xCoord, yCoord, zCoord, 192);
+				PacketUtils.sendToPlayers(grid.getDescriptionPacket(), worldObj, xCoord, yCoord, zCoord, 192);
 
 			} else if ((Utils.isClientWorld()) && (side == Side.SERVER)) {
 				PacketUtils.sendToServer(grid.getDescriptionPacket());

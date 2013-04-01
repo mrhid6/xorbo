@@ -60,8 +60,7 @@ public class TETriniumConverter extends TEMachineBase implements IConverterObj {
 			int y1 = yCoord + Config.SIDE_COORD_MOD[i][1];
 			int z1 = zCoord + Config.SIDE_COORD_MOD[i][2];
 
-			GridPower gridCheck = GridManager
-					.getGridAt(x1, y1, z1, worldObj, i);
+			GridPower gridCheck = GridManager.getGridAt(x1, y1, z1, worldObj, i);
 
 			if (getGrid() != null && gridCheck != null) {
 
@@ -69,8 +68,7 @@ public class TETriniumConverter extends TEMachineBase implements IConverterObj {
 					getGrid().removeMachine(this);
 					gridindex = gridCheck.gridIndex;
 
-					System.out.println("teconverter grid Was Changed to"
-							+ gridCheck.gridIndex);
+					System.out.println("teconverter grid Was Changed to" + gridCheck.gridIndex);
 				}
 			}
 		}
@@ -102,10 +100,8 @@ public class TETriniumConverter extends TEMachineBase implements IConverterObj {
 
 		for (int i = 0; i < 6; i++) {
 
-			int[] coords = Config.getAdjacentCoordinatesForSide(xCoord, yCoord,
-					zCoord, i);
-			TileEntity te = worldObj.getBlockTileEntity(coords[0], coords[1],
-					coords[2]);
+			int[] coords = Config.getAdjacentCoordinatesForSide(xCoord, yCoord, zCoord, i);
+			TileEntity te = worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
 
 			connections[i] = (te instanceof TECableBase);
 		}
@@ -123,8 +119,7 @@ public class TETriniumConverter extends TEMachineBase implements IConverterObj {
 			findGrid();
 
 			if (getGrid() != null) {
-				System.out.println("found Grid triniumconverter"
-						+ getGrid().gridIndex);
+				System.out.println("found Grid triniumconverter" + getGrid().gridIndex);
 				getGrid().addConverter(this);
 			} else {
 				System.out.println("im still null!" + (worldObj.isRemote));

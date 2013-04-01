@@ -43,8 +43,7 @@ public class DummySlot extends Slot {
 				inc *= 16;
 			}
 			ItemStack tstack = getStack();
-			int quantity = tstack.stackSize
-					+ InventoryUtils.incrStackSize(tstack, inc);
+			int quantity = tstack.stackSize + InventoryUtils.incrStackSize(tstack, inc);
 			if (quantity <= 0) {
 				putStack(null);
 			} else {

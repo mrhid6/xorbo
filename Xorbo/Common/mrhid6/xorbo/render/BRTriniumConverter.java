@@ -19,20 +19,17 @@ public class BRTriniumConverter implements ISimpleBlockRenderingHandler {
 	}
 
 	@Override
-	public void renderInventoryBlock( Block block, int metadata, int modelID,
-			RenderBlocks renderer ) {
+	public void renderInventoryBlock( Block block, int metadata, int modelID, RenderBlocks renderer ) {
 
 		GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		TileEntityRenderer.instance.renderTileEntityAt(
-				new TETriniumConverter(), 0.0D, 0.0D, 0.0D, 0.0F);
+		TileEntityRenderer.instance.renderTileEntityAt(new TETriniumConverter(), 0.0D, 0.0D, 0.0D, 0.0F);
 		GL11.glEnable(32826);
 
 	}
 
 	@Override
-	public boolean renderWorldBlock( IBlockAccess world, int x, int y, int z,
-			Block block, int modelId, RenderBlocks renderer ) {
+	public boolean renderWorldBlock( IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer ) {
 		return false;
 	}
 

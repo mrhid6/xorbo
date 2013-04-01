@@ -16,13 +16,10 @@ public class Config extends Configuration {
 
 	static HashMap<String, Integer> renderIds = new HashMap<String, Integer>();
 
-	public static final int[][] SIDE_COORD_MOD = { { 0, -1, 0 }, { 0, 1, 0 },
-			{ 0, 0, -1 }, { 0, 0, 1 }, { -1, 0, 0 }, { 1, 0, 0 } };
+	public static final int[][] SIDE_COORD_MOD = { { 0, -1, 0 }, { 0, 1, 0 }, { 0, 0, -1 }, { 0, 0, 1 }, { -1, 0, 0 }, { 1, 0, 0 } };
 
-	public static int[] getAdjacentCoordinatesForSide( int x, int y, int z,
-			int side ) {
-		return new int[] { x + SIDE_COORD_MOD[side][0],
-				y + SIDE_COORD_MOD[side][1], z + SIDE_COORD_MOD[side][2] };
+	public static int[] getAdjacentCoordinatesForSide( int x, int y, int z, int side ) {
+		return new int[] { x + SIDE_COORD_MOD[side][0], y + SIDE_COORD_MOD[side][1], z + SIDE_COORD_MOD[side][2] };
 	}
 
 	public static int getRenderId( String string ) {
@@ -41,31 +38,34 @@ public class Config extends Configuration {
 		config = new Configuration(configFile);
 		config.load();
 
-		BlockIds.addBlockID(config, "zoroCable", 500);
-		BlockIds.addBlockID(config, "triniumCable", 501);
-		BlockIds.addBlockID(config, "zoroFurnace", 502);
-		BlockIds.addBlockID(config, "zoroController", 503);
-		BlockIds.addBlockID(config, "zoroChest", 504);
-		BlockIds.addBlockID(config, "triniumMiner", 505);
-		BlockIds.addBlockID(config, "triniumConverter", 506);
-		BlockIds.addBlockID(config, "stearilliumCrafter", 507);
-		BlockIds.addBlockID(config, "zoroGrass", 508);
-		BlockIds.addBlockID(config, "hazelspringLog", 509);
-		BlockIds.addBlockID(config, "winterbirchLog", 510);
-		BlockIds.addBlockID(config, "hazelspringLeaves", 511);
-		BlockIds.addBlockID(config, "winterbirchLeaves", 512);
+		BlockIds.addBlockID(config, "zoroCable");
+		BlockIds.addBlockID(config, "triniumCable");
+		BlockIds.addBlockID(config, "zoroFurnace");
+		BlockIds.addBlockID(config, "zoroController");
+		BlockIds.addBlockID(config, "zoroChest");
+		BlockIds.addBlockID(config, "triniumMiner");
+		BlockIds.addBlockID(config, "triniumConverter");
+		BlockIds.addBlockID(config, "stearilliumCrafter");
+		BlockIds.addBlockID(config, "zoroGrass");
+		BlockIds.addBlockID(config, "hazelspringLog");
+		BlockIds.addBlockID(config, "winterbirchLog");
+		BlockIds.addBlockID(config, "hazelspringLeaves");
+		BlockIds.addBlockID(config, "winterbirchLeaves");
+		BlockIds.addBlockID(config, "zoroBrick");
+		BlockIds.addBlockID(config, "triniumBrick");
 
-		BlockIds.addBlockID(config, "zoroStill", 513);
-		BlockIds.addBlockID(config, "zoroFlowing", 514);
+		BlockIds.addBlockID(config, "zoroStill");
+		BlockIds.addBlockID(config, "zoroFlowing");
 
-		BlockIds.addBlockID(config, "zoroOre", 515);
-		BlockIds.addBlockID(config, "stearilliumOre", 516);
-		BlockIds.addBlockID(config, "triniumOre", 517);
+		BlockIds.addBlockID(config, "zoroOre");
+		BlockIds.addBlockID(config, "stearilliumOre");
+		BlockIds.addBlockID(config, "triniumOre");
 
-		ItemIds.addItemID(config, "zoroBucket", 5000);
-		ItemIds.addItemID(config, "ZoroIngot", 5001);
-		ItemIds.addItemID(config, "stearilliumOre", 5002);
-		ItemIds.addItemID(config, "debugTool", 5003);
+		ItemIds.addItemID(config, "zoroIngot");
+		ItemIds.addItemID(config, "zoroBucket");
+		ItemIds.addItemID(config, "ZoroIngot");
+		ItemIds.addItemID(config, "stearilliumOre");
+		ItemIds.addItemID(config, "debugTool");
 		config.save();
 	}
 

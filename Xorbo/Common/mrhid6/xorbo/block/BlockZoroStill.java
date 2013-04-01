@@ -23,8 +23,7 @@ public class BlockZoroStill extends BlockFluid implements ILiquid {
 	}
 
 	@Override
-	public boolean getBlocksMovement( IBlockAccess par1IBlockAccess, int par2,
-			int par3, int par4 ) {
+	public boolean getBlocksMovement( IBlockAccess par1IBlockAccess, int par2, int par3, int par4 ) {
 		return blockMaterial != Material.lava;
 	}
 
@@ -52,8 +51,7 @@ public class BlockZoroStill extends BlockFluid implements ILiquid {
 	 * neighbor blockID
 	 */
 	@Override
-	public void onNeighborBlockChange( World par1World, int par2, int par3,
-			int par4, int par5 ) {
+	public void onNeighborBlockChange( World par1World, int par2, int par3, int par4, int par5 ) {
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
 
 		if (par1World.getBlockId(par2, par3, par4) == blockID) {
@@ -63,14 +61,11 @@ public class BlockZoroStill extends BlockFluid implements ILiquid {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick( World par1World, int par2, int par3,
-			int par4, Random par5Random ) {
+	public void randomDisplayTick( World par1World, int par2, int par3, int par4, Random par5Random ) {
 		super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
 
 		if (par5Random.nextInt(50) == 0) {
-			ZoroBubble bubble = new ZoroBubble(par1World, par2
-					+ par5Random.nextFloat(), par3 + 2.1F, par4
-					+ par5Random.nextFloat());
+			ZoroBubble bubble = new ZoroBubble(par1World, par2 + par5Random.nextFloat(), par3 + 2.1F, par4 + par5Random.nextFloat());
 			Minecraft.getMinecraft().effectRenderer.addEffect(bubble);
 			Minecraft.getMinecraft().effectRenderer.renderParticles(bubble, 1);
 			// par1World.spawnParticle("smoke", (double)((float)par2 +
@@ -91,10 +86,8 @@ public class BlockZoroStill extends BlockFluid implements ILiquid {
 	 */
 	private void setNotStationary( World par1World, int par2, int par3, int par4 ) {
 		int l = par1World.getBlockMetadata(par2, par3, par4);
-		par1World.setBlock(par2, par3, par4, ModBlocks.zoroFlowing.blockID, l,
-				2);
-		par1World.scheduleBlockUpdate(par2, par3, par4,
-				ModBlocks.zoroFlowing.blockID, this.tickRate(par1World));
+		par1World.setBlock(par2, par3, par4, ModBlocks.zoroFlowing.blockID, l, 2);
+		par1World.scheduleBlockUpdate(par2, par3, par4, ModBlocks.zoroFlowing.blockID, this.tickRate(par1World));
 	}
 
 	@Override
@@ -111,8 +104,7 @@ public class BlockZoroStill extends BlockFluid implements ILiquid {
 	 * Ticks the block if it's been scheduled
 	 */
 	@Override
-	public void updateTick( World par1World, int par2, int par3, int par4,
-			Random par5Random ) {
+	public void updateTick( World par1World, int par2, int par3, int par4, Random par5Random ) {
 		if (blockMaterial == Material.lava) {
 			int l = par5Random.nextInt(3);
 			int i1;
@@ -125,14 +117,8 @@ public class BlockZoroStill extends BlockFluid implements ILiquid {
 				j1 = par1World.getBlockId(par2, par3, par4);
 
 				if (j1 == 0) {
-					if (this.isFlammable(par1World, par2 - 1, par3, par4)
-							|| this.isFlammable(par1World, par2 + 1, par3, par4)
-							|| this.isFlammable(par1World, par2, par3, par4 - 1)
-							|| this.isFlammable(par1World, par2, par3, par4 + 1)
-							|| this.isFlammable(par1World, par2, par3 - 1, par4)
-							|| this.isFlammable(par1World, par2, par3 + 1, par4)) {
-						par1World
-								.setBlock(par2, par3, par4, Block.fire.blockID);
+					if (this.isFlammable(par1World, par2 - 1, par3, par4) || this.isFlammable(par1World, par2 + 1, par3, par4) || this.isFlammable(par1World, par2, par3, par4 - 1) || this.isFlammable(par1World, par2, par3, par4 + 1) || this.isFlammable(par1World, par2, par3 - 1, par4) || this.isFlammable(par1World, par2, par3 + 1, par4)) {
+						par1World.setBlock(par2, par3, par4, Block.fire.blockID);
 						return;
 					}
 				} else if (Block.blocksList[j1].blockMaterial.blocksMovement()) {
@@ -148,10 +134,8 @@ public class BlockZoroStill extends BlockFluid implements ILiquid {
 					par2 = i1 + par5Random.nextInt(3) - 1;
 					par4 = j1 + par5Random.nextInt(3) - 1;
 
-					if (par1World.isAirBlock(par2, par3 + 1, par4)
-							&& this.isFlammable(par1World, par2, par3, par4)) {
-						par1World.setBlock(par2, par3 + 1, par4,
-								Block.fire.blockID);
+					if (par1World.isAirBlock(par2, par3 + 1, par4) && this.isFlammable(par1World, par2, par3, par4)) {
+						par1World.setBlock(par2, par3 + 1, par4, Block.fire.blockID);
 					}
 				}
 			}

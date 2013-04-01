@@ -28,8 +28,7 @@ public class BlockHazelspringLog extends BlockTexturedBase {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTexture( IBlockAccess par1iBlockAccess, int x, int y,
-			int z, int blockSide ) {
+	public Icon getBlockTexture( IBlockAccess par1iBlockAccess, int x, int y, int z, int blockSide ) {
 
 		return getBlockTextureFromSideAndMetadata(blockSide, 0);
 	}

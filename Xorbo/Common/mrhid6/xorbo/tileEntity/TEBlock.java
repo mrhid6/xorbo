@@ -102,8 +102,7 @@ public abstract class TEBlock extends TEPoweredBase implements IInventory {
 	public void setInventorySlotContents( int i, ItemStack itemstack ) {
 		inventory[i] = itemstack;
 
-		if ((itemstack != null)
-				&& (itemstack.stackSize > getInventoryStackLimit())) {
+		if ((itemstack != null) && (itemstack.stackSize > getInventoryStackLimit())) {
 			itemstack.stackSize = getInventoryStackLimit();
 		}
 	}

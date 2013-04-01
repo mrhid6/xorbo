@@ -15,8 +15,7 @@ public class WorldGenZoroPond {
 			y--;
 		}
 		y--;
-		if (world.getBlockId(x, y, z) != Block.grass.blockID
-				&& world.getBlockId(x, y, z) != Block.dirt.blockID) {
+		if (world.getBlockId(x, y, z) != Block.grass.blockID && world.getBlockId(x, y, z) != Block.dirt.blockID) {
 			return;
 		}
 

@@ -22,18 +22,13 @@ public class PacketHandler implements IPacketHandler {
 	}
 
 	@Override
-	public void onPacketData( INetworkManager manager,
-			Packet250CustomPayload packet, Player player ) {
-		DataInputStream data = new DataInputStream(new ByteArrayInputStream(
-				packet.data));
+	public void onPacketData( INetworkManager manager, Packet250CustomPayload packet, Player player ) {
+		DataInputStream data = new DataInputStream(new ByteArrayInputStream(packet.data));
 		try {
 			int id = data.read();
 			int type = data.read();
 			if (type == 0) {
-				PacketTile tilePacket = new PacketTile(
-						id,
-						(player instanceof EntityPlayerMP) ? (EntityPlayerMP) player
-								: null);
+				PacketTile tilePacket = new PacketTile(id, (player instanceof EntityPlayerMP) ? (EntityPlayerMP) player : null);
 				tilePacket.readData(data);
 
 				World world = ((EntityPlayer) player).worldObj;
@@ -52,10 +47,7 @@ public class PacketHandler implements IPacketHandler {
 
 			if (type == 1) {
 
-				PacketGrid tilePacket = new PacketGrid(
-						id,
-						(player instanceof EntityPlayerMP) ? (EntityPlayerMP) player
-								: null);
+				PacketGrid tilePacket = new PacketGrid(id, (player instanceof EntityPlayerMP) ? (EntityPlayerMP) player : null);
 				tilePacket.readData(data);
 
 				GridManager.handleGridPacket(id, tilePacket);

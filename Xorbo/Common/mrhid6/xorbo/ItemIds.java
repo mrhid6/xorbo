@@ -5,15 +5,16 @@ import net.minecraftforge.common.Configuration;
 
 public class ItemIds {
 
-	private static HashMap IDs = new HashMap();
+	private static HashMap<String, Integer> IDs = new HashMap<String, Integer>();
+	private static int lastId = 5000;
 
-	public static void addItemID( Configuration config, String name,
-			int defaultID ) {
-		IDs.put(name, Integer.valueOf(config.getItem(name, defaultID).getInt()));
+	public static void addItemID( Configuration config, String name ) {
+		IDs.put(name, Integer.valueOf(config.getItem(name, lastId).getInt()));
+		lastId++;
 	}
 
 	public static int getID( String name ) {
-		int res = ((Integer) IDs.get(name)).intValue();
+		int res = IDs.get(name).intValue();
 		return res;
 	}
 }

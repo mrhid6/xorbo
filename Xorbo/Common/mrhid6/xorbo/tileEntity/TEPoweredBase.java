@@ -38,8 +38,7 @@ public abstract class TEPoweredBase extends TileRoot implements IGridInterface {
 			} else if (te instanceof TEZoroController) {
 				TEZoroController controller = (TEZoroController) te;
 
-				if (controller.canInteractWith(this)
-						&& controller.getGrid() != null) {
+				if (controller.canInteractWith(this) && controller.getGrid() != null) {
 					gridindex = controller.getGrid().gridIndex;
 					break;
 				}

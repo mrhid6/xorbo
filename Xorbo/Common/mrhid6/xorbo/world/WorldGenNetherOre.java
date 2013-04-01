@@ -30,10 +30,8 @@ public class WorldGenNetherOre {
 			double d7 = d4 + ((d5 - d4) * l) / numberOfBlocks;
 			double d8 = d2 + ((d3 - d2) * l) / numberOfBlocks;
 			double d9 = (rand.nextDouble() * numberOfBlocks) / 16D;
-			double d10 = (MathHelper.sin((l * 3.141593F) / numberOfBlocks) + 1.0F)
-					* d9 + 1.0D;
-			double d11 = (MathHelper.sin((l * 3.141593F) / numberOfBlocks) + 1.0F)
-					* d9 + 1.0D;
+			double d10 = (MathHelper.sin((l * 3.141593F) / numberOfBlocks) + 1.0F) * d9 + 1.0D;
+			double d11 = (MathHelper.sin((l * 3.141593F) / numberOfBlocks) + 1.0F) * d9 + 1.0D;
 
 			int i1 = MathHelper.floor_double(d6 - d10 / 2D);
 			int j1 = MathHelper.floor_double(d7 - d11 / 2D);
@@ -59,8 +57,7 @@ public class WorldGenNetherOre {
 					for (int i3 = k1; i3 <= j2; i3++) {
 
 						double d14 = ((i3 + 0.5D) - d8) / (d10 / 2D);
-						if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D
-								&& world.getBlockId(k2, l2, i3) == Block.netherrack.blockID) {
+						if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D && world.getBlockId(k2, l2, i3) == Block.netherrack.blockID) {
 							world.setBlock(k2, l2, i3, minableBlockId);
 						}
 					}

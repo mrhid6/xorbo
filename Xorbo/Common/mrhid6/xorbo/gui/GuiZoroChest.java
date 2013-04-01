@@ -15,8 +15,7 @@ public class GuiZoroChest extends GuiMain {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer( float par1, int par2,
-			int par3 ) {
+	protected void drawGuiContainerBackgroundLayer( float par1, int par2, int par3 ) {
 		// draw your Gui here, only thing you need to change is the path
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -37,9 +36,7 @@ public class GuiZoroChest extends GuiMain {
 	@Override
 	protected void drawGuiContainerForegroundLayer( int param1, int param2 ) {
 		fontRenderer.drawString("Stearillium Crafter", 45, 6, 4210752);
-		fontRenderer.drawString(
-				StatCollector.translateToLocal("container.inventory"), 8,
-				ySize - 96 + 2, 4210752);
+		fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
 		super.drawGuiContainerForegroundLayer(param1, param2);
 	}
 

@@ -1,6 +1,5 @@
 package mrhid6.xorbo.items;
 
-import mrhid6.xorbo.Config;
 import mrhid6.xorbo.tileEntity.TECableBase;
 import mrhid6.xorbo.tileEntity.TEPoweredBase;
 import mrhid6.xorbo.tileEntity.TEZoroController;
@@ -12,12 +11,11 @@ import net.minecraft.world.World;
 public class ItemDebug extends ItemTexturedBase {
 
 	public ItemDebug( int id, String name ) {
-		super(id, 1, Config.creativeTabXor, name);
+		super(id, 1, name);
 	}
 
 	@Override
-	public ItemStack onItemRightClick( ItemStack par1ItemStack,
-			World par2World, EntityPlayer par3EntityPlayer ) {
+	public ItemStack onItemRightClick( ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer ) {
 		return null;
 
 		/*
@@ -87,9 +85,7 @@ public class ItemDebug extends ItemTexturedBase {
 	}
 
 	@Override
-	public boolean onItemUseFirst( ItemStack stack, EntityPlayer player,
-			World world, int x, int y, int z, int side, float hitX, float hitY,
-			float hitZ ) {
+	public boolean onItemUseFirst( ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ ) {
 
 		TileEntity te = world.getBlockTileEntity(x, y, z);
 

@@ -169,10 +169,8 @@ public class GridPower {
 
 		TileEntity te1 = w.getBlockTileEntity(x, y, z);
 
-		if (masterController != null && te1 != null
-				&& te1 instanceof TEZoroController) {
-			if (masterController.xCoord == x && masterController.yCoord == y
-					&& masterController.zCoord == z) {
+		if (masterController != null && te1 != null && te1 instanceof TEZoroController) {
+			if (masterController.xCoord == x && masterController.yCoord == y && masterController.zCoord == z) {
 				return true;
 			}
 		}

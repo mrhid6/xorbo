@@ -13,8 +13,7 @@ public class BlockStearilliumCrafter extends BlockMachine {
 
 	public Icon[] icons;
 
-	public BlockStearilliumCrafter( int id, String textureName, String name,
-			boolean craftable ) {
+	public BlockStearilliumCrafter( int id, String textureName, String name, boolean craftable ) {
 		super(id, textureName, name, craftable);
 
 		this.setResistance(6.0F);
@@ -25,8 +24,7 @@ public class BlockStearilliumCrafter extends BlockMachine {
 	@Override
 	public void breakBlock( World world, int x, int y, int z, int par5, int par6 ) {
 
-		TEStearilliumCrafter tile = (TEStearilliumCrafter) world
-				.getBlockTileEntity(x, y, z);
+		TEStearilliumCrafter tile = (TEStearilliumCrafter) world.getBlockTileEntity(x, y, z);
 
 		if (tile != null) {
 			tile.breakBlock();
@@ -41,8 +39,7 @@ public class BlockStearilliumCrafter extends BlockMachine {
 	}
 
 	@Override
-	public Icon getBlockTexture( IBlockAccess par1IBlockAccess, int x, int y,
-			int z, int blockSide ) {
+	public Icon getBlockTexture( IBlockAccess par1IBlockAccess, int x, int y, int z, int blockSide ) {
 		if (blockSide == 1) {
 			return icons[0];
 		} else if (blockSide == 0) {

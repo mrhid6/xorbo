@@ -18,21 +18,17 @@ public class GuiHandler implements IGuiHandler {
 
 	// returns an instance of the Gui you made earlier
 	@Override
-	public Object getClientGuiElement( int id, EntityPlayer player,
-			World world, int x, int y, int z ) {
+	public Object getClientGuiElement( int id, EntityPlayer player, World world, int x, int y, int z ) {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
 		if (tileEntity instanceof TEZoroFurnace) {
-			return new GuiZoroFurnace(new ContainerZoroFurnace(player,
-					(TEZoroFurnace) tileEntity));
+			return new GuiZoroFurnace(new ContainerZoroFurnace(player, (TEZoroFurnace) tileEntity));
 		}
 		if (tileEntity instanceof TEStearilliumCrafter) {
-			return new GuiStearilliumCrafter(new ContainerStearilliumCrafter(
-					player, (TEStearilliumCrafter) tileEntity));
+			return new GuiStearilliumCrafter(new ContainerStearilliumCrafter(player, (TEStearilliumCrafter) tileEntity));
 		}
 		if (tileEntity instanceof TEZoroChest) {
-			return new GuiZoroChest(new ContainerZoroChest(player,
-					(TEZoroChest) tileEntity));
+			return new GuiZoroChest(new ContainerZoroChest(player, (TEZoroChest) tileEntity));
 		}
 		/*
 		 * if(tileEntity instanceof TETriniumChillerBase || tileEntity
@@ -49,16 +45,14 @@ public class GuiHandler implements IGuiHandler {
 
 	// returns an instance of the Container you made earlier
 	@Override
-	public Object getServerGuiElement( int id, EntityPlayer player,
-			World world, int x, int y, int z ) {
+	public Object getServerGuiElement( int id, EntityPlayer player, World world, int x, int y, int z ) {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
 		if (tileEntity instanceof TEZoroFurnace) {
 			return new ContainerZoroFurnace(player, (TEZoroFurnace) tileEntity);
 		}
 		if (tileEntity instanceof TEStearilliumCrafter) {
-			return new ContainerStearilliumCrafter(player,
-					(TEStearilliumCrafter) tileEntity);
+			return new ContainerStearilliumCrafter(player, (TEStearilliumCrafter) tileEntity);
 		}
 		if (tileEntity instanceof TEZoroChest) {
 			return new ContainerZoroChest(player, (TEZoroChest) tileEntity);

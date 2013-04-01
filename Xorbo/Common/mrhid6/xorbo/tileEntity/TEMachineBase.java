@@ -13,8 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 
-public abstract class TEMachineBase extends TEBlock implements ISidedInventory,
-		IPacketXorHandler {
+public abstract class TEMachineBase extends TEBlock implements ISidedInventory, IPacketXorHandler {
 
 	protected static int descPacketId;
 
@@ -53,8 +52,7 @@ public abstract class TEMachineBase extends TEBlock implements ISidedInventory,
 		payload.floatPayload[0] = processCur;
 		payload.floatPayload[1] = processEnd;
 
-		PacketTile packet = new PacketTile(descPacketId, xCoord, yCoord,
-				zCoord, payload);
+		PacketTile packet = new PacketTile(descPacketId, xCoord, yCoord, zCoord, payload);
 		return packet.getPacket();
 	}
 
@@ -92,8 +90,7 @@ public abstract class TEMachineBase extends TEBlock implements ISidedInventory,
 		worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
 
 		if (Utils.isServerWorld()) {
-			PacketUtils.sendToPlayers(getDescriptionPacket(), worldObj, xCoord,
-					yCoord, zCoord, 192);
+			PacketUtils.sendToPlayers(getDescriptionPacket(), worldObj, xCoord, yCoord, zCoord, 192);
 		}
 
 	}
@@ -124,8 +121,7 @@ public abstract class TEMachineBase extends TEBlock implements ISidedInventory,
 
 	public void sendGuiNetworkData( Container container, ICrafting iCrafting ) {
 		if (((iCrafting instanceof EntityPlayer)) && (Utils.isServerWorld())) {
-			PacketUtils.sendToPlayer((EntityPlayer) iCrafting,
-					getDescriptionPacket());
+			PacketUtils.sendToPlayer((EntityPlayer) iCrafting, getDescriptionPacket());
 		}
 	}
 

@@ -12,14 +12,12 @@ public class ContainerStearilliumCrafter extends ContainerXorbo {
 
 	protected TEStearilliumCrafter tileEntity;
 
-	public ContainerStearilliumCrafter( EntityPlayer inventory,
-			TEStearilliumCrafter te ) {
+	public ContainerStearilliumCrafter( EntityPlayer inventory, TEStearilliumCrafter te ) {
 		tileEntity = te;
 
 		for (int r = 0; r < 3; r++) {
 			for (int c = 0; c < 3; c++) {
-				this.addSlotToContainer(new DummySlot(tileEntity, r * 3 + c,
-						8 + c * 18, 20 + r * 18, 1));
+				this.addSlotToContainer(new DummySlot(tileEntity, r * 3 + c, 8 + c * 18, 20 + r * 18, 1));
 			}
 		}
 
@@ -38,15 +36,13 @@ public class ContainerStearilliumCrafter extends ContainerXorbo {
 		});
 		for (int r = 0; r < 3; r++) {
 			for (int c = 0; c < 3; c++) {
-				this.addSlotToContainer(new Slot(tileEntity, r * 3 + c + 10,
-						116 + c * 18, 20 + r * 18));
+				this.addSlotToContainer(new Slot(tileEntity, r * 3 + c + 10, 116 + c * 18, 20 + r * 18));
 			}
 		}
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
-				addSlotToContainer(new Slot(inventory.inventory, j + i * 9 + 9,
-						8 + j * 18, 95 + i * 18));
+				addSlotToContainer(new Slot(inventory.inventory, j + i * 9 + 9, 8 + j * 18, 95 + i * 18));
 			}
 		}
 
@@ -93,10 +89,7 @@ public class ContainerStearilliumCrafter extends ContainerXorbo {
 					if (!mergeItemStack(stackInSlot, invPlayer, invFull, false)) {
 						return null;
 					}
-				} else if ((i >= invPlayer)
-						&& (i < invFull)
-						&& (!mergeItemStack(stackInSlot, invTile, invPlayer,
-								false))) {
+				} else if ((i >= invPlayer) && (i < invFull) && (!mergeItemStack(stackInSlot, invTile, invPlayer, false))) {
 					return null;
 				}
 			} else if (!mergeItemStack(stackInSlot, invTile, invFull, false)) {

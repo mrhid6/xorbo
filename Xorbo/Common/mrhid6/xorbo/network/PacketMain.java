@@ -41,9 +41,7 @@ public abstract class PacketMain {
 		return packetType;
 	}
 
-	public abstract void readData( DataInputStream paramDataInputStream )
-			throws IOException;
+	public abstract void readData( DataInputStream paramDataInputStream ) throws IOException;
 
-	public abstract void writeData( DataOutputStream paramDataOutputStream )
-			throws IOException;
+	public abstract void writeData( DataOutputStream paramDataOutputStream ) throws IOException;
 }

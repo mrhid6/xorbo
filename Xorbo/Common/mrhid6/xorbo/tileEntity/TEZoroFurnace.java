@@ -89,8 +89,7 @@ public class TEZoroFurnace extends TEMachineBase implements IXorGridObj {
 				findGrid();
 
 				if (getGrid() != null) {
-					System.out.println("found Grid zoroFurnace"
-							+ (worldObj.isRemote));
+					System.out.println("found Grid zoroFurnace" + (worldObj.isRemote));
 					getGrid().addMachine(this);
 					sendUpdatePacket(Side.CLIENT);
 				} else {

@@ -49,8 +49,7 @@ public class TEZoroController extends TEMachineBase implements IXorGridObj {
 		breakingblock = true;
 
 		worldObj.setBlock(xCoord, yCoord, zCoord, 0);
-		EntityItem entityitem = new EntityItem(worldObj, xCoord, yCoord,
-				zCoord, new ItemStack(ModBlocks.zoroController, 1));
+		EntityItem entityitem = new EntityItem(worldObj, xCoord, yCoord, zCoord, new ItemStack(ModBlocks.zoroController, 1));
 
 		entityitem.lifespan = 5200;
 		entityitem.delayBeforeCanPickup = 10;
@@ -155,16 +154,13 @@ public class TEZoroController extends TEMachineBase implements IXorGridObj {
 			int y1 = yCoord + Config.SIDE_COORD_MOD[i][1];
 			int z1 = zCoord + Config.SIDE_COORD_MOD[i][2];
 
-			GridPower gridCheck = GridManager
-					.getGridAt(x1, y1, z1, worldObj, i);
+			GridPower gridCheck = GridManager.getGridAt(x1, y1, z1, worldObj, i);
 
 			if (myGrid != null && gridCheck != null) {
 
-				if (gridCheck.gridIndex < myGrid.gridIndex
-						&& !(gridCheck.gridIndex == -1)) {
+				if (gridCheck.gridIndex < myGrid.gridIndex && !(gridCheck.gridIndex == -1)) {
 					if (!canBeAdjacent()) {
-						myGrid.removeController(worldObj, xCoord, yCoord,
-								zCoord);
+						myGrid.removeController(worldObj, xCoord, yCoord, zCoord);
 						breakController();
 						return true;
 					}
@@ -186,8 +182,7 @@ public class TEZoroController extends TEMachineBase implements IXorGridObj {
 
 			myGrid.setController(this);
 
-		} else if (getGrid() != null
-				&& !getGrid().hasController(worldObj, xCoord, yCoord, zCoord)) {
+		} else if (getGrid() != null && !getGrid().hasController(worldObj, xCoord, yCoord, zCoord)) {
 
 			if (!canBeAdjacent()) {
 				breakController();
@@ -231,8 +226,7 @@ public class TEZoroController extends TEMachineBase implements IXorGridObj {
 	@Override
 	public void sendGuiNetworkData( Container container, ICrafting iCrafting ) {
 		if (((iCrafting instanceof EntityPlayer)) && (Utils.isServerWorld())) {
-			PacketUtils.sendToPlayer((EntityPlayer) iCrafting,
-					getDescriptionPacket());
+			PacketUtils.sendToPlayer((EntityPlayer) iCrafting, getDescriptionPacket());
 		}
 	}
 
@@ -257,8 +251,7 @@ public class TEZoroController extends TEMachineBase implements IXorGridObj {
 		}
 
 		if (update || updateGridCheck) {
-			GridManager.sendUpdatePacket(Side.CLIENT, worldObj, xCoord, yCoord,
-					zCoord, gridindex);
+			GridManager.sendUpdatePacket(Side.CLIENT, worldObj, xCoord, yCoord, zCoord, gridindex);
 			sendUpdatePacket(Side.CLIENT);
 		}
 

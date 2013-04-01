@@ -464,8 +464,7 @@ public class ModelTitan extends ModelBase {
 	}
 
 	@Override
-	public void render( Entity par1Entity, float par2, float par3, float par4,
-			float par5, float par6, float f5 ) {
+	public void render( Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float f5 ) {
 		super.render(par1Entity, par2, par3, par4, par5, par6, f5);
 		this.setRotationAngles(par2, par3, par4, par5, par6, f5, par1Entity);
 
@@ -542,8 +541,7 @@ public class ModelTitan extends ModelBase {
 	}
 
 	@Override
-	public void setRotationAngles( float par1, float par2, float par3,
-			float par4, float par5, float par6, Entity par7Entity ) {
+	public void setRotationAngles( float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity ) {
 		// System.out.println("rotationangles");
 
 		/*
@@ -554,11 +552,9 @@ public class ModelTitan extends ModelBase {
 		 * this.bipedLeftLeg.rotateAngleY = 0.0F;
 		 */
 
-		float f1 = (float) (par7Entity.motionX + par7Entity.motionX
-				* par7Entity.motionZ + par7Entity.motionZ);
+		float f1 = (float) (par7Entity.motionX + par7Entity.motionX * par7Entity.motionZ + par7Entity.motionZ);
 
-		lygodica.rotateAngleX = MathHelper
-				.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2 + f1;
+		lygodica.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2 + f1;
 		// lygodica.rotateAngleX = (float) ((par2-par7Entity.motionX)%0.5);
 	}
 

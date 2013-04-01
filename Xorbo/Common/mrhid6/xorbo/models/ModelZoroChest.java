@@ -15,8 +15,7 @@ public class ModelZoroChest extends ModelBase {
 	public ModelRenderer chestKnob;
 
 	/** The chest lid in the chest's model. */
-	public ModelRenderer chestLid = (new ModelRenderer(this, 0, 0))
-			.setTextureSize(64, 64);
+	public ModelRenderer chestLid = (new ModelRenderer(this, 0, 0)).setTextureSize(64, 64);
 
 	public ModelZoroChest() {
 		chestLid.addBox(0.0F, -5.0F, -16.0F, 16, 5, 16, 0.0F);

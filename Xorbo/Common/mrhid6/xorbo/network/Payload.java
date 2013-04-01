@@ -16,8 +16,7 @@ public class Payload {
 	public Payload() {
 	}
 
-	public Payload( int boolSize, int byteSize, int intSize, int floatSize,
-			int stringSize ) {
+	public Payload( int boolSize, int byteSize, int intSize, int floatSize, int stringSize ) {
 		boolPayload = new boolean[boolSize];
 		bytePayload = new byte[byteSize];
 		intPayload = new int[intSize];
@@ -52,11 +51,7 @@ public class Payload {
 
 	@Override
 	public String toString() {
-		return "Payload [boolPayload=" + Arrays.toString(boolPayload)
-				+ ", bytePayload=" + Arrays.toString(bytePayload)
-				+ ", intPayload=" + Arrays.toString(intPayload)
-				+ ", floatPayload=" + Arrays.toString(floatPayload)
-				+ ", stringPayload=" + Arrays.toString(stringPayload) + "]";
+		return "Payload [boolPayload=" + Arrays.toString(boolPayload) + ", bytePayload=" + Arrays.toString(bytePayload) + ", intPayload=" + Arrays.toString(intPayload) + ", floatPayload=" + Arrays.toString(floatPayload) + ", stringPayload=" + Arrays.toString(stringPayload) + "]";
 	}
 
 	public void writePayloadData( DataOutputStream data ) throws IOException {

@@ -49,13 +49,11 @@ public class Xorbo {
 
 	}
 
-	public static void registerEntityEgg( Class<? extends Entity> entity,
-			int primaryColor, int secondaryColor ) {
+	public static void registerEntityEgg( Class<? extends Entity> entity, int primaryColor, int secondaryColor ) {
 		int id = getUniqueEntitId();
 
 		EntityList.IDtoClassMapping.put(id, entity);
-		EntityList.entityEggs.put(id, new EntityEggInfo(id, primaryColor,
-				secondaryColor));
+		EntityList.entityEggs.put(id, new EntityEggInfo(id, primaryColor, secondaryColor));
 
 	}
 
@@ -65,17 +63,16 @@ public class Xorbo {
 		proxy.registerPacketInformation();
 		ModItems.init();
 		ModBlocks.init();
+		XorRecipes.addRecipes();
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 		GameRegistry.registerWorldGenerator(new WorldGenBase());
 
-		EntityRegistry.registerModEntity(EntityTitan.class, "Titan", 1, this,
-				80, 3, true);
+		EntityRegistry.registerModEntity(EntityTitan.class, "Titan", 1, this, 80, 3, true);
 
 		// EntityRegistry.addSpawn(EntityTitan.class, 10, 2, 4,
 		// EnumCreatureType.creature, BiomeGenBase.plains,BiomeGenBase.forest);
 
-		LanguageRegistry.instance().addStringLocalization(
-				"entity.Xorbo.Titan.name", "Titan");
+		LanguageRegistry.instance().addStringLocalization("entity.Xorbo.Titan.name", "Titan");
 		registerEntityEgg(EntityTitan.class, 0xff0000, 0x0000ff);
 	}
 

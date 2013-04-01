@@ -15,8 +15,7 @@ public class GuiZoroFurnace extends GuiMain {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer( float par1, int par2,
-			int par3 ) {
+	protected void drawGuiContainerBackgroundLayer( float par1, int par2, int par3 ) {
 		// draw your Gui here, only thing you need to change is the path
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -38,9 +37,7 @@ public class GuiZoroFurnace extends GuiMain {
 	@Override
 	protected void drawGuiContainerForegroundLayer( int param1, int param2 ) {
 		fontRenderer.drawString("Zoro Furnace", 50, 6, 4210752);
-		fontRenderer.drawString(
-				StatCollector.translateToLocal("container.inventory"), 8,
-				ySize - 96 + 2, 4210752);
+		fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
 		super.drawGuiContainerForegroundLayer(param1, param2);
 	}
 
@@ -54,8 +51,7 @@ public class GuiZoroFurnace extends GuiMain {
 		}
 
 		if ((mousex >= 42) && (mousex < 144) && (mousey >= 61) && (mousey < 71)) {
-			drawToolTip("" + (int) grid.getEnergyStored() + " / "
-					+ (int) grid.getMaxEnergy() + " MJ");
+			drawToolTip("" + (int) grid.getEnergyStored() + " / " + (int) grid.getMaxEnergy() + " MJ");
 		}
 
 	}

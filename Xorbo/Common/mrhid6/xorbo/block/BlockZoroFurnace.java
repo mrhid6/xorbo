@@ -13,8 +13,7 @@ public class BlockZoroFurnace extends BlockMachine {
 
 	public Icon[] icons;
 
-	public BlockZoroFurnace( int id, String textureName, String name,
-			boolean craftable ) {
+	public BlockZoroFurnace( int id, String textureName, String name, boolean craftable ) {
 		super(id, textureName, name, craftable);
 
 		this.setResistance(6.0F);
@@ -40,8 +39,7 @@ public class BlockZoroFurnace extends BlockMachine {
 	}
 
 	@Override
-	public Icon getBlockTexture( IBlockAccess par1IBlockAccess, int x, int y,
-			int z, int blockSide ) {
+	public Icon getBlockTexture( IBlockAccess par1IBlockAccess, int x, int y, int z, int blockSide ) {
 		if (blockSide == 1) {
 			return icons[0];
 		} else if (blockSide == 0) {
