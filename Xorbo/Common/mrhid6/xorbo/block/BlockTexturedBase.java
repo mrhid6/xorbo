@@ -6,25 +6,23 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public abstract class BlockTexturedBase extends BlockContainer{
+public abstract class BlockTexturedBase extends BlockContainer {
 
+	public Icon[] icons;
 	private String name;
 	protected String textureName;
-	public Icon[] icons;
 
-	public BlockTexturedBase(int id, String texture, String name, boolean craftable) {
+	public BlockTexturedBase( int id, String texture, String name,
+			boolean craftable ) {
 		super(id, Material.ground);
-		
-		this.textureName = texture.toLowerCase();
+
+		textureName = texture.toLowerCase();
 		this.name = name;
-		if(craftable){
+		if (craftable) {
 			this.setCreativeTab(Config.creativeTabXor);
-		}else{
+		} else {
 			this.setCreativeTab(null);
 		}
 		this.setHardness(89.3F);
@@ -32,25 +30,20 @@ public abstract class BlockTexturedBase extends BlockContainer{
 		this.setStepSound(soundMetalFootstep);
 		this.setUnlocalizedName(name);
 	}
-	
-	public String getName(){
-		return this.name;
-	}
-	
-	
-	
-	@Override
-	public void registerIcons(IconRegister iconRegister){
-		this.blockIcon = iconRegister.registerIcon("xorbo:"+textureName);
-	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
+	public TileEntity createNewTileEntity( World world ) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
 
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public void registerIcons( IconRegister iconRegister ) {
+		blockIcon = iconRegister.registerIcon("xorbo:" + textureName);
+	}
 
 }

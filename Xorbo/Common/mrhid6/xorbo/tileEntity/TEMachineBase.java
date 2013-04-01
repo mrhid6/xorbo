@@ -1,103 +1,106 @@
 package mrhid6.xorbo.tileEntity;
 
 import mrhid6.xorbo.Utils;
-import mrhid6.xorbo.block.ModBlocks;
 import mrhid6.xorbo.interfaces.IPacketXorHandler;
 import mrhid6.xorbo.network.PacketTile;
 import mrhid6.xorbo.network.PacketUtils;
 import mrhid6.xorbo.network.Payload;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 
-public abstract class TEMachineBase extends TEBlock implements ISidedInventory, IPacketXorHandler
-{
-	public ItemStack[] processInv;
-	byte facing;
-	byte[] sideConfig;
-	public boolean wasActive;
-	protected float processCur;
-	protected float processEnd;
+public abstract class TEMachineBase extends TEBlock implements ISidedInventory,
+		IPacketXorHandler {
+
 	protected static int descPacketId;
 
-	public TEMachineBase()
-	{
-
-	}
-	
-	public static boolean setDescPacketId(int id){
+	public static boolean setDescPacketId( int id ) {
 		if (id == 0) {
 			return false;
 		}
 		descPacketId = id;
 		return true;
 	}
-	
+
+	byte facing;
+	protected float processCur;
+	protected float processEnd;
+	public ItemStack[] processInv;
+
+	public boolean wasActive;
+
+	public TEMachineBase() {
+
+	}
+
+	@Override
+	public void closeChest() {
+	}
+
 	@Override
 	public Packet getDescriptionPacket() {
 		Payload payload = new Payload(2, 0, 1, 2, 0);
 
-	    payload.boolPayload[0] = this.isActive;
-	    payload.boolPayload[1] = this.transmitpower;
-	    
-	    payload.intPayload[0] = this.gridindex;
-	    
-		payload.floatPayload[0] = this.processCur;
-		payload.floatPayload[1] = this.processEnd;
+		payload.boolPayload[0] = isActive;
+		payload.boolPayload[1] = transmitpower;
 
-		PacketTile packet = new PacketTile(descPacketId,this.xCoord,this.yCoord,this.zCoord,payload);
+		payload.intPayload[0] = gridindex;
+
+		payload.floatPayload[0] = processCur;
+		payload.floatPayload[1] = processEnd;
+
+		PacketTile packet = new PacketTile(descPacketId, xCoord, yCoord,
+				zCoord, payload);
 		return packet.getPacket();
 	}
-	
-	@Override
-	public void handleTilePacket(PacketTile packet) {
-
-		this.isActive = packet.payload.boolPayload[0];
-		this.transmitpower = packet.payload.boolPayload[0];
-
-		this.processCur = packet.payload.floatPayload[0];
-		this.processEnd = packet.payload.floatPayload[1];
-		
-		this.gridindex = packet.payload.intPayload[0];
-		
-		if (Utils.isClientWorld()) {
-			this.processCur = packet.payload.floatPayload[0];
-			this.processEnd = packet.payload.floatPayload[1];
-			this.gridindex = packet.payload.intPayload[0];
-			//System.out.println(gridindex);
-		}
-		
-		
-
-		this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
-		this.worldObj.updateAllLightTypes(this.xCoord, this.yCoord, this.zCoord);
-
-		if (Utils.isServerWorld())
-			PacketUtils.sendToPlayers(getDescriptionPacket(), this.worldObj, this.xCoord, this.yCoord, this.zCoord, 192);
-
-	}
-
-	public int getScaledProgress(int scale)
-	{
-		if (this.processEnd == 0.0F) {
-			return 0;
-		}
-		return (int)(this.processCur * scale / this.processEnd);
-	}
-
 
 	@Override
-	public int getInventoryStackLimit()
-	{
+	public int getInventoryStackLimit() {
 		return 64;
 	}
 
+	public int getScaledProgress( int scale ) {
+		if (processEnd == 0.0F) {
+			return 0;
+		}
+		return (int) (processCur * scale / processEnd);
+	}
+
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer var1){
-		if (this.worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this){
+	public void handleTilePacket( PacketTile packet ) {
+
+		isActive = packet.payload.boolPayload[0];
+		transmitpower = packet.payload.boolPayload[0];
+
+		processCur = packet.payload.floatPayload[0];
+		processEnd = packet.payload.floatPayload[1];
+
+		gridindex = packet.payload.intPayload[0];
+
+		if (Utils.isClientWorld()) {
+			processCur = packet.payload.floatPayload[0];
+			processEnd = packet.payload.floatPayload[1];
+			gridindex = packet.payload.intPayload[0];
+			// System.out.println(gridindex);
+		}
+
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
+
+		if (Utils.isServerWorld()) {
+			PacketUtils.sendToPlayers(getDescriptionPacket(), worldObj, xCoord,
+					yCoord, zCoord, 192);
+		}
+
+	}
+
+	@Override
+	public boolean isUseableByPlayer( EntityPlayer var1 ) {
+		if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this) {
 			return false;
 		}
 
@@ -105,26 +108,32 @@ public abstract class TEMachineBase extends TEBlock implements ISidedInventory, 
 	}
 
 	@Override
-	public void openChest(){}
+	public void openChest() {
+	}
 
 	@Override
-	public void closeChest(){}
-
-
-	public void readFromNBT(NBTTagCompound data)
-	{
+	public void readFromNBT( NBTTagCompound data ) {
 		super.readFromNBT(data);
-
-		this.processCur = data.getFloat("process.cur");
-		this.processEnd = data.getFloat("process.end");
+		processCur = data.getFloat("process.cur");
+		processEnd = data.getFloat("process.end");
 
 	}
 
+	public void receiveGuiNetworkData( int i, int j ) {
+	}
 
-	public void writeToNBT(NBTTagCompound data){
+	public void sendGuiNetworkData( Container container, ICrafting iCrafting ) {
+		if (((iCrafting instanceof EntityPlayer)) && (Utils.isServerWorld())) {
+			PacketUtils.sendToPlayer((EntityPlayer) iCrafting,
+					getDescriptionPacket());
+		}
+	}
+
+	@Override
+	public void writeToNBT( NBTTagCompound data ) {
 		super.writeToNBT(data);
 
-		data.setFloat("process.cur", this.processCur);
-		data.setFloat("process.end", this.processEnd);
+		data.setFloat("process.cur", processCur);
+		data.setFloat("process.end", processEnd);
 	}
 }

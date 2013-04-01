@@ -3,19 +3,19 @@ package mrhid6.xorbo.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelTLBase extends ModelBase{
-	//fields
+public class ModelTLBase extends ModelBase {
+
+	ModelRenderer Base;
+	ModelRenderer InnerBox;
+	// fields
 	ModelRenderer Leg1;
 	ModelRenderer Leg2;
 	ModelRenderer Leg3;
 	ModelRenderer Leg4;
-	ModelRenderer Base;
 	ModelRenderer TopBase;
 	ModelRenderer TopTop;
-	ModelRenderer InnerBox;
 
-	public ModelTLBase()
-	{
+	public ModelTLBase() {
 		textureWidth = 128;
 		textureHeight = 64;
 
@@ -69,7 +69,7 @@ public class ModelTLBase extends ModelBase{
 		setRotation(InnerBox, 0F, 0F, 0F);
 	}
 
-	public void render(){
+	public void render() {
 		Leg1.render(0.0625F);
 		Leg2.render(0.0625F);
 		Leg3.render(0.0625F);
@@ -80,8 +80,7 @@ public class ModelTLBase extends ModelBase{
 		InnerBox.render(0.0625F);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation( ModelRenderer model, float x, float y, float z ) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;

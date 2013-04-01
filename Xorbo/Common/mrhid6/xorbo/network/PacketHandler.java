@@ -2,7 +2,7 @@ package mrhid6.xorbo.network;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
-
+import mrhid6.xorbo.GridManager;
 import mrhid6.xorbo.interfaces.IPacketXorHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -13,41 +13,57 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 
-public class PacketHandler implements IPacketHandler{
-	
+public class PacketHandler implements IPacketHandler {
+
 	private static int packetIdCounter = 0;
+
+	public static int getAvailablePacketId() {
+		return ++packetIdCounter;
+	}
+
 	@Override
-	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
-		DataInputStream data = new DataInputStream(new ByteArrayInputStream(packet.data));
+	public void onPacketData( INetworkManager manager,
+			Packet250CustomPayload packet, Player player ) {
+		DataInputStream data = new DataInputStream(new ByteArrayInputStream(
+				packet.data));
 		try {
 			int id = data.read();
 			int type = data.read();
 			if (type == 0) {
-				PacketTile tilePacket = new PacketTile(id, (player instanceof EntityPlayerMP) ? (EntityPlayerMP)player : null);
+				PacketTile tilePacket = new PacketTile(
+						id,
+						(player instanceof EntityPlayerMP) ? (EntityPlayerMP) player
+								: null);
 				tilePacket.readData(data);
 
-				World world = ((EntityPlayer)player).worldObj;
+				World world = ((EntityPlayer) player).worldObj;
 				if (!tilePacket.targetExists(world)) {
-					//System.out.println("tile was not exsits!");
+					// System.out.println("tile was not exsits!");
 					return;
 				}
 				TileEntity tile = tilePacket.getTarget(world);
 				if (!(tile instanceof IPacketXorHandler)) {
-					//System.out.println("tile was not implementing!");
+					// System.out.println("tile was not implementing!");
 					return;
 				}
-				//System.out.println("handling data");
-				((IPacketXorHandler)tile).handleTilePacket(tilePacket);
+				// System.out.println("handling data");
+				((IPacketXorHandler) tile).handleTilePacket(tilePacket);
 			}
-		}
-		catch (Exception e) {
+
+			if (type == 1) {
+
+				PacketGrid tilePacket = new PacketGrid(
+						id,
+						(player instanceof EntityPlayerMP) ? (EntityPlayerMP) player
+								: null);
+				tilePacket.readData(data);
+
+				GridManager.handleGridPacket(id, tilePacket);
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-	}
-
-	public static int getAvailablePacketId(){
-		return ++packetIdCounter;
 	}
 
 }

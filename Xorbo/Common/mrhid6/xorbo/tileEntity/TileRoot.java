@@ -5,23 +5,23 @@ import mrhid6.xorbo.network.PacketUtils;
 import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.relauncher.Side;
 
-public abstract class TileRoot extends TileEntity{
+public abstract class TileRoot extends TileEntity {
 
 	public boolean transmitpower = false;
-	
-	public void sendUpdatePacket(Side side){
-		if ((Utils.isServerWorld()) && (side == Side.CLIENT)) {
-			PacketUtils.sendToPlayers(getDescriptionPacket(), this.worldObj, this.xCoord, this.yCoord, this.zCoord, 192);
 
-			this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
-			this.worldObj.updateAllLightTypes(this.xCoord, this.yCoord, this.zCoord);
-		}
-		else if ((Utils.isClientWorld()) && (side == Side.SERVER)) {
+	public void sendUpdatePacket( Side side ) {
+		if ((Utils.isServerWorld()) && (side == Side.CLIENT)) {
+			PacketUtils.sendToPlayers(getDescriptionPacket(), worldObj, xCoord,
+					yCoord, zCoord, 192);
+
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
+		} else if ((Utils.isClientWorld()) && (side == Side.SERVER)) {
 			PacketUtils.sendToServer(getDescriptionPacket());
 		}
 	}
 
-	public boolean setTransmitInfo(boolean disable){
+	public boolean setTransmitInfo( boolean disable ) {
 		transmitpower = disable;
 		sendUpdatePacket(Side.SERVER);
 		return true;

@@ -3,15 +3,15 @@ package mrhid6.xorbo.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelTSun extends ModelBase{
-	//fields
+public class ModelTSun extends ModelBase {
+
+	ModelRenderer Laser1, Laser2, Laser3, Laser4, Laser5, Laser6;
+	// fields
 	ModelRenderer Shape1;
+
 	ModelRenderer Shape2;
 
-	ModelRenderer Laser1,Laser2,Laser3,Laser4,Laser5,Laser6;
-
-	public ModelTSun()
-	{
+	public ModelTSun() {
 		textureWidth = 128;
 		textureHeight = 64;
 
@@ -66,42 +66,41 @@ public class ModelTSun extends ModelBase{
 		setRotation(Laser6, 0F, 0F, 0F);
 	}
 
-	public void render()
-	{
+	public void render() {
 		Shape1.render(0.0625F);
-		//renderLasers(sides, active);
+		// renderLasers(sides, active);
 	}
 
-	public void renderInner(){
+	public void renderInner() {
 		Shape2.render(0.0625F);
 	}
-	
-	public void renderLasers(boolean[] sides, boolean active){
-		if(!active)
+
+	public void renderLasers( boolean[] sides, boolean active ) {
+		if (!active) {
 			return;
-		
-		if(sides[0]){
+		}
+
+		if (sides[0]) {
 			Laser4.render(0.0625F);
 		}
-		if(sides[1]){
+		if (sides[1]) {
 			Laser3.render(0.0625F);
 		}
-		if(sides[2]){
+		if (sides[2]) {
 			Laser6.render(0.0625F);
 		}
-		if(sides[3]){
+		if (sides[3]) {
 			Laser5.render(0.0625F);
 		}
-		if(sides[4]){
+		if (sides[4]) {
 			Laser2.render(0.0625F);
 		}
-		if(sides[5]){
+		if (sides[5]) {
 			Laser1.render(0.0625F);
 		}
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation( ModelRenderer model, float x, float y, float z ) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;

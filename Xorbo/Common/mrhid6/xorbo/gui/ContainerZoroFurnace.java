@@ -9,33 +9,50 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ContainerZoroFurnace extends ContainerXorbo
-{
+public class ContainerZoroFurnace extends ContainerXorbo {
+
 	public float energy = -1;
 	protected TEZoroFurnace tileEntity;
 
-	public ContainerZoroFurnace(EntityPlayer inventory, TEZoroFurnace te)
-	{
+	public ContainerZoroFurnace( EntityPlayer inventory, TEZoroFurnace te ) {
 		tileEntity = te;
-		addSlotToContainer(new Slot(this.tileEntity, 0, 56, 24));
-		addSlotToContainer(new SlotFurnace(inventory, this.tileEntity, 1, 116, 33));
+		addSlotToContainer(new Slot(tileEntity, 0, 56, 24));
+		addSlotToContainer(new SlotFurnace(inventory, tileEntity, 1, 116, 33));
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
-				addSlotToContainer(new Slot(inventory.inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+				addSlotToContainer(new Slot(inventory.inventory, j + i * 9 + 9,
+						8 + j * 18, 84 + i * 18));
 			}
 		}
 
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < 9; i++) {
 			addSlotToContainer(new Slot(inventory.inventory, i, 8 + i * 18, 142));
+		}
 	}
 
-	public ItemStack transferStackInSlot(EntityPlayer player, int i)
-	{
-		ItemStack itemstack = null;
-		Slot slot = (Slot)this.inventorySlots.get(i);
+	@Override
+	public boolean canInteractWith( EntityPlayer player ) {
+		return tileEntity.isUseableByPlayer(player);
+	}
 
-		int invTile = this.tileEntity.inventory.length;
+	@Override
+	public void detectAndSendChanges() {
+		super.detectAndSendChanges();
+
+		for (int i = 0; i < crafters.size(); i++) {
+			ICrafting icrafting = (ICrafting) crafters.get(i);
+
+			tileEntity.sendGuiNetworkData(this, icrafting);
+		}
+	}
+
+	@Override
+	public ItemStack transferStackInSlot( EntityPlayer player, int i ) {
+		ItemStack itemstack = null;
+		Slot slot = (Slot) inventorySlots.get(i);
+
+		int invTile = tileEntity.inventory.length;
 		int invPlayer = invTile + 27;
 		int invFull = invTile + 36;
 
@@ -44,28 +61,31 @@ public class ContainerZoroFurnace extends ContainerXorbo
 			itemstack = stackInSlot.copy();
 
 			if (i == 1) {
-				if (!mergeItemStack(stackInSlot, invTile, invFull, true))
+				if (!mergeItemStack(stackInSlot, invTile, invFull, true)) {
 					return null;
-			}
-			else if (i != 0) {
-				if (this.tileEntity.getResultFor(stackInSlot) != null) {
-					if (!mergeItemStack(stackInSlot, 0, 1, false))
-						return null;
 				}
-				else if ((i >= invTile) && (i < invPlayer)) {
-					if (!mergeItemStack(stackInSlot, invPlayer, invFull, false))
+			} else if (i != 0) {
+				if (tileEntity.getResultFor(stackInSlot) != null) {
+					if (!mergeItemStack(stackInSlot, 0, 1, false)) {
 						return null;
-				}
-				else if ((i >= invPlayer) && (i < invFull) && (!mergeItemStack(stackInSlot, invTile, invPlayer, false)))
+					}
+				} else if ((i >= invTile) && (i < invPlayer)) {
+					if (!mergeItemStack(stackInSlot, invPlayer, invFull, false)) {
+						return null;
+					}
+				} else if ((i >= invPlayer)
+						&& (i < invFull)
+						&& (!mergeItemStack(stackInSlot, invTile, invPlayer,
+								false))) {
 					return null;
-			}
-			else if (!mergeItemStack(stackInSlot, invTile, invFull, false)) {
+				}
+			} else if (!mergeItemStack(stackInSlot, invTile, invFull, false)) {
 				return null;
 			}
 
-			if (stackInSlot.stackSize == 0)
-				slot.putStack((ItemStack)null);
-			else {
+			if (stackInSlot.stackSize == 0) {
+				slot.putStack((ItemStack) null);
+			} else {
 				slot.onSlotChanged();
 			}
 
@@ -78,33 +98,10 @@ public class ContainerZoroFurnace extends ContainerXorbo
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer player)
-	{
-		return tileEntity.isUseableByPlayer(player);
-	}
-
-	@Override
-	public void detectAndSendChanges()
-	{
-		super.detectAndSendChanges();
-
-		for (int i = 0; i < this.crafters.size(); i++)
-		{
-			ICrafting icrafting = (ICrafting)this.crafters.get(i);
-			
-			tileEntity.sendGuiNetworkData(this, icrafting);
-		}
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateProgressBar(int i, int j)
-	{
+	public void updateProgressBar( int i, int j ) {
 		super.updateProgressBar(i, j);
 		tileEntity.receiveGuiNetworkData(i, j);
 	}
 
-	
-	
-	
 }

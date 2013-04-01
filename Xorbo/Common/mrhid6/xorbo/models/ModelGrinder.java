@@ -1,15 +1,15 @@
-package mrhid6.xorbo.models ;
+package mrhid6.xorbo.models;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelGrinder extends ModelBase{
-	//fields
-	ModelRenderer Shape1,Shape2;
-	ModelRenderer blade1,blade2,blade3,blade4;
+public class ModelGrinder extends ModelBase {
 
-	public ModelGrinder()
-	{
+	ModelRenderer blade1, blade2, blade3, blade4;
+	// fields
+	ModelRenderer Shape1, Shape2;
+
+	public ModelGrinder() {
 		textureWidth = 128;
 		textureHeight = 64;
 
@@ -21,7 +21,7 @@ public class ModelGrinder extends ModelBase{
 		setRotation(Shape1, 0F, 0F, 0F);
 		Shape2 = new ModelRenderer(this, 0, 32);
 		Shape2.addBox(-8F, 0F, -8F, 16, 0, 16);
-		Shape2.setRotationPoint(0F,23.5F, 0F);
+		Shape2.setRotationPoint(0F, 23.5F, 0F);
 		Shape2.setTextureSize(128, 64);
 		Shape2.mirror = true;
 		setRotation(Shape2, 0F, 0F, 0F);
@@ -51,20 +51,19 @@ public class ModelGrinder extends ModelBase{
 		setRotation(blade4, 0F, 0F, 0F);
 	}
 
-	public void render(boolean isActive){
+	public void render( boolean isActive ) {
 		Shape1.render(0.0625F);
 		Shape2.render(0.0625F);
 	}
 
-	public void renderBlades(){
+	public void renderBlades() {
 		blade1.render(0.0625F);
 		blade2.render(0.0625F);
 		blade3.render(0.0625F);
 		blade4.render(0.0625F);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation( ModelRenderer model, float x, float y, float z ) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;

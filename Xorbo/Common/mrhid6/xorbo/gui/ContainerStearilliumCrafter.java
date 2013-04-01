@@ -1,50 +1,82 @@
 package mrhid6.xorbo.gui;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import mrhid6.xorbo.tileEntity.TEStearilliumCrafter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class ContainerStearilliumCrafter extends ContainerXorbo
-{
-	public float energy = -1;
+public class ContainerStearilliumCrafter extends ContainerXorbo {
+
 	protected TEStearilliumCrafter tileEntity;
 
-	public ContainerStearilliumCrafter(EntityPlayer inventory, TEStearilliumCrafter te)
-	{
+	public ContainerStearilliumCrafter( EntityPlayer inventory,
+			TEStearilliumCrafter te ) {
 		tileEntity = te;
-		
-		int l;
-        int i1;
-		
-		for (l = 0; l < 3; ++l)
-        {
-            for (i1 = 0; i1 < 3; ++i1)
-            {
-                this.addSlotToContainer(new Slot(this.tileEntity, i1 + l * 3, 30 + i1 * 18, 17 + l * 18));
-            }
-        }
 
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 9; j++) {
-				addSlotToContainer(new Slot(inventory.inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+		for (int r = 0; r < 3; r++) {
+			for (int c = 0; c < 3; c++) {
+				this.addSlotToContainer(new DummySlot(tileEntity, r * 3 + c,
+						8 + c * 18, 20 + r * 18, 1));
 			}
 		}
 
-		for (int i = 0; i < 9; i++)
-			addSlotToContainer(new Slot(inventory.inventory, i, 8 + i * 18, 142));
+		this.addSlotToContainer(new DummySlotOutput(tileEntity, 9, 80, 38){
+
+			@Override
+			public void slotClick( ItemStack stack, int button, boolean shift ) {
+				if (button == 0) {
+					tileEntity.instataCraft();
+				} else {
+					for (int i = 0; i < 9; i++) {
+						tileEntity.setInventorySlotContents(i, null);
+					}
+				}
+			}
+		});
+		for (int r = 0; r < 3; r++) {
+			for (int c = 0; c < 3; c++) {
+				this.addSlotToContainer(new Slot(tileEntity, r * 3 + c + 10,
+						116 + c * 18, 20 + r * 18));
+			}
+		}
+
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 9; j++) {
+				addSlotToContainer(new Slot(inventory.inventory, j + i * 9 + 9,
+						8 + j * 18, 95 + i * 18));
+			}
+		}
+
+		for (int i = 0; i < 9; i++) {
+			addSlotToContainer(new Slot(inventory.inventory, i, 8 + i * 18, 153));
+		}
 	}
 
-	public ItemStack transferStackInSlot(EntityPlayer player, int i)
-	{
-		ItemStack itemstack = null;
-		Slot slot = (Slot)this.inventorySlots.get(i);
+	@Override
+	public boolean canInteractWith( EntityPlayer player ) {
+		return tileEntity.isUseableByPlayer(player);
+	}
 
-		int invTile = this.tileEntity.inventory.length;
+	@Override
+	public void detectAndSendChanges() {
+		super.detectAndSendChanges();
+
+		for (int i = 0; i < crafters.size(); i++) {
+			ICrafting icrafting = (ICrafting) crafters.get(i);
+
+			tileEntity.sendGuiNetworkData(this, icrafting);
+		}
+	}
+
+	@Override
+	public ItemStack transferStackInSlot( EntityPlayer player, int i ) {
+		ItemStack itemstack = null;
+		Slot slot = (Slot) inventorySlots.get(i);
+
+		int invTile = tileEntity.inventory.length;
 		int invPlayer = invTile + 27;
 		int invFull = invTile + 36;
 
@@ -53,28 +85,27 @@ public class ContainerStearilliumCrafter extends ContainerXorbo
 			itemstack = stackInSlot.copy();
 
 			if (i == 1) {
-				if (!mergeItemStack(stackInSlot, invTile, invFull, true))
+				if (!mergeItemStack(stackInSlot, invTile, invFull, true)) {
 					return null;
-			}
-			else if (i != 0) {
-				if (this.tileEntity.getResultFor(stackInSlot) != null) {
-					if (!mergeItemStack(stackInSlot, 0, 1, false))
-						return null;
 				}
-				else if ((i >= invTile) && (i < invPlayer)) {
-					if (!mergeItemStack(stackInSlot, invPlayer, invFull, false))
+			} else if (i != 0) {
+				if ((i >= invTile) && (i < invPlayer)) {
+					if (!mergeItemStack(stackInSlot, invPlayer, invFull, false)) {
 						return null;
-				}
-				else if ((i >= invPlayer) && (i < invFull) && (!mergeItemStack(stackInSlot, invTile, invPlayer, false)))
+					}
+				} else if ((i >= invPlayer)
+						&& (i < invFull)
+						&& (!mergeItemStack(stackInSlot, invTile, invPlayer,
+								false))) {
 					return null;
-			}
-			else if (!mergeItemStack(stackInSlot, invTile, invFull, false)) {
+				}
+			} else if (!mergeItemStack(stackInSlot, invTile, invFull, false)) {
 				return null;
 			}
 
-			if (stackInSlot.stackSize == 0)
-				slot.putStack((ItemStack)null);
-			else {
+			if (stackInSlot.stackSize == 0) {
+				slot.putStack((ItemStack) null);
+			} else {
 				slot.onSlotChanged();
 			}
 
@@ -87,31 +118,10 @@ public class ContainerStearilliumCrafter extends ContainerXorbo
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer player)
-	{
-		return tileEntity.isUseableByPlayer(player);
-	}
-
-	@Override
-	public void detectAndSendChanges()
-	{
-		super.detectAndSendChanges();
-
-		for (int i = 0; i < this.crafters.size(); i++)
-		{
-			ICrafting icrafting = (ICrafting)this.crafters.get(i);
-			
-			tileEntity.sendGuiNetworkData(this, icrafting);
-		}
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateProgressBar(int i, int j)
-	{
+	public void updateProgressBar( int i, int j ) {
 		super.updateProgressBar(i, j);
 		tileEntity.receiveGuiNetworkData(i, j);
 	}
-	
-	
+
 }

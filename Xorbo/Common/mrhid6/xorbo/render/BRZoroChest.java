@@ -1,6 +1,6 @@
 package mrhid6.xorbo.render;
 
-import mrhid6.xorbo.tileEntity.TETriniumConverter;
+import mrhid6.xorbo.tileEntity.TEZoroChest;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class BRTriniumConverter implements ISimpleBlockRenderingHandler {
+public class BRZoroChest implements ISimpleBlockRenderingHandler {
 
 	public static int renderID = RenderingRegistry.getNextAvailableRenderId();
 
@@ -22,10 +22,10 @@ public class BRTriniumConverter implements ISimpleBlockRenderingHandler {
 	public void renderInventoryBlock( Block block, int metadata, int modelID,
 			RenderBlocks renderer ) {
 
-		GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F);
+		GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		TileEntityRenderer.instance.renderTileEntityAt(
-				new TETriniumConverter(), 0.0D, 0.0D, 0.0D, 0.0F);
+		TileEntityRenderer.instance.renderTileEntityAt(new TEZoroChest(), 0.0D,
+				0.0D, 0.0D, 0.0F);
 		GL11.glEnable(32826);
 
 	}

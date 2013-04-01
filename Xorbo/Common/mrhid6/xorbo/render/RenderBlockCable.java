@@ -1,72 +1,91 @@
 package mrhid6.xorbo.render;
 
-import org.lwjgl.opengl.GL11;
-
+import mrhid6.xorbo.GridManager;
+import mrhid6.xorbo.GridPower;
 import mrhid6.xorbo.tileEntity.TECableBase;
-import mrhid6.xorbo.tileEntity.TETriniumConverter;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class RenderBlockCable implements ISimpleBlockRenderingHandler{
+public class RenderBlockCable implements ISimpleBlockRenderingHandler {
 
 	public static int renderId;
 
-	public RenderBlockCable(){
+	public RenderBlockCable() {
 		renderId = RenderingRegistry.getNextAvailableRenderId();
 	}
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-		
+	public int getRenderId() {
+		return renderId;
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-		
+	public void renderInventoryBlock( Block block, int metadata, int modelID,
+			RenderBlocks renderer ) {
+
+	}
+
+	@Override
+	public boolean renderWorldBlock( IBlockAccess world, int x, int y, int z,
+			Block block, int modelId, RenderBlocks renderer ) {
+
 		TileEntity te = world.getBlockTileEntity(x, y, z);
-		if(!(te instanceof TECableBase)) return true;
+		if (!(te instanceof TECableBase)) {
+			return true;
+		}
 
-		TECableBase cable = (TECableBase)te;
+		TECableBase cable = (TECableBase) te;
 
-		float th = (float)cable.getCableThickness();
+		float th = (float) cable.getCableThickness();
 		float sp = (1.0F - th) / 2.0F;
 
 		Tessellator tessellator = Tessellator.instance;
 		int connectivity = 0;
 		int renderSide = 0;
 
-		Icon texture = block.getBlockTexture(world, x, y, z, 0);
+		Icon texture = null;
 
-		tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
+		GridPower grid = GridManager.getGrid(cable.gridindex);
+
+		if (grid != null && grid.gridIndex != -1) {
+			texture = block.getBlockTexture(world, x, y, z, 1);
+		} else {
+			texture = block.getBlockTexture(world, x, y, z, 0);
+		}
+
+		tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y,
+				z));
 
 		double xD = x;
 		double yD = y;
 		double zD = z;
-		
+
 		int mask = 1;
 
-		for (int i = 0;i<6;i++) {
+		for (int i = 0; i < 6; i++) {
 
 			TileEntity neighbor = null;
 
-			int[] coords = { x,y,z };
+			int[] coords = { x, y, z };
 
 			coords[(i / 2)] += (i % 2 * 2 - 1);
 
-			if ((cable.worldObj != null) && (cable.worldObj.blockExists(coords[0], coords[1], coords[2]))) {
-				neighbor = cable.worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
+			if ((cable.worldObj != null)
+					&& (cable.worldObj.blockExists(coords[0], coords[1],
+							coords[2]))) {
+				neighbor = cable.worldObj.getBlockTileEntity(coords[0],
+						coords[1], coords[2]);
 			}
 
 			if ((neighbor != null)) {
 
-				if (cable.canInteractRender(neighbor,i)) {
+				if (cable.canInteractRender(neighbor, i)) {
 					connectivity |= mask;
 					renderSide |= mask;
 				}
@@ -89,8 +108,7 @@ public class RenderBlockCable implements ISimpleBlockRenderingHandler{
 			tessellator.setColorOpaque_F(0.6F, 0.6F, 0.6F);
 			renderer.renderNorthFace(block, xD, yD, zD, texture);
 			renderer.renderSouthFace(block, xD, yD, zD, texture);
-		}
-		else if (connectivity == 3) {
+		} else if (connectivity == 3) {
 			block.setBlockBounds(0.0F, sp, sp, 1.0F, sp + th, sp + th);
 			renderer.setRenderBoundsFromBlock(block);
 
@@ -152,8 +170,7 @@ public class RenderBlockCable implements ISimpleBlockRenderingHandler{
 				tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
 				renderer.renderWestFace(block, xD, yD, zD, texture);
 			}
-		}
-		else {
+		} else {
 			if ((connectivity & 0x1) == 0) {
 				block.setBlockBounds(sp, sp, sp, sp + th, sp + th, sp + th);
 				renderer.setRenderBoundsFromBlock(block);
@@ -301,7 +318,7 @@ public class RenderBlockCable implements ISimpleBlockRenderingHandler{
 				}
 			}
 		}
-		
+
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		renderer.setRenderBoundsFromBlock(block);
 		return true;
@@ -310,11 +327,6 @@ public class RenderBlockCable implements ISimpleBlockRenderingHandler{
 	@Override
 	public boolean shouldRender3DInInventory() {
 		return false;
-	}
-
-	@Override
-	public int getRenderId() {
-		return renderId;
 	}
 
 }

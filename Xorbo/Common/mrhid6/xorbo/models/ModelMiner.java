@@ -3,21 +3,19 @@ package mrhid6.xorbo.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-
 import org.lwjgl.opengl.GL11;
 
-public class ModelMiner extends ModelBase
-{
-	//fields
-	ModelRenderer Shape1;
+public class ModelMiner extends ModelBase {
 
 	ModelRenderer blade1;
+
 	ModelRenderer blade2;
 	ModelRenderer blade3;
 	ModelRenderer blade4;
+	// fields
+	ModelRenderer Shape1;
 
-	public ModelMiner()
-	{
+	public ModelMiner() {
 		textureWidth = 128;
 		textureHeight = 64;
 
@@ -57,8 +55,9 @@ public class ModelMiner extends ModelBase
 		setRotation(blade4, 0F, 0F, 0F);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	@Override
+	public void render( Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5 ) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		Shape1.render(0.0625F);
 		blade1.render(0.0625F);
@@ -66,24 +65,23 @@ public class ModelMiner extends ModelBase
 		blade3.render(0.0625F);
 		blade4.render(0.0625F);
 	}
-	
-	public void renderArm(double x, double y,double z){
 
-		GL11.glTranslated(x + 0.5F, y-1.5F, z + 0.5F);
+	public void renderArm( double x, double y, double z ) {
+
+		GL11.glTranslated(x + 0.5F, y - 1.5F, z + 0.5F);
 		Shape1.render(0.0625F);
 	}
-	
-	public void renderBlades(double x, double y,double z){
-		
-		GL11.glTranslated(x + 0.5F, y-1.5F, z + 0.5F);
+
+	public void renderBlades( double x, double y, double z ) {
+
+		GL11.glTranslated(x + 0.5F, y - 1.5F, z + 0.5F);
 		blade1.render(0.0625F);
 		blade2.render(0.0625F);
 		blade3.render(0.0625F);
 		blade4.render(0.0625F);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation( ModelRenderer model, float x, float y, float z ) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;

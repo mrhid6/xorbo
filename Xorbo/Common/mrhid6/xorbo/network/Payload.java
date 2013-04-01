@@ -9,18 +9,45 @@ public class Payload {
 
 	public boolean[] boolPayload = new boolean[0];
 	public byte[] bytePayload = new byte[0];
-	public int[] intPayload = new int[0];
 	public float[] floatPayload = new float[0];
+	public int[] intPayload = new int[0];
 	public String[] stringPayload = new String[0];
 
-	public Payload(){}
+	public Payload() {
+	}
 
-	public Payload(int boolSize, int byteSize, int intSize, int floatSize, int stringSize){
-		this.boolPayload = new boolean[boolSize];
-		this.bytePayload = new byte[byteSize];
-		this.intPayload = new int[intSize];
-		this.floatPayload = new float[floatSize];
-		this.stringPayload = new String[stringSize];
+	public Payload( int boolSize, int byteSize, int intSize, int floatSize,
+			int stringSize ) {
+		boolPayload = new boolean[boolSize];
+		bytePayload = new byte[byteSize];
+		intPayload = new int[intSize];
+		floatPayload = new float[floatSize];
+		stringPayload = new String[stringSize];
+	}
+
+	public void readPayloadData( DataInputStream data ) throws IOException {
+		boolPayload = new boolean[data.readByte()];
+		bytePayload = new byte[data.readByte()];
+		intPayload = new int[data.readByte()];
+		floatPayload = new float[data.readByte()];
+		stringPayload = new String[data.readByte()];
+
+		for (int i = 0; i < boolPayload.length; i++) {
+			boolPayload[i] = data.readBoolean();
+		}
+		for (int i = 0; i < bytePayload.length; i++) {
+			bytePayload[i] = data.readByte();
+		}
+		for (int i = 0; i < intPayload.length; i++) {
+			intPayload[i] = data.readInt();
+		}
+		for (int i = 0; i < floatPayload.length; i++) {
+			floatPayload[i] = data.readFloat();
+		}
+		for (int i = 0; i < stringPayload.length; i++) {
+			stringPayload[i] = data.readUTF();
+		}
+
 	}
 
 	@Override
@@ -32,51 +59,26 @@ public class Payload {
 				+ ", stringPayload=" + Arrays.toString(stringPayload) + "]";
 	}
 
-	public void readPayloadData(DataInputStream data) throws IOException
-	{
-		this.boolPayload = new boolean[data.readByte()];
-		this.bytePayload = new byte[data.readByte()];
-		this.intPayload = new int[data.readByte()];
-		this.floatPayload = new float[data.readByte()];
-		this.stringPayload = new String[data.readByte()];
+	public void writePayloadData( DataOutputStream data ) throws IOException {
+		data.writeByte(boolPayload.length);
+		data.writeByte(bytePayload.length);
+		data.writeByte(intPayload.length);
+		data.writeByte(floatPayload.length);
+		data.writeByte(stringPayload.length);
 
-		for (int i = 0; i < this.boolPayload.length; i++) {
-			this.boolPayload[i] = data.readBoolean();
-		}
-		for (int i = 0; i < this.bytePayload.length; i++) {
-			this.bytePayload[i] = data.readByte();
-		}
-		for (int i = 0; i < this.intPayload.length; i++) {
-			this.intPayload[i] = data.readInt();
-		}
-		for (int i = 0; i < this.floatPayload.length; i++) {
-			this.floatPayload[i] = data.readFloat();
-		}
-		for (int i = 0; i < this.stringPayload.length; i++)
-			this.stringPayload[i] = data.readUTF();
-
-	}
-
-	public void writePayloadData(DataOutputStream data) throws IOException{
-		data.writeByte(this.boolPayload.length);
-		data.writeByte(this.bytePayload.length);
-		data.writeByte(this.intPayload.length);
-		data.writeByte(this.floatPayload.length);
-		data.writeByte(this.stringPayload.length);
-
-		for (boolean boolData : this.boolPayload) {
+		for (boolean boolData : boolPayload) {
 			data.writeBoolean(boolData);
 		}
-		for (byte byteData : this.bytePayload) {
+		for (byte byteData : bytePayload) {
 			data.writeByte(byteData);
 		}
-		for (int intData : this.intPayload) {
+		for (int intData : intPayload) {
 			data.writeInt(intData);
 		}
-		for (float floatData : this.floatPayload) {
+		for (float floatData : floatPayload) {
 			data.writeFloat(floatData);
 		}
-		for (String stringData : this.stringPayload){
+		for (String stringData : stringPayload) {
 			data.writeUTF(stringData);
 		}
 	}
