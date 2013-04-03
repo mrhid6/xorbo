@@ -16,7 +16,9 @@ public class Utils {
 	public static int[] getAdjacentCoordinatesForSide( int x, int y, int z, int side ) {
 		return new int[] { x + SIDE_COORD_MOD[side][0], y + SIDE_COORD_MOD[side][1], z + SIDE_COORD_MOD[side][2] };
 	}
-
+	
+	
+	
 	public static int getFuelFor( ItemStack item ) {
 
 		if (item == null) {

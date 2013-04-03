@@ -45,6 +45,7 @@ public class Config extends Configuration {
 		BlockIds.addBlockID(config, "zoroChest");
 		BlockIds.addBlockID(config, "triniumMiner");
 		BlockIds.addBlockID(config, "triniumConverter");
+		BlockIds.addBlockID(config, "triniumChiller");
 		BlockIds.addBlockID(config, "stearilliumCrafter");
 		BlockIds.addBlockID(config, "zoroGrass");
 		BlockIds.addBlockID(config, "hazelspringLog");
@@ -53,6 +54,8 @@ public class Config extends Configuration {
 		BlockIds.addBlockID(config, "winterbirchLeaves");
 		BlockIds.addBlockID(config, "zoroBrick");
 		BlockIds.addBlockID(config, "triniumBrick");
+		BlockIds.addBlockID(config, "stearilliumStone");
+		BlockIds.addBlockID(config, "stearilliumGlass");
 
 		BlockIds.addBlockID(config, "zoroStill");
 		BlockIds.addBlockID(config, "zoroFlowing");
@@ -63,8 +66,13 @@ public class Config extends Configuration {
 
 		ItemIds.addItemID(config, "zoroIngot");
 		ItemIds.addItemID(config, "zoroBucket");
-		ItemIds.addItemID(config, "ZoroIngot");
+		ItemIds.addItemID(config, "zoroCable");
+		ItemIds.addItemID(config, "zoroStaff");
 		ItemIds.addItemID(config, "stearilliumOre");
+		ItemIds.addItemID(config, "triniumHelm");
+		ItemIds.addItemID(config, "triniumPlate");
+		ItemIds.addItemID(config, "triniumLegs");
+		ItemIds.addItemID(config, "triniumBoots");
 		ItemIds.addItemID(config, "debugTool");
 		config.save();
 	}

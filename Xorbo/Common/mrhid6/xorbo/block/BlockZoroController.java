@@ -1,7 +1,9 @@
 package mrhid6.xorbo.block;
 
+import mrhid6.xorbo.Xorbo;
 import mrhid6.xorbo.tileEntity.TEZoroController;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
@@ -19,6 +21,19 @@ public class BlockZoroController extends BlockTexturedBase {
 		this.setResistance(6.0F);
 		this.setHardness(6.0F);
 		icons = new Icon[4];
+	}
+	
+	@Override
+	public boolean onBlockActivated( World world, int x, int y, int z, EntityPlayer player, int idk, float what, float these, float are ) {
+		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+
+		if (tileEntity == null || player.isSneaking()) {
+			return false;
+		}
+
+		// code to open gui explained later
+		player.openGui(Xorbo.instance, 0, world, x, y, z);
+		return true;
 	}
 
 	@Override

@@ -2,6 +2,8 @@ package mrhid6.xorbo.block;
 
 import mrhid6.xorbo.BlockIds;
 import mrhid6.xorbo.block.fancy.BlockHazelspringLog;
+import mrhid6.xorbo.block.fancy.BlockStearilliumGlass;
+import mrhid6.xorbo.block.fancy.BlockStearilliumStone;
 import mrhid6.xorbo.block.fancy.BlockTriniumBrick;
 import mrhid6.xorbo.block.fancy.BlockWinterbirchLog;
 import mrhid6.xorbo.block.fancy.BlockZoroGrass;
@@ -14,6 +16,8 @@ import mrhid6.xorbo.items.ModItems;
 import mrhid6.xorbo.tileEntity.TECableBase;
 import mrhid6.xorbo.tileEntity.TEStearilliumCrafter;
 import mrhid6.xorbo.tileEntity.TETriniumCable;
+import mrhid6.xorbo.tileEntity.TETriniumChillerBase;
+import mrhid6.xorbo.tileEntity.TETriniumChillerCore;
 import mrhid6.xorbo.tileEntity.TETriniumConverter;
 import mrhid6.xorbo.tileEntity.TETriniumMiner;
 import mrhid6.xorbo.tileEntity.TEZoroChest;
@@ -55,6 +59,9 @@ public class ModBlocks {
 	public static Block zoroGrass;
 	public static Block zoroOre;
 	public static BlockFluid zoroStill;
+	public static Block triniumChiller;
+	public static Block stearilliumStone;
+	public static Block stearilliumGlass;
 
 	public static void init() {
 
@@ -93,6 +100,13 @@ public class ModBlocks {
 		GameRegistry.registerBlock(triniumMiner, triniumMiner.getUnlocalizedName());
 
 		GameRegistry.registerTileEntity(TETriniumMiner.class, "te" + triniumMiner.getUnlocalizedName());
+		
+		triniumChiller = new BlockTriniumChiller(BlockIds.getID("triniumChiller"), "triniumChiller");
+		LanguageRegistry.addName(triniumChiller, "Trinium Chiller");
+		GameRegistry.registerBlock(triniumChiller, "triniumchiller");
+		
+		GameRegistry.registerTileEntity(TETriniumChillerCore.class, "triniumchillercontainer");
+		GameRegistry.registerTileEntity(TETriniumChillerBase.class, "triniumchillerbasecontainer");
 
 		stearilliumCrafter = new BlockStearilliumCrafter(BlockIds.getID("stearilliumCrafter"), "stearilliumCrafter", "stearilliumcrafter", true);
 		LanguageRegistry.addName(stearilliumCrafter, "Stearillium Crafter");
@@ -117,6 +131,14 @@ public class ModBlocks {
 		triniumBrick = new BlockTriniumBrick(BlockIds.getID("triniumBrick"), "triniumBrick");
 		LanguageRegistry.addName(triniumBrick, "Trinium Brick");
 		GameRegistry.registerBlock(triniumBrick, triniumBrick.getUnlocalizedName());
+		
+		stearilliumStone = new BlockStearilliumStone(BlockIds.getID("stearilliumStone"), "stearilliumStone");
+		LanguageRegistry.addName(stearilliumStone, "Stearillium Stone");
+		GameRegistry.registerBlock(stearilliumStone, stearilliumStone.getUnlocalizedName());
+		
+		stearilliumGlass = new BlockStearilliumGlass(BlockIds.getID("stearilliumGlass"), "stearilliumGlass");
+		LanguageRegistry.addName(stearilliumGlass, "Stearillium Glass");
+		GameRegistry.registerBlock(stearilliumGlass, stearilliumGlass.getUnlocalizedName());
 
 		// Ores
 

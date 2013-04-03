@@ -32,6 +32,7 @@ public class TECableBase extends TileEntity implements IGridInterface, IPacketXo
 	public void breakBlock() {
 
 		if (getGrid() != null) {
+			
 			getGrid().removeCable(this);
 		}
 	}
@@ -102,7 +103,7 @@ public class TECableBase extends TileEntity implements IGridInterface, IPacketXo
 			} else if (te instanceof TETriniumConverter) {
 				TETriniumConverter controller = (TETriniumConverter) te;
 
-				if (controller.getGrid() != null) {
+				if (controller.getGrid() != null && controller.canConnectSide(i)) {
 					// System.out.println("found grid method");
 					gridindex = controller.getGrid().gridIndex;
 					break;

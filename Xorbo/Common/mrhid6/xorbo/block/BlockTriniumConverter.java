@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockTriniumConverter extends BlockMachine {
+public class BlockTriniumConverter extends BlockTexturedBase {
 
 	public BlockTriniumConverter( int id, String texture, String name ) {
 		super(id, texture, name, true);
