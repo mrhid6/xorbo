@@ -288,15 +288,16 @@ public class TEZoroController extends TEMachineBase implements IXorGridObj {
 		boolean update = false;
 		boolean updateGridCheck = false;
 		
-		if((TickSinceUpdate % 10) == 0 && getGrid()!=null){
-			getGrid().update();
-			update=true;
-		}
+
 
 		if (Utils.isClientWorld() || breakingblock) {
 			return;
 		}
-
+		
+		if(getGrid()!=null){
+			getGrid().update();
+			update=true;
+		}
 		if ((TickSinceUpdate % 3) == 0) {
 
 			if (getGrid() != null) {

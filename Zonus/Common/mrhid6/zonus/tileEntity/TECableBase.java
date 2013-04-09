@@ -99,9 +99,8 @@ public class TECableBase extends TileEntity implements IGridInterface, IPacketXo
 	public boolean foundController() {
 
 		if (getGrid() != null) {
-			return getGrid().hasCable(this);
+			return (getGrid().hasCable(this));
 		}
-
 		return false;
 	}
 
@@ -195,14 +194,11 @@ public class TECableBase extends TileEntity implements IGridInterface, IPacketXo
 			return;
 		}
 		if (ticks % 2 == 0) {
-
-
 			if (!foundController()) {
 				if (getGrid() != null) {
 					getGrid().removeCable(this);
 				}
 				gridindex = -1;
-				sendUpdatePacket(Side.CLIENT);
 			}
 			
 			sendUpdatePacket(Side.CLIENT);

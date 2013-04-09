@@ -161,10 +161,25 @@ public class GridPower {
 		
 	}
 	public boolean canDiscoverCable( TECableBase te ) {
+		for (int i = 0; i < 6; i++) {
+			int x1 = masterController.xCoord + Config.SIDE_COORD_MOD[i][0];
+			int y1 = masterController.yCoord + Config.SIDE_COORD_MOD[i][1];
+			int z1 = masterController.zCoord + Config.SIDE_COORD_MOD[i][2];
+			
+			TileEntity te1 = masterController.worldObj.getBlockTileEntity(x1, y1, z1);
+			
+			if (te1 instanceof TECableBase) {
+				
+				if((TECableBase)te1 == te){
+					return true;
+				}
+			}
+		}
 		
 		for (TECableBase cable : cablesArray.keySet()) {
 			
 			if (cablesArray.get(cable) == 1) {
+				//System.out.println("cable is marked for removal!");
 				continue;
 			}
 			
@@ -178,7 +193,7 @@ public class GridPower {
 				
 				if (te1 instanceof TECableBase) {
 					
-					if((TECableBase)te1 == te){
+					if( ((TECableBase)te1) == te){
 						return true;
 					}
 				}
@@ -285,14 +300,13 @@ public class GridPower {
 			setEnergyStored(packet.payload.floatPayload[0]);
 			// ClientMaxPower = packet.payload.floatPayload[1];
 		}
-		update();
 		WorkOutMaxPower();
 	}
 
 	public boolean hasCable( TECableBase te ) {
 		for (TECableBase te1 : cablesArray.keySet()) {
-			if (te == te1 && cablesArray.get(te1) == 2 && te.gridindex == gridIndex) {
-				return checkCable(te);
+			if (te == te1 && cablesArray.get(te1) == 2) {
+				return true;
 			}
 		}
 		return false;
@@ -307,17 +321,6 @@ public class GridPower {
 		return false;
 	}
 
-	public boolean hasEnergyCube( TEStearilliumEnergyCube te ) {
-
-		for (TEStearilliumEnergyCube cube : energyCubeArray.keySet()) {
-			if (cube == te && energyCubeArray.get(cube) == 2) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-	
 	public boolean hasReactor( TEStearilliumReactor te ) {
 		
 		for (TEStearilliumReactor cube : reactorArray.keySet()) {
@@ -340,6 +343,17 @@ public class GridPower {
 
 	public boolean hasPower() {
 		return (Power > 0);
+	}
+
+	public boolean hasEnergyCube( TEStearilliumEnergyCube te ) {
+	
+		for (TEStearilliumEnergyCube cube : energyCubeArray.keySet()) {
+			if (cube == te && energyCubeArray.get(cube) == 2) {
+				return true;
+			}
+		}
+	
+		return false;
 	}
 
 	public boolean isController( World w, int x, int y, int z ) {
@@ -389,21 +403,19 @@ public class GridPower {
 					te2.getCoreBlock().sendUpdatePacket(Side.CLIENT);
 					continue;
 				}
-				continue;
-				
 			}
 
 			if (te instanceof TECableBase) {
 
-				// System.out.println(hasCable((TECableBase) te));
-
-				if (!hasCable((TECableBase) te) && ((TECableBase) te).canInteractWith(te1, i, false)) {
+				 //System.out.println(hasCable((TECableBase) te));
+				TECableBase te2 = (TECableBase) te;
+				if (!hasCable((TECableBase) te)) {
 					addCable((TECableBase) te);
-					((TECableBase) te).gridindex = gridIndex;
-					((TECableBase) te).sendUpdatePacket(Side.CLIENT);
-					pathFinder(te.xCoord, te.yCoord, te.zCoord, te.worldObj);
+					te2.gridindex = gridIndex;
+					pathFinder(te2.xCoord, te2.yCoord, te2.zCoord, te2.worldObj);
 				}
 			}
+			
 			if (te instanceof TEZoroController) {
 				if (!isController(w, x1, y1, z1)) {
 					((TEZoroController) te).breakController();

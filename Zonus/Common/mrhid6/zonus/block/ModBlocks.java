@@ -15,6 +15,7 @@ import mrhid6.zonus.block.machine.BlockTriniumMiner;
 import mrhid6.zonus.block.machine.BlockZoroChest;
 import mrhid6.zonus.block.machine.BlockZoroController;
 import mrhid6.zonus.block.machine.BlockZoroFurnace;
+import mrhid6.zonus.block.minable.BlockNoxiteOre;
 import mrhid6.zonus.block.minable.BlockStearilliumOre;
 import mrhid6.zonus.block.minable.BlockTriniumOre;
 import mrhid6.zonus.block.minable.BlockZoroOre;
@@ -63,6 +64,7 @@ public class ModBlocks {
 	public static Block triniumConverter;
 	public static Block triniumMiner;
 	public static Block triniumOre;
+	public static Block noxiteOre;
 	public static BlockLeaves winterbirchLeaves;
 	public static Block winterbirchLog;
 	public static Block zoroBrick;
@@ -184,6 +186,12 @@ public class ModBlocks {
 		LanguageRegistry.addName(triniumOre, "Trinium Ore");
 		GameRegistry.registerBlock(triniumOre, triniumOre.getUnlocalizedName());
 		MinecraftForge.setBlockHarvestLevel(triniumOre, "pickaxe", 3);
+		
+		
+		noxiteOre = new BlockNoxiteOre(BlockIds.getID("noxiteOre"), "noxiteore");
+		LanguageRegistry.addName(noxiteOre, "Noxite Ore");
+		GameRegistry.registerBlock(noxiteOre, noxiteOre.getUnlocalizedName());
+		MinecraftForge.setBlockHarvestLevel(noxiteOre, "pickaxe", 3);
 
 		// Trees
 

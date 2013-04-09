@@ -65,12 +65,14 @@ public class Config extends Configuration {
 		BlockIds.addBlockID(config, "zoroOre");
 		BlockIds.addBlockID(config, "stearilliumOre");
 		BlockIds.addBlockID(config, "triniumOre");
+		BlockIds.addBlockID(config, "noxiteOre");
 
 		ItemIds.addItemID(config, "zoroIngot");
 		ItemIds.addItemID(config, "zoroBucket");
 		ItemIds.addItemID(config, "zoroCable");
 		ItemIds.addItemID(config, "zoroStaff");
 		ItemIds.addItemID(config, "stearilliumOre");
+		ItemIds.addItemID(config, "noxiteCrystal");
 		ItemIds.addItemID(config, "triniumHelm");
 		ItemIds.addItemID(config, "triniumPlate");
 		ItemIds.addItemID(config, "triniumLegs");

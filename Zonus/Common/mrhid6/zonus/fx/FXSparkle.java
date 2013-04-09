@@ -1,6 +1,7 @@
 package mrhid6.zonus.fx;
 
 import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.src.ModLoader;
 import net.minecraft.world.World;
@@ -46,7 +47,7 @@ public class FXSparkle extends EntityFX {
 			 GL11.glBlendFunc(770, 1);
 
 			GL11.glBindTexture(3553, ModLoader.getMinecraftInstance().renderEngine.getTexture("/mods/zonus/textures/particles/particles.png"));
-
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 170F, 170F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1);
 			float var8 = particle % 8 / 8.0F;
 			float var9 = var8 + 0.124875F;

@@ -13,6 +13,7 @@ public class ModItems {
 	static EnumArmorMaterial ArmorMaterial = EnumHelper.addArmorMaterial("triniumArmorMaterial", 40, new int[] { 5, 14, 9, 5 }, 15);
 	public static Item debug;
 	public static Item stearilliumOre;
+	public static Item noxiteCrystal;
 	public static Item triniumBoots;
 	public static Item triniumHelm;
 	public static Item triniumLegs;
@@ -43,6 +44,9 @@ public class ModItems {
 
 		stearilliumOre = new ItemStearilliumOre(ItemIds.getID("stearilliumOre"), "stearilliumore");
 		LanguageRegistry.addName(stearilliumOre, "stearilliumore");
+		
+		//noxiteCrystal = new ItemNoxiteCrystal(ItemIds.getID("noxiteCrystal"), "noxitecrystal");
+		//LanguageRegistry.addName(noxiteCrystal, "noxitecrystal");
 
 		int data = 3;
 

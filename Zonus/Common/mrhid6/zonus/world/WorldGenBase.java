@@ -29,6 +29,7 @@ public class WorldGenBase implements IWorldGenerator {
 			genPonds(world, random, chunkX, chunkZ);
 			genZoroOre(world, random, chunkX * 16, chunkZ * 16);
 			genTriniumOre(world, random, chunkX * 16, chunkZ * 16);
+			genNoxiteOre(world, random, chunkX * 16, chunkZ * 16);
 			break;
 
 		case 1:
@@ -118,6 +119,15 @@ public class WorldGenBase implements IWorldGenerator {
 			int firstBlockYCoord = rand.nextInt(64);
 			int firstBlockZCoord = chunkZ + rand.nextInt(16);
 			(new WorldGenMinable(ModBlocks.zoroOre.blockID, 6)).generate(world, rand, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
+		}
+	}
+	
+	private void genNoxiteOre( World world, Random rand, int chunkX, int chunkZ ) {
+		for (int k = 0; k < 10; k++) {
+			int firstBlockXCoord = chunkX + rand.nextInt(16);
+			int firstBlockYCoord = rand.nextInt(20);
+			int firstBlockZCoord = chunkZ + rand.nextInt(16);
+			(new WorldGenMinable(ModBlocks.zoroOre.blockID, 2)).generate(world, rand, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
 		}
 	}
 }
